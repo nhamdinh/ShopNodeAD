@@ -56,6 +56,7 @@ export default defineConfig({
             '@widgets': '/src/widgets',
             '@contexts': '/src/contexts',
             '@constants': '/src/constants',
+            '@store': '/src/store',
         }
     },
     define: {

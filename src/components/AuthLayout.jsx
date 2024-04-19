@@ -26,8 +26,12 @@ import {
 import Message from "./LoadingError/Error";
 import Loading from "./LoadingError/Loading";
 import { useState } from "react";
+import { openToast } from "@store/components/customDialog/toastSlice";
+import { useDispatch } from "react-redux";
 
 const AuthLayout = () => {
+  const dispatch = useDispatch();
+
   const { width } = useWindowSize();
   const navigate = useNavigate();
   const {
@@ -56,22 +60,22 @@ const AuthLayout = () => {
         localStorage.setItem(ACCESSTOKEN_STORAGE, data.token);
         localStorage.setItem(NAME_STORAGE, data.name);
         localStorage.setItem(LANG_STORAGE, "en");
-        // dispatch(
-        //   openToast({
-        //     isOpen: Date.now(),
-        //     content: "Login Success",
-        //     step: 1,
-        //   })
-        // );
+        dispatch(
+          openToast({
+            isOpen: Date.now(),
+            content: "Login Success",
+            step: 1,
+          })
+        );
         navigate("/");
       } else {
-        // dispatch(
-        //   openToast({
-        //     isOpen: Date.now(),
-        //     content: "You are not Admin",
-        //     step: 2,
-        //   })
-        // );
+        dispatch(
+          openToast({
+            isOpen: Date.now(),
+            content: "You are not Admin",
+            step: 2,
+          })
+        );
       }
     } else {
       setisError(true);

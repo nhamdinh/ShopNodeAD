@@ -30,6 +30,7 @@ import Sidebar from '@layout/Sidebar';
 import Copyright from '@components/Copyright';
 import AppBar from '@layout/AppBar';
 import { REACT_ENV,API_LINK,SOCKET_HOST } from '@utils/constants';
+import Toast from '@components/LoadingError/Toast';
 
 // pages
 const Login  = lazy(() => import('@pages/Login'));
@@ -76,7 +77,8 @@ const App = () => {
         <SidebarProvider>
             <ThemeProvider theme={{theme: theme}}>
                 <ThemeStyles/>
-                <ToastContainer theme={theme} autoClose={2000} style={{padding: '20px'}}/>
+                {/* <ToastContainer theme={theme} autoClose={2000} /> */}
+                <Toast />
                 {width < 1280 && withSidebar && <AppBar/>}
                 <div className={`app ${!withSidebar ? 'fluid' : ''}`} ref={appRef}>
                     <ScrollToTop/>
@@ -109,11 +111,14 @@ const App = () => {
                                     <Route path="/404" element={<PageNotFound/>}/>
                                 </Routes>
                             </div>
+
                             {withSidebar && <Copyright/>}
                         </Suspense>
                     </div>
                 </div>
+
             </ThemeProvider>
+
         </SidebarProvider>
     );
 }

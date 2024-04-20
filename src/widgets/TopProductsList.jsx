@@ -36,7 +36,7 @@ const TopSalesByCategories = ({category = 'electronics'}) => {
                         loop>
                     {
                         categoryProducts.map(product => (
-                            <SwiperSlide className="!h-auto" key={product.id}>
+                            <SwiperSlide className="!h-auto" key={product._id}>
                                 <ProductGridItem product={product} isSlide />
                             </SwiperSlide>
                         ))

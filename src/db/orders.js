@@ -21,10 +21,11 @@ const orders = [
             received: 600,
         },
         product: {
-            name: 'Oculus Quest 2 VR Headset 64 GB',
-            image: img1,
-            regular_price: 600,
-            sale_price: 559,
+            product_name: 'Oculus Quest 2 VR Headset 64 GB',
+            product_thumb: img1,
+            product_thumb_small: img1,
+            product_price: 600,
+            product_original_price: 559,
         }
     },
     {
@@ -38,9 +39,10 @@ const orders = [
             received: 180,
         },
         product: {
-            name: 'Levis Standard Issue Backpack Black',
-            image: img2,
-            regular_price: 100,
+            product_name: 'Levis Standard Issue Backpack Black',
+            product_thumb: img2,
+            product_thumb_small: img2,
+            product_price: 100,
         }
     },
     {
@@ -54,10 +56,11 @@ const orders = [
             received: 0,
         },
         product: {
-            name: 'Xiaomi WiFI Repeater Pro',
-            image: img3,
-            regular_price: 200,
-            sale_price: 180,
+            product_name: 'Xiaomi WiFI Repeater Pro',
+            product_thumb: img3,
+            product_thumb_small: img3,
+            product_price: 200,
+            product_original_price: 180,
         }
     },
     {
@@ -71,9 +74,10 @@ const orders = [
             received: 9.99,
         },
         product: {
-            name: 'UPS Express Shipping',
-            image: img4,
-            regular_price: 9.99,
+            product_name: 'UPS Express Shipping',
+            product_thumb: img4,
+            product_thumb_small: img4,
+            product_price: 9.99,
         }
     },
     {
@@ -87,10 +91,11 @@ const orders = [
             received: 40,
         },
         product: {
-            name: 'Parfois Woman Flower Backpack',
-            image: img5,
-            regular_price: 20,
-            sale_price: 15.99
+            product_name: 'Parfois Woman Flower Backpack',
+            product_thumb: img5,
+            product_thumb_small: img5,
+            product_price: 20,
+            product_original_price: 15.99
         }
     },
     {
@@ -104,9 +109,10 @@ const orders = [
             received: 129.54,
         },
         product: {
-            name: 'Goodwill Sanctuary Sanca Olive Oil 5L',
-            image: img6,
-            regular_price: 129.54,
+            product_name: 'Goodwill Sanctuary Sanca Olive Oil 5L',
+            product_thumb: img6,
+            product_thumb_small: img6,
+            product_price: 129.54,
         }
     },
     {
@@ -120,10 +126,11 @@ const orders = [
             received: 52.18,
         },
         product: {
-            name: 'Guylian Seashells Belgian Chocolate 1kg',
-            image: img7,
-            regular_price: 78.99,
-            sale_price: 69.99
+            product_name: 'Guylian Seashells Belgian Chocolate 1kg',
+            product_thumb: img7,
+            product_thumb_small: img7,
+            product_price: 78.99,
+            product_original_price: 69.99
         }
     },
     {
@@ -137,10 +144,11 @@ const orders = [
             received: 0,
         },
         product: {
-            name: 'Puma Crossbody Bag Black Unisex',
-            image: img8,
-            regular_price: 118.99,
-            sale_price: 99.99
+            product_name: 'Puma Crossbody Bag Black Unisex',
+            product_thumb: img8,
+            product_thumb_small: img8,
+            product_price: 118.99,
+            product_original_price: 99.99
         }
     },
     {
@@ -154,9 +162,10 @@ const orders = [
             received: 0,
         },
         product: {
-            name: 'Sustainable packaging services for 1 item',
-            image: img9,
-            regular_price: 9.99,
+            product_name: 'Sustainable packaging services for 1 item',
+            product_thumb: img9,
+            product_thumb_small: img9,
+            product_price: 9.99,
         }
     },
     {
@@ -170,10 +179,11 @@ const orders = [
             received: 200,
         },
         product: {
-            name: 'SteamDeck Gaming Console 64 GB',
-            image: img10,
-            regular_price: 200,
-            sale_price: 180,
+            product_name: 'SteamDeck Gaming Console 64 GB',
+            product_thumb: img10,
+            product_thumb_small: img10,
+            product_price: 200,
+            product_original_price: 180,
         }
     }
 ]

@@ -30,6 +30,7 @@ export const productsApi = createApi({
     "GetBrands",
     "GetReviews",
     "getReviewsByShop_tag",
+    "tag_getPublishedProducts"
   ],
   endpoints: (builder) => ({
     getProducts: builder.query({
@@ -142,6 +143,15 @@ export const productsApi = createApi({
       }),
       providesTags: ["getReviewsByShop_tag"],
     }),
+    getPublishedProducts: builder.query({
+      query: (data) => ({
+        url: `/products/published/all`,
+        method: "GET",
+        params: data,
+      }),
+      providesTags: ["tag_getPublishedProducts"],
+    }),
+
   }),
 });
 
@@ -161,4 +171,5 @@ export const {
   useCreateBrandMutation,
   useGetReviewsQuery,
   useUpdateReviewMutation,
+  useGetPublishedProductsQuery
 } = productsApi;

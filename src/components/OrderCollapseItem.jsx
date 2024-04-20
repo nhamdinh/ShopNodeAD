@@ -45,13 +45,13 @@ const OrderCollapseItem = ({order, activeCollapse, handleCollapse}) => {
                         <td colSpan={2}>
                             <div className="flex gap-6">
                                 <div className="img-wrapper w-[70px] h-[64px] flex items-center justify-center">
-                                    <img src={order.product.image} alt={order.product.name}/>
+                                    <img src={order.product.product_thumb_small ?? order.product.product_thumb} alt={order.product.name}/>
                                 </div>
                                 <div className="flex flex-col">
                                     <h5 className="text-sm mb-1.5">{order.product.name}</h5>
                                     <div className="flex flex-col gap-1 text-sm text-body-text">
-                                        <p>Regular price: ${order.product.regular_price}</p>
-                                        {order.product.sale_price && <p>Sale price: ${order.product.sale_price}</p>}
+                                        <p>Regular price: ${order.product.product_price}</p>
+                                        {order.product.product_original_price && <p>Sale price: ${order.product.product_original_price}</p>}
                                     </div>
                                 </div>
                             </div>

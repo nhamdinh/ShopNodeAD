@@ -17,7 +17,7 @@ const ProductManagementCollapseItem = ({product, activeCollapse, handleCollapse}
                     <Checkbox/>
                     <div className="flex items-center gap-2.5">
                         <div className="img-wrapper w-[40px] h-[40px] flex items-center justify-center">
-                            <img src={product.image} alt="product"/>
+                            <img src={product?.product_thumb_small ?? product?.product_thumb} alt="product"/>
                         </div>
                         <h6 className="text-sm max-w-[70px] truncate">{product.sku}</h6>
                     </div>
@@ -44,9 +44,9 @@ const ProductManagementCollapseItem = ({product, activeCollapse, handleCollapse}
                         <td colSpan={2}>
                             <div className="flex gap-2.5">
                                 <div className="img-wrapper w-[45px] h-[45px] flex items-center justify-center">
-                                    <img src={product.image} alt="product"/>
+                                    <img src={product?.product_thumb_small ?? product?.product_thumb} alt="product"/>
                                 </div>
-                                <h6 className="text-sm max-w-[155px]">{product.name}</h6>
+                                <h6 className="text-sm max-w-[155px]">{product.product_name}</h6>
                             </div>
                         </td>
                     </tr>

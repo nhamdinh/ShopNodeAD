@@ -27,9 +27,9 @@ const OrdersTable = ({category, sort}) => {
             case 'default':
                 return filteredData;
             case 'a-z':
-                return filteredData.sort((a, b) => a.product.name.localeCompare(b.product.name));
+                return filteredData.sort((a, b) => a.product.product_name.localeCompare(b.product.product_name));
             case 'z-a':
-                return filteredData.sort((a, b) => b.product.name.localeCompare(a.product.name));
+                return filteredData.sort((a, b) => b.product.product_name.localeCompare(a.product.product_name));
             case 'rating-high-to-low':
                 return filteredData.sort((a, b) => b.rating - a.rating);
             case 'rating-low-to-high':

@@ -24,13 +24,13 @@ export const ORDERS_COLUMN_DEFS = [
         render: product =>
             <div className="flex gap-6">
                 <div className="img-wrapper w-[70px] h-[64px] flex items-center justify-center shrink-0">
-                    <img src={product.image} alt={product.name}/>
+                    <img src={product?.product_thumb_small ?? product?.product_thumb} alt={product.product_name}/>
                 </div>
                 <div className="flex-col hidden 2xl:flex">
-                    <h5 className="text-sm max-w-[195px] mb-1.5">{product.name}</h5>
+                    <h5 className="text-sm max-w-[195px] mb-1.5">{product.product_name}</h5>
                     <div className="flex flex-col gap-1 text-sm">
-                        <p>Regular price: ${product.regular_price}</p>
-                        {product.sale_price && <p>Sale price: ${product.sale_price}</p>}
+                        <p>Regular price: ${product.product_price}</p>
+                        {product.product_original_price && <p>Sale price: ${product.product_original_price}</p>}
                     </div>
                 </div>
             </div>,

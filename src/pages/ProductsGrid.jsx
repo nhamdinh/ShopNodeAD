@@ -2,8 +2,6 @@
 import PageHeader from '@layout/PageHeader';
 import ItemsGrid from '@widgets/ItemsGrid';
 
-
-
 // hooks
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -39,8 +37,6 @@ const ProductsGrid = () => {
       // console.log(JSON.stringify(dataFetched[0]))
       // console.log(JSON.stringify(products[0]))
       // console.log(dataFetched)
-
-
 
     return (
         <>

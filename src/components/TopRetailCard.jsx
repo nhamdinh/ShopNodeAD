@@ -5,10 +5,10 @@ import Spring from '@components/Spring';
 import {numFormatter, getCategory} from '@utils/helpers';
 
 const TopRetailCard = ({data}) => {
+    /* tạo một nested array với key/value của một Object */
     const arr = Object.entries(data.profit).map(([key, value]) => ({key, value}))
         .sort((a, b) => b.value - a.value);
     const category = getCategory(arr[0].key);
-
     return (
         <Spring className="card">
             <div className="img-wrapper h-[157px] flex justify-center items-center mb-6">

@@ -8,12 +8,12 @@ import {Swiper, SwiperSlide} from 'swiper/react';
 import ProductGridItem from '@components/ProductGridItem';
 import {Pagination} from 'swiper/modules';
 
+
 // data placeholder
-import products from '@db/products';
+// import products from '@db/products';
 
-const TopSalesByCategories = ({category = 'electronics'}) => {
-    const categoryProducts = products.filter(product => product.category === category).slice(0, 6);
-
+const TopSalesByCategories = ({category = 'electronic',dataProducts=[]}) => {
+    const categoryProducts = dataProducts.filter(product => product.product_type === category).slice(0, 6);
     return (
         <Spring className="flex flex-col gap-5">
             <CategoryHeader category={category} />

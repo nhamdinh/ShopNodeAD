@@ -1,7 +1,7 @@
 import {PRODUCT_CATEGORIES_REAL} from '@constants/options';
 
 const CategoryHeader = ({ category }) => {
-    const { label, icon, color } = PRODUCT_CATEGORIES_REAL.find(c => c.value === category);
+    const { label, icon, color } = PRODUCT_CATEGORIES_REAL.find(c => c.value === category) ?? {value: 'all', label: 'All Products'};
 
     return (
         <div className="flex items-center gap-4">

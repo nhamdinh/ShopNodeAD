@@ -4,7 +4,7 @@ import TopRetailCard from '@components/TopRetailCard';
 // data placeholder
 import sellers from '@db/sellers';
 
-const TopRetail = () => {
+const TopRetail = ({ dataProducts = [] }) => {
     const data = sellers.slice(0,4);
 
     return (

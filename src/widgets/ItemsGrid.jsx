@@ -7,64 +7,32 @@ import CategoryHeader from "@ui/CategoryHeader";
 // hooks
 import { useState, useEffect } from "react";
 import usePagination from "@hooks/usePagination";
-import { useSelector } from "react-redux";
 
 // constants
-import { PRODUCT_CATEGORIES, PRODUCT_SORT_OPTIONS } from "@constants/options";
+import { PRODUCT_CATEGORIES_REAL, PRODUCT_SORT_OPTIONS } from "@constants/options";
 
 // utils
 import { sortProducts } from "@utils/helpers";
 
-import { useGetPublishedProductsQuery } from "@store/components/products/productsApi";
-import { getUserInfo } from "@store/selector/RootSelector";
-
 // data placeholder
 // import products from "@db/products";
 
-const ItemsGrid = () => {
-  const userInfo = useSelector(getUserInfo);
-
-  const options = PRODUCT_CATEGORIES.filter((option) => option.value !== "all");
+const ItemsGrid = ({products}) => {
+  const options = PRODUCT_CATEGORIES_REAL.filter((option) => option.value !== "all");
   const [category, setCategory] = useState(options[0]);
   const [sort, setSort] = useState(PRODUCT_SORT_OPTIONS[0]);
-
-  const [sortedProducts, setSortedProducts] = useState([]);
 
   // const productsByCategory = products.filter(product => product.category === category.value);
   // const sortedProducts = sortProducts(productsByCategory, sort.value);
 
+  const productsByCategory = products.filter(product => product.product_type === category.value);
+  const sortedProducts = sortProducts(productsByCategory, sort.value)
   const pagination = usePagination(sortedProducts, 12);
-
   useEffect(() => {
     pagination.goToPage(0);
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category, sort]);
 
-  const {
-    data: dataProducts,
-    error,
-    isSuccess,
-    isLoading,
-  } = useGetPublishedProductsQuery(
-    {
-      product_shop: userInfo?._id,
-    },
-    {
-      refetchOnMountOrArgChange: true,
-      skip: false,
-    }
-  );
-
-  useEffect(() => {
-    if (isSuccess) {
-      const products = dataProducts?.metadata?.products;
-      setSortedProducts(products);
-    }
-  }, [dataProducts]);
-  // console.log(JSON.stringify(dataFetched[0]))
-  // console.log(JSON.stringify(products[0]))
-  // console.log(dataFetched)
   return (
     <>
       <div className="grid gap-[26px] lg:grid-cols-4 2xl:grid-cols-6">

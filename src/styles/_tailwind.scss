@@ -95,3 +95,22 @@
   }
 }
 
+.line__through {
+  text-decoration: line-through;
+}
+.underline {
+  text-decoration: underline;
+}
+.df {
+  display: flex;
+}
+.content__between {
+  justify-content: space-between;
+}
+
+.content__end {
+  justify-content: flex-end;
+}
+.ed1c24 {
+  color: #ed1c24 !important;
+}

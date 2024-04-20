@@ -17,9 +17,18 @@ export const PRODUCT_CATEGORIES = [
     {value: 'services', label: 'Services', icon: 'icon-user-gear-solid', color: 'yellow'},
 ]
 
+export const PRODUCT_CATEGORIES_REAL = [
+    {value: 'all', label: 'All Products'},
+    {value: 'household', label: 'Household', icon: 'icon-burger-soda-solid', color: 'header'},
+    {value: 'electronic', label: 'Electronics', icon: 'icon-laptop-mobile-solid', color: 'accent'},
+    {value: 'clothing', label: 'Clothing', icon: 'icon-shirt-solid', color: 'red'},
+    {value: 'furniture', label: 'Furniture', icon: 'icon-user-gear-solid', color: 'yellow'},
+]
+
 export const PRODUCT_SORT_OPTIONS = [
     {value: 'best-selling', label: 'Best Selling'},
-    {value: 'available', label: 'Available'},
+    {value: 'available', label: 'Available: High to Low'},
+    {value: 'available-to-high', label: 'Available: Low to High'},
     {value: 'price-low-to-high', label: 'Price: Low to High'},
     {value: 'price-high-to-low', label: 'Price: High to Low'}
 ]

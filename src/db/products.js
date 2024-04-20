@@ -64,7 +64,7 @@ const products = [
         product_thumb_small: img1,
         category: 'electronics',
         product_quantity: 1548,
-        sold: 274,
+        product_sold: 274,
         product_price: 600,
         product_original_price: 559,
         product_ratings: 4.5,
@@ -76,7 +76,7 @@ const products = [
         product_thumb_small: img2,
         category: 'electronics',
         product_quantity: 566,
-        sold: 414,
+        product_sold: 414,
         product_price: 499,
         product_original_price: 399,
         product_ratings: 5
@@ -88,7 +88,7 @@ const products = [
         product_thumb_small: img3,
         category: 'electronics',
         product_quantity: 2471,
-        sold: 366,
+        product_sold: 366,
         product_price: 199,
         product_original_price: 159,
         product_ratings: 4.5
@@ -100,7 +100,7 @@ const products = [
         product_thumb_small: img4,
         category: 'electronics',
         product_quantity: 102,
-        sold: 1923,
+        product_sold: 1923,
         product_price: 300,
         product_original_price: 289,
         product_ratings: 4
@@ -112,7 +112,7 @@ const products = [
         product_thumb_small: img5,
         category: 'electronics',
         product_quantity: 27,
-        sold: 662,
+        product_sold: 662,
         product_price: 620,
         product_original_price: 599,
         product_ratings: 5
@@ -124,7 +124,7 @@ const products = [
         product_thumb_small: img6,
         category: 'electronics',
         product_quantity: 1006,
-        sold: 19874,
+        product_sold: 19874,
         product_price: 599,
         product_original_price: 579,
         product_ratings: 5
@@ -136,7 +136,7 @@ const products = [
         product_thumb_small: img7,
         category: 'electronics',
         product_quantity: 5,
-        sold: 15,
+        product_sold: 15,
         product_price: 199,
         product_original_price: 149,
         product_ratings: 3.5
@@ -148,7 +148,7 @@ const products = [
         product_thumb_small: img8,
         category: 'electronics',
         product_quantity: 95,
-        sold: 118,
+        product_sold: 118,
         product_price: 1199,
         product_original_price: 1099,
         product_ratings: 4.5
@@ -160,7 +160,7 @@ const products = [
         product_thumb_small: img9,
         category: 'electronics',
         product_quantity: 21,
-        sold: 7,
+        product_sold: 7,
         product_price: 3599,
         product_original_price: 3499,
         product_ratings: 5
@@ -172,7 +172,7 @@ const products = [
         product_thumb_small: img10,
         category: 'electronics',
         product_quantity: 202,
-        sold: 58741,
+        product_sold: 58741,
         product_price: 699,
         product_original_price: 599,
         product_ratings: 5
@@ -184,7 +184,7 @@ const products = [
         product_thumb_small: img11,
         category: 'electronics',
         product_quantity: 369,
-        sold: 22941,
+        product_sold: 22941,
         product_price: 499,
         product_original_price: 449,
         product_ratings: 5
@@ -196,7 +196,7 @@ const products = [
         product_thumb_small: img12,
         category: 'electronics',
         product_quantity: 2,
-        sold: 651,
+        product_sold: 651,
         product_price: 189,
         product_original_price: 139,
         product_ratings: 3.5
@@ -208,7 +208,7 @@ const products = [
         product_thumb_small: img13,
         category: 'electronics',
         product_quantity: 19,
-        sold: 46,
+        product_sold: 46,
         product_price: 199,
         product_original_price: 149,
         product_ratings: 4
@@ -220,7 +220,7 @@ const products = [
         product_thumb_small: img14,
         category: 'electronics',
         product_quantity: 95,
-        sold: 118,
+        product_sold: 118,
         product_price: 1199,
         product_original_price: 1099,
         product_ratings: 4.5
@@ -232,7 +232,7 @@ const products = [
         product_thumb_small: img15,
         category: 'electronics',
         product_quantity: 502,
-        sold: 217,
+        product_sold: 217,
         product_price: 89,
         product_original_price: 69,
         product_ratings: 3
@@ -244,7 +244,7 @@ const products = [
         product_thumb_small: img16,
         category: 'electronics',
         product_quantity: 6641,
-        sold: 20053,
+        product_sold: 20053,
         product_price: 600,
         product_original_price: 569,
         product_ratings: 4.5
@@ -256,7 +256,7 @@ const products = [
         product_thumb_small: img17,
         category: 'electronics',
         product_quantity: 361,
-        sold: 80,
+        product_sold: 80,
         product_price: 239,
         product_original_price: 199,
         product_ratings: 4
@@ -268,7 +268,7 @@ const products = [
         product_thumb_small: img18,
         category: 'electronics',
         product_quantity: 1152,
-        sold: 10802,
+        product_sold: 10802,
         product_price: 1199,
         product_original_price: 1099,
         product_ratings: 4.5
@@ -280,7 +280,7 @@ const products = [
         product_thumb_small: img19,
         category: 'electronics',
         product_quantity: 5221,
-        sold: 36874,
+        product_sold: 36874,
         product_price: 1199,
         product_original_price: 1099,
         product_ratings: 5
@@ -292,7 +292,7 @@ const products = [
         product_thumb_small: img20,
         category: 'electronics',
         product_quantity: 362,
-        sold: 292,
+        product_sold: 292,
         product_price: 119,
         product_original_price: 99,
         product_ratings: 4
@@ -304,7 +304,7 @@ const products = [
         product_thumb_small: img21,
         category: 'electronics',
         product_quantity: 995,
-        sold: 10452,
+        product_sold: 10452,
         product_price: 499,
         product_original_price: 449,
         product_ratings: 3.5
@@ -316,7 +316,7 @@ const products = [
         product_thumb_small: img22,
         category: 'electronics',
         product_quantity: 16,
-        sold: 258,
+        product_sold: 258,
         product_price: 499,
         product_original_price: 399,
         product_ratings: 4
@@ -328,7 +328,7 @@ const products = [
         product_thumb_small: img23,
         category: 'electronics',
         product_quantity: 0,
-        sold: 3471,
+        product_sold: 3471,
         product_price: 399,
         product_original_price: 389,
         product_ratings: 4.5
@@ -340,7 +340,7 @@ const products = [
         product_thumb_small: img24,
         category: 'electronics',
         product_quantity: 52,
-        sold: 954,
+        product_sold: 954,
         product_price: 1599,
         product_original_price: 1499,
         product_ratings: 4
@@ -352,7 +352,7 @@ const products = [
         product_thumb_small: img25,
         category: 'food',
         product_quantity: 465,
-        sold: 1544,
+        product_sold: 1544,
         product_price: 19.99,
         product_original_price: 17.99,
         product_ratings: 5
@@ -364,7 +364,7 @@ const products = [
         product_thumb_small: img26,
         category: 'food',
         product_quantity: 10025,
-        sold: 265874,
+        product_sold: 265874,
         product_price: 9.99,
         product_original_price: 8.99,
         product_ratings: 5
@@ -376,7 +376,7 @@ const products = [
         product_thumb_small: img27,
         category: 'food',
         product_quantity: 8014,
-        sold: 9845,
+        product_sold: 9845,
         product_price: 1.99,
         product_original_price: 1.69,
         product_ratings: 5
@@ -388,7 +388,7 @@ const products = [
         product_thumb_small: img28,
         category: 'food',
         product_quantity: 10025,
-        sold: 265874,
+        product_sold: 265874,
         product_price: 9.99,
         product_original_price: 8.99,
         product_ratings: 5
@@ -400,7 +400,7 @@ const products = [
         product_thumb_small: img29,
         category: 'food',
         product_quantity: 117,
-        sold: 20045,
+        product_sold: 20045,
         product_price: 19.99,
         product_original_price: 18.99,
         product_ratings: 5
@@ -412,7 +412,7 @@ const products = [
         product_thumb_small: img30,
         category: 'food',
         product_quantity: 561,
-        sold: 15231,
+        product_sold: 15231,
         product_price: 9.99,
         product_original_price: 8.99,
         product_ratings: 4.5
@@ -424,7 +424,7 @@ const products = [
         product_thumb_small: img31,
         category: 'food',
         product_quantity: 566,
-        sold: 6622,
+        product_sold: 6622,
         product_price: 19.99,
         product_original_price: 18.99,
         product_ratings: 4
@@ -436,7 +436,7 @@ const products = [
         product_thumb_small: img32,
         category: 'food',
         product_quantity: 482,
-        sold: 19,
+        product_sold: 19,
         product_price: 5.99,
         product_original_price: 3.99,
         product_ratings: 5
@@ -448,7 +448,7 @@ const products = [
         product_thumb_small: img33,
         category: 'food',
         product_quantity: 6418,
-        sold: 9841,
+        product_sold: 9841,
         product_price: 3.99,
         product_original_price: 2.99,
         product_ratings: 3
@@ -460,7 +460,7 @@ const products = [
         product_thumb_small: img34,
         category: 'food',
         product_quantity: 365,
-        sold: 24,
+        product_sold: 24,
         product_price: 3.99,
         product_original_price: 2.99,
         product_ratings: 5
@@ -472,7 +472,7 @@ const products = [
         product_thumb_small: img35,
         category: 'food',
         product_quantity: 488,
-        sold: 236,
+        product_sold: 236,
         product_price: 29.99,
         product_original_price: 27.99,
         product_ratings: 2.5
@@ -484,7 +484,7 @@ const products = [
         product_thumb_small: img36,
         category: 'food',
         product_quantity: 66,
-        sold: 82,
+        product_sold: 82,
         product_price: 3.99,
         product_original_price: 2.99,
         product_ratings: 4.5
@@ -496,7 +496,7 @@ const products = [
         product_thumb_small: img37,
         category: 'food',
         product_quantity: 564,
-        sold: 1584,
+        product_sold: 1584,
         product_price: 9.99,
         product_original_price: 8.99,
         product_ratings: 5
@@ -508,7 +508,7 @@ const products = [
         product_thumb_small: img38,
         category: 'food',
         product_quantity: 966,
-        sold: 405,
+        product_sold: 405,
         product_price: 6.99,
         product_original_price: 3.99,
         product_ratings: 4
@@ -520,7 +520,7 @@ const products = [
         product_thumb_small: img39,
         category: 'food',
         product_quantity: 625,
-        sold: 2591,
+        product_sold: 2591,
         product_price: 2.99,
         product_original_price: 0.99,
         product_ratings: 5
@@ -532,7 +532,7 @@ const products = [
         product_thumb_small: img40,
         category: 'food',
         product_quantity: 3614,
-        sold: 201,
+        product_sold: 201,
         product_price: 7.99,
         product_original_price: 4.99,
         product_ratings: 5
@@ -544,7 +544,7 @@ const products = [
         product_thumb_small: img41,
         category: 'food',
         product_quantity: 703,
-        sold: 211,
+        product_sold: 211,
         product_price: 9.99,
         product_original_price: 8.99,
         product_ratings: 5
@@ -556,7 +556,7 @@ const products = [
         product_thumb_small: img42,
         category: 'food',
         product_quantity: 3605,
-        sold: 1452,
+        product_sold: 1452,
         product_price: 39.99,
         product_original_price: 28.99,
         product_ratings: 5
@@ -568,7 +568,7 @@ const products = [
         product_thumb_small: img43,
         category: 'fashion',
         product_quantity: 105,
-        sold: 987,
+        product_sold: 987,
         product_price: 100,
         product_original_price: 59,
         product_ratings: 4.5
@@ -580,7 +580,7 @@ const products = [
         product_thumb_small: img44,
         category: 'fashion',
         product_quantity: 12,
-        sold: 81,
+        product_sold: 81,
         product_price: 52,
         product_original_price: 39,
         product_ratings: 3
@@ -592,7 +592,7 @@ const products = [
         product_thumb_small: img45,
         category: 'fashion',
         product_quantity: 188,
-        sold: 15,
+        product_sold: 15,
         product_price: 100,
         product_original_price: 79,
         product_ratings: 5
@@ -604,7 +604,7 @@ const products = [
         product_thumb_small: img46,
         category: 'fashion',
         product_quantity: 5,
-        sold: 254,
+        product_sold: 254,
         product_price: 32,
         product_original_price: 10,
         product_ratings: 4
@@ -616,7 +616,7 @@ const products = [
         product_thumb_small: img47,
         category: 'fashion',
         product_quantity: 2547,
-        sold: 5581,
+        product_sold: 5581,
         product_price: 5,
         product_original_price: 4,
         product_ratings: 5
@@ -628,7 +628,7 @@ const products = [
         product_thumb_small: img48,
         category: 'fashion',
         product_quantity: 987,
-        sold: 551,
+        product_sold: 551,
         product_price: 150,
         product_original_price: 129,
         product_ratings: 4.5
@@ -640,7 +640,7 @@ const products = [
         product_thumb_small: img49,
         category: 'fashion',
         product_quantity: 5874,
-        sold: 2584,
+        product_sold: 2584,
         product_price: 100,
         product_original_price: 79,
         product_ratings: 5
@@ -652,7 +652,7 @@ const products = [
         product_thumb_small: img50,
         category: 'fashion',
         product_quantity: 941,
-        sold: 668,
+        product_sold: 668,
         product_price: 150,
         product_original_price: 119,
         product_ratings: 4.5
@@ -664,7 +664,7 @@ const products = [
         product_thumb_small: img51,
         category: 'fashion',
         product_quantity: 147,
-        sold: 79,
+        product_sold: 79,
         product_price: 50,
         product_original_price: 30,
         product_ratings: 4
@@ -676,7 +676,7 @@ const products = [
         product_thumb_small: img52,
         category: 'fashion',
         product_quantity: 552,
-        sold: 347,
+        product_sold: 347,
         product_price: 99,
         product_original_price: 69,
         product_ratings: 4.5
@@ -688,7 +688,7 @@ const products = [
         product_thumb_small: img53,
         category: 'fashion',
         product_quantity: 202,
-        sold: 17,
+        product_sold: 17,
         product_price: 268,
         product_original_price: 199,
         product_ratings: 4
@@ -700,7 +700,7 @@ const products = [
         product_thumb_small: img54,
         category: 'fashion',
         product_quantity: 498,
-        sold: 112,
+        product_sold: 112,
         product_price: 395,
         product_original_price: 300,
         product_ratings: 2.5
@@ -712,7 +712,7 @@ const products = [
         product_thumb_small: img55,
         category: 'services',
         product_quantity: 202,
-        sold: 17,
+        product_sold: 17,
         product_price: 268,
         product_original_price: 199,
         product_ratings: 5
@@ -724,7 +724,7 @@ const products = [
         product_thumb_small: img56,
         category: 'services',
         product_quantity: 100,
-        sold: 154,
+        product_sold: 154,
         product_price: 99,
         product_original_price: 1.99,
         product_ratings: 5
@@ -736,7 +736,7 @@ const products = [
         product_thumb_small: img57,
         category: 'services',
         product_quantity: 15874,
-        sold: 22987,
+        product_sold: 22987,
         product_price: 3.99,
         product_original_price: 0.99,
         product_ratings: 5
@@ -748,7 +748,7 @@ const products = [
         product_thumb_small: img55,
         category: 'services',
         product_quantity: 202,
-        sold: 17,
+        product_sold: 17,
         product_price: 268,
         product_original_price: 199,
         product_ratings: 5
@@ -760,7 +760,7 @@ const products = [
         product_thumb_small: img56,
         category: 'services',
         product_quantity: 100,
-        sold: 154,
+        product_sold: 154,
         product_price: 99,
         product_original_price: 1.99,
         product_ratings: 5
@@ -772,7 +772,7 @@ const products = [
         product_thumb_small: img57,
         category: 'services',
         product_quantity: 15874,
-        sold: 22987,
+        product_sold: 22987,
         product_price: 3.99,
         product_original_price: 0.99,
         product_ratings: 5

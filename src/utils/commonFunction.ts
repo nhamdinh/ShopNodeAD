@@ -33,12 +33,23 @@ export const formatMoneyCurrency = (text: any) => {
     return "0.00";
   }
   //format china currency delivery_type === 1
+  // console.log(text)
   let numberText = +text;
+  if (+text < 0) {
+    numberText = +numberText * -1;
+  }
+
   let string = numberText.toFixed(2).toString();
   let length = string.length;
   let string_slice = string.substr(0, length - 3);
   let string_slice3 = string.substr(length - 3, length - 1);
-  return addCommas(removeNonNumeric(string_slice)) + string_slice3;
+  if (+text < 0)
+    return (
+      "-" +
+      string_slice.toString().replace(REGEX_CURRENCY, "$1,") +
+      string_slice3
+    );
+  return string_slice.toString().replace(REGEX_CURRENCY, "$1,") + string_slice3;
 };
 
 export const rawMarkup = (rawMarkup = "") => {
@@ -67,4 +78,9 @@ export const formatMoney = (text: any) => {
 export const findUniqueElements = (array1:any, array2:any) => {
   const result = array1.filter((item:any) => !array2.includes(item));
   return result;
+};
+
+export const calPerDiscount = (product:any) => {
+  const perDiscount = ((1 - product?.product_price/ product?.product_original_price) * 100).toFixed(0)
+  return perDiscount;
 };

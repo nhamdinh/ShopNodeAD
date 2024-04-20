@@ -65,16 +65,14 @@ export const generateGridPoints = (id, gutter = 20, axis = 'y') => {
 }
 
 export const sortProducts = (products, sort) => {
-
-    console.log(products)
-
-    if(products.length === 0) return []
     switch (sort) {
         default:
-        // case 'best-selling':
-        //     return products.sort((a, b) => b.sold - a.sold);
+        case 'best-selling':
+            return products.sort((a, b) => b.product_sold - a.product_sold);
         case 'available':
             return products.sort((a, b) => b.product_quantity - a.product_quantity);
+        case 'available-to-high':
+            return products.sort((a, b) => a.product_quantity - b.product_quantity);
         case 'price-low-to-high':
             return products.sort((a, b) => a.product_price - b.product_price);
         case 'price-high-to-low':

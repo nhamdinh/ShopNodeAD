@@ -55,9 +55,9 @@ const ConnectedApps = lazy(() => import('@pages/ConnectedApps'));
 const PageNotFound = lazy(() => import('@pages/PageNotFound'));
 
 const App = () => {
-    console.log(REACT_ENV)
-    console.log(API_LINK)
-    console.log(SOCKET_HOST)
+    // console.log(REACT_ENV)
+    // console.log(API_LINK)
+    // console.log(SOCKET_HOST)
 
     const {width} = useWindowSize();
     const appRef = useRef(null);
@@ -85,7 +85,7 @@ const App = () => {
                     {withSidebar && <Sidebar/>}
                     <div className="app_content">
                         {width >= 1280 && withSidebar && <AppBar/>}
-                        <Suspense fallback={<Loader/>}>
+                        {/* <Suspense fallback={<Loader/>}> */}
                             <div className="main">
                                 <Routes>
                                     <Route path="/login" element={<Login/>}/>
@@ -113,7 +113,7 @@ const App = () => {
                             </div>
 
                             {withSidebar && <Copyright/>}
-                        </Suspense>
+                        {/* </Suspense> */}
                     </div>
                 </div>
 

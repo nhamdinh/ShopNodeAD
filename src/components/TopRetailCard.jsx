@@ -9,6 +9,7 @@ const TopRetailCard = ({data}) => {
     const arr = Object.entries(data.profit).map(([key, value]) => ({key, value}))
         .sort((a, b) => b.value - a.value);
     const category = getCategory(arr[0].key);
+    console.log(data)
     return (
         <Spring className="card">
             <div className="img-wrapper h-[157px] flex justify-center items-center mb-6">

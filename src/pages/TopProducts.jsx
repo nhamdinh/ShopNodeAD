@@ -14,8 +14,8 @@ const TopProducts = () => {
                 <div className="widgets-grid grid-cols-1 xl:grid-cols-[minmax(0,330px)_minmax(0,1fr)]
                     2xl:grid-cols-6">
                     <TopSalesByCategories dataProducts={dataProducts} />
-                    <TopRetail dataProducts={dataProducts}/>
-                </div>
+{/*                     <TopRetail dataProducts={dataProducts}/>
+ */}                </div>
               <div className="widgets-grid grid-cols-1 lg:grid-cols-2">
                     <TopProductsList dataProducts={dataProducts} />
                     <TopProductsList dataProducts={dataProducts} category="household" />

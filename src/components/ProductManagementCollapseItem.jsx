@@ -6,10 +6,10 @@ import {Checkbox} from 'antd';
 
 // utils
 import PropTypes from 'prop-types';
+import { SAFE_STOCK } from '@utils/constants';
 
 const ProductManagementCollapseItem = ({product, activeCollapse, handleCollapse}) => {
     const stock = product.product_quantity;
-    console.log(stock)
     return (
         <div className="card">
             <div className="flex items-center justify-between">
@@ -23,9 +23,9 @@ const ProductManagementCollapseItem = ({product, activeCollapse, handleCollapse}
                     </div>
                 </div>
                 <div className="flex items-center gap-4">
-                    <button className={`collapse-btn ${activeCollapse === product.product_sku ? 'active' : ''}`}
+                    <button className={`collapse-btn ${activeCollapse === product._id ? 'active' : ''}`}
                             aria-label="Toggle view"
-                            onClick={() => handleCollapse(product.product_sku)}>
+                            onClick={() => handleCollapse(product._id)}>
                         <i className="icon icon-caret-down-solid"/>
                     </button>
                     <NavLink to="/product-editor" aria-label="Edit">
@@ -34,7 +34,7 @@ const ProductManagementCollapseItem = ({product, activeCollapse, handleCollapse}
                     <SubmenuTrigger/>
                 </div>
             </div>
-            <Collapse in={activeCollapse === product.product_sku}>
+            <Collapse in={activeCollapse === product._id}>
                 <table className="basic-table">
                     <tbody>
                     <tr>
@@ -62,7 +62,7 @@ const ProductManagementCollapseItem = ({product, activeCollapse, handleCollapse}
                                     :
                                     <span>
                                         <span className={`${stock !== 0 ? 'text-green' : 'text-red'}`}>
-                                            {stock !== 0 ? (stock >= 10 ? ' In stock ' : ' Low Inventory ') : ' Out of stock '}
+                                            {stock !== 0 ? (stock >= SAFE_STOCK ? 'In stock ' : 'Low Inventory ') : 'Out of stock '}
                                         </span>
                                         ({stock})
                                     </span>

@@ -67,7 +67,7 @@ const ProductsManagement = () => {
       const arr = Object.entries(product).map(([key, value]) => (value));
         return arr
     })
-    
+
     return (
         <>
             <PageHeader isFetching={isLoading} cb_refetch={onGetProductsByShop} title="Products Management" />
@@ -107,6 +107,7 @@ const ProductsManagement = () => {
                 products={products} 
                 options={options}
                 status={status}
+                userInfo={userInfo}
             />
         </>
     )

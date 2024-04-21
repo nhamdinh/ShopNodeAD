@@ -9,6 +9,7 @@ import Counter from '@components/Counter';
 // utils
 import {getCategory, getStatusColor, numFormatter} from '@utils/helpers';
 import dayjs from 'dayjs';
+import { SAFE_STOCK } from '@utils/constants';
 
 export const ORDERS_COLUMN_DEFS = [
     {
@@ -289,7 +290,7 @@ export const PRODUCTS_MANAGEMENT_COLUMN_DEFS = [
     {
         title: 'Product name',
         dataIndex: 'product_name',
-        render: text => <span className="inline-block h6 !text-sm max-w-[155px]">{text}</span>
+        render: text => <span className="inline-block h6 !text-sm max-w-[155px] h40px line__clamp__2">{text}</span>
     },
     {title: 'SKU', dataIndex: 'product_sku'},
     {
@@ -304,7 +305,7 @@ export const PRODUCTS_MANAGEMENT_COLUMN_DEFS = [
                         :
                         <span>
                         <span className={`${stock !== 0 ? 'text-green' : 'text-red'}`}>
-                            {stock !== 0 ? (stock >= 100 ? 'In stock ' : 'Low Inventory ') : 'Out of stock '}
+                            {stock !== 0 ? (stock >= SAFE_STOCK ? 'In stock ' : 'Low Inventory ') : 'Out of stock '}
                         </span>
                         ({stock})
                     </span>

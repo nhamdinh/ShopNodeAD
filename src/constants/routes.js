@@ -19,7 +19,7 @@ const ROUTES = [
             {name: 'Products Grid', path: '/products-grid'},
             {name: 'Products Management', path: '/products-management'},
             {name: 'Product Editor', path: '/product-editor'},
-            {name: 'Banners', path: '/banners'},
+            // {name: 'Banners', path: '/banners'},
         ]
     },
     {

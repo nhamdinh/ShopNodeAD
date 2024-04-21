@@ -279,22 +279,22 @@ export const PRODUCTS_MANAGEMENT_COLUMN_DEFS = [
         title: <div className="flex items-center justify-center">
             <i className="icon-image-regular text-[26px]"/>
         </div>,
-        dataIndex: 'image',
+        dataIndex: 'product_thumb_small',
         width: 45,
-        render: image =>
+        render: (image,record) =>
             <div className="img-wrapper w-[45px] h-[45px] flex items-center justify-center">
-                <img src={image} alt="product"/>
+                <img loading="lazy" src={image??record.product_thumb} alt="product"/>
             </div>
     },
     {
         title: 'Product name',
-        dataIndex: 'name',
+        dataIndex: 'product_name',
         render: text => <span className="inline-block h6 !text-sm max-w-[155px]">{text}</span>
     },
-    {title: 'SKU', dataIndex: 'sku'},
+    {title: 'SKU', dataIndex: 'product_sku'},
     {
         title: 'Stock',
-        dataIndex: 'stock',
+        dataIndex: 'product_quantity',
         width: 130,
         render: stock =>
             <div className="flex items-center gap-5">
@@ -304,7 +304,7 @@ export const PRODUCTS_MANAGEMENT_COLUMN_DEFS = [
                         :
                         <span>
                         <span className={`${stock !== 0 ? 'text-green' : 'text-red'}`}>
-                            {stock !== 0 ? (stock >= 10 ? 'In stock ' : 'Low Inventory ') : 'Out of stock '}
+                            {stock !== 0 ? (stock >= 100 ? 'In stock ' : 'Low Inventory ') : 'Out of stock '}
                         </span>
                         ({stock})
                     </span>
@@ -313,12 +313,12 @@ export const PRODUCTS_MANAGEMENT_COLUMN_DEFS = [
     },
     {
         title: 'Price',
-        dataIndex: 'price',
+        dataIndex: 'product_price',
         render: price => <span>${price ? price.toFixed(2) : '0.00'}</span>
     },
     {
         title: 'Category',
-        dataIndex: 'category',
+        dataIndex: 'product_type',
         render: category => <button className="text-accent capitalize">{category}</button>,
         responsive: ['xxl'],
     },
@@ -328,29 +328,29 @@ export const PRODUCTS_MANAGEMENT_COLUMN_DEFS = [
         render: type => <span className="capitalize">{type}</span>,
         responsive: ['lg'],
     },
-    {
-        title: 'Statistics',
-        dataIndex: 'statistics',
-        render: statistics => <span className="capitalize">{statistics || '-'}</span>,
-        responsive: ['xl'],
-    },
-    {
-        title: 'Tags',
-        dataIndex: 'tags',
-        width: 125,
-        render: tags => <div className="flex flex-wrap gap-x-0.5">
-            {
-                tags && tags.length ? tags.map((tag, index) =>
-                    <button className="tag text-accent capitalize"
-                            key={tag}>{tag}{index !== tags.length - 1 && ','}</button>
-                ) : '-'
-            }
-        </div>,
-        responsive: ['xl'],
-    },
+    // {
+    //     title: 'Statistics',
+    //     dataIndex: 'statistics',
+    //     render: statistics => <span className="capitalize">{statistics || '-'}</span>,
+    //     responsive: ['xl'],
+    // },
+    // {
+    //     title: 'Tags',
+    //     dataIndex: 'tags',
+    //     width: 125,
+    //     render: tags => <div className="flex flex-wrap gap-x-0.5">
+    //         {
+    //             tags && tags.length ? tags.map((tag, index) =>
+    //                 <button className="tag text-accent capitalize"
+    //                         key={tag}>{tag}{index !== tags.length - 1 && ','}</button>
+    //             ) : '-'
+    //         }
+    //     </div>,
+    //     responsive: ['xl'],
+    // },
     {
         title: 'Rate',
-        dataIndex: 'rateCount',
+        dataIndex: 'product_ratings',
         render: rateCount =>
             <div className="flex items-center gap-2">
                 <i className={`icon icon-star-${rateCount !== 0 ? 'solid' : 'regular'} text-lg leading-none`}/>
@@ -360,7 +360,7 @@ export const PRODUCTS_MANAGEMENT_COLUMN_DEFS = [
     },
     {
         title: 'Date',
-        dataIndex: 'date',
+        dataIndex: 'createdAt',
         render: date =>
             <div className="flex flex-col">
                 <span>Last modified:</span>

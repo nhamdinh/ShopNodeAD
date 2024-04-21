@@ -14,7 +14,7 @@ import {useWindowSize} from 'react-use';
 // constants
 import {
     PRODUCT_MANAGEMENT_OPTIONS,
-    PRODUCT_CATEGORIES,
+    PRODUCT_CATEGORIES_REAL,
     STOCK_STATUS_OPTIONS,
     PRODUCT_TYPE_OPTIONS,
     PRODUCT_SELLER_OPTIONS,
@@ -24,9 +24,8 @@ import {
 import {PRODUCTS_MANAGEMENT_COLUMN_DEFS} from '@constants/columnDefs';
 
 // data placeholder
-import products_management from '@db/products_management';
 
-const ProductManagementTable = () => {
+const ProductManagementTable = ({products=[]}) => {
     const {width} = useWindowSize();
     const defaultFilters = {
         stockStatus: null,
@@ -41,8 +40,8 @@ const ProductManagementTable = () => {
     const [activeCollapse, setActiveCollapse] = useState('');
 
     const getQty = (category) => {
-        if (category === 'all') return products_management.length;
-        return products_management.filter(product => product.status === category).length;
+        if (category === 'all') return products.length;
+        return products.filter(product => product.status === category).length;
     }
 
     const handleFilterSelect = ({value, label}, name) => {
@@ -59,8 +58,8 @@ const ProductManagementTable = () => {
     }
 
     const dataByStatus = () => {
-        if (category === 'all') return products_management;
-        return products_management.filter(product => product.status === category);
+        if (category === 'all') return products;
+        return products.filter(product => product.status === category);
     }
 
     const pagination = usePagination(dataByStatus(), 8);
@@ -70,11 +69,11 @@ const ProductManagementTable = () => {
         setActiveCollapse('');
     }, [pagination.currentPage, width]);
 
-    const handleCollapse = (sku) => {
-        if (activeCollapse === sku) {
+    const handleCollapse = (product_sku) => {
+        if (activeCollapse === product_sku) {
             setActiveCollapse('');
         } else {
-            setActiveCollapse(sku);
+            setActiveCollapse(product_sku);
         }
     }
 
@@ -100,7 +99,7 @@ const ProductManagementTable = () => {
                         value={filters.stockStatus}
                         placeholder="Stock Status"
                         onChange={e => handleFilterSelect(e, 'stockStatus')}/>
-                <Select options={PRODUCT_CATEGORIES}
+                <Select options={PRODUCT_CATEGORIES_REAL}
                         value={filters.productCategory}
                         placeholder="Product Category"
                         onChange={e => handleFilterSelect(e, 'productCategory')}/>
@@ -142,7 +141,7 @@ const ProductManagementTable = () => {
                     width >= 768 ?
                         <StyledTable columns={PRODUCTS_MANAGEMENT_COLUMN_DEFS}
                                      dataSource={pagination.currentItems()}
-                                     rowKey={record => record.sku}
+                                     rowKey={record => record.product_sku}
                                      locale={{
                                          emptyText: <Empty text="No products found"/>
                                      }}

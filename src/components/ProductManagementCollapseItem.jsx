@@ -8,8 +8,8 @@ import {Checkbox} from 'antd';
 import PropTypes from 'prop-types';
 
 const ProductManagementCollapseItem = ({product, activeCollapse, handleCollapse}) => {
-    const {stock} = product;
-
+    const stock = product.product_quantity;
+    console.log(stock)
     return (
         <div className="card">
             <div className="flex items-center justify-between">
@@ -19,13 +19,13 @@ const ProductManagementCollapseItem = ({product, activeCollapse, handleCollapse}
                         <div className="img-wrapper w-[40px] h-[40px] flex items-center justify-center">
                             <img src={product?.product_thumb_small ?? product?.product_thumb} alt="product"/>
                         </div>
-                        <h6 className="text-sm max-w-[70px] truncate">{product.sku}</h6>
+                        <h6 className="text-sm max-w-[70px] truncate">{product.product_sku}</h6>
                     </div>
                 </div>
                 <div className="flex items-center gap-4">
-                    <button className={`collapse-btn ${activeCollapse === product.sku ? 'active' : ''}`}
+                    <button className={`collapse-btn ${activeCollapse === product.product_sku ? 'active' : ''}`}
                             aria-label="Toggle view"
-                            onClick={() => handleCollapse(product.sku)}>
+                            onClick={() => handleCollapse(product.product_sku)}>
                         <i className="icon icon-caret-down-solid"/>
                     </button>
                     <NavLink to="/product-editor" aria-label="Edit">
@@ -34,7 +34,7 @@ const ProductManagementCollapseItem = ({product, activeCollapse, handleCollapse}
                     <SubmenuTrigger/>
                 </div>
             </div>
-            <Collapse in={activeCollapse === product.sku}>
+            <Collapse in={activeCollapse === product.product_sku}>
                 <table className="basic-table">
                     <tbody>
                     <tr>
@@ -51,7 +51,7 @@ const ProductManagementCollapseItem = ({product, activeCollapse, handleCollapse}
                         </td>
                     </tr>
                     <tr>
-                        <td colSpan={2}>SKU: {product.sku}</td>
+                        <td colSpan={2}>SKU: {product.product_sku}</td>
                     </tr>
                     <tr>
                         <td colSpan={2}>
@@ -70,12 +70,12 @@ const ProductManagementCollapseItem = ({product, activeCollapse, handleCollapse}
                         </td>
                     </tr>
                     <tr>
-                        <td colSpan={2}>Price: ${product.price}</td>
+                        <td colSpan={2}>Price: ${product.product_price}</td>
                     </tr>
                     <tr>
                         <td colSpan={2}>
                             Category:
-                            <button className="capitalize text-accent ml-1">{product.category}</button>
+                            <button className="capitalize text-accent ml-1">{product.product_type}</button>
                         </td>
                     </tr>
                     </tbody>

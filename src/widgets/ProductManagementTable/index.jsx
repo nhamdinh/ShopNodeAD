@@ -22,10 +22,11 @@ import {
     PRODUCT_SELECT_OPTIONS
 } from '@constants/options';
 import {PRODUCTS_MANAGEMENT_COLUMN_DEFS} from '@constants/columnDefs';
+import { PAGE_SIZE } from '@utils/constants';
 
 // data placeholder
 
-const ProductManagementTable = ({products=[] , options}) => {
+const ProductManagementTable = ({products=[] , options , status, cb_setParamsPage, cb_setParamsStatus}) => {
     const {width} = useWindowSize();
     const defaultFilters = {
         stockStatus: null,
@@ -38,9 +39,14 @@ const ProductManagementTable = ({products=[] , options}) => {
     const [filters, setFilters] = useState(defaultFilters);
     const [selectedAction, setSelectedAction] = useState(null);
     const [activeCollapse, setActiveCollapse] = useState('');
-
     const getQty = (category) => {
-        if (category === 'all') return products.length;
+        const categories = {
+            all:options?.countAll ?? products.length,
+            trash:status?.isDelete ?? 0,
+            publish:status?.isPublished ?? 0,
+            draft:status?.isDraft ?? 0
+        }
+        return categories[category] ?? 0;
         return products.filter(product => product.status === category).length;
     }
 
@@ -62,11 +68,11 @@ const ProductManagementTable = ({products=[] , options}) => {
         return products.filter(product => product.status === category);
     }
 
-    const pagination = usePagination({...options, data : dataByStatus(), limit : 8 , });
-
+    const pagination = usePagination({...options, data : dataByStatus(), limit : PAGE_SIZE});
     // reset active collapse when page or window width changes
     useEffect(() => {
         setActiveCollapse('');
+        if(cb_setParamsPage) cb_setParamsPage({page: +pagination.currentPage > 0 ? +pagination.currentPage + 1 : 1 })
     }, [pagination.currentPage, width]);
 
     const handleCollapse = (product_sku) => {
@@ -89,7 +95,11 @@ const ProductManagementTable = ({products=[] , options}) => {
                                         qty={getQty(option.value)}
                                         value={option.value}
                                         active={category}
-                                        onClick={setCategory}/>
+                                        onClick={()=>{
+                                            if(cb_setParamsStatus) cb_setParamsStatus(option.value)
+                                            setCategory(option.value)
+                                            pagination.setCurrentPage(0);
+                                        }}/>
                         ))
                     }
                 </div>

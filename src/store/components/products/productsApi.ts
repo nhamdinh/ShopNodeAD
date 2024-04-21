@@ -151,14 +151,13 @@ export const productsApi = createApi({
       }),
       providesTags: ["tag_getPublishedProducts"],
     }),
-    getProductsByShop: builder.query({
+    getProductsByShop: builder.mutation({
       query: (data) => ({
         url: `/products/all-by-shop`,
-        method: "GET",
-        params: data,
+        method: "PUT",
+        body: data,
       }),
     }),
-
   }),
 });
 
@@ -179,5 +178,5 @@ export const {
   useGetReviewsQuery,
   useUpdateReviewMutation,
   useGetPublishedProductsQuery,
-  useGetProductsByShopQuery
+  useGetProductsByShopMutation,
 } = productsApi;

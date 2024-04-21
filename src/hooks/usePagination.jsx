@@ -4,13 +4,12 @@ const usePagination = ({data, limit = 10, totalPages, totalCount}) => {
     const [currentPage, setCurrentPage] = useState(0);
     const totalCountData = totalCount ?? data.length;
     const maxPage = totalPages ?? Math.ceil(data.length / limit);
-    console.log(maxPage)
-    console.log(limit)
-
+    
     const currentItems = () => {
         const begin = (currentPage) * limit;
         const end = begin + limit;
-        return data.slice(begin, end);
+        // return data.slice(begin, end);
+        return data;
     };
 
     useEffect(() => {

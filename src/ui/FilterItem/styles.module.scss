@@ -13,6 +13,8 @@
     &:hover, &:focus {
         .text {
             color: var(--header);
+            color: #ed1c24;
+            transform: scale(1.06);
         }
     }
 

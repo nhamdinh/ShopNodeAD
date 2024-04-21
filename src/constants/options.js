@@ -136,9 +136,22 @@ export const PRODUCT_ADDITIONAL_OPTIONS = [
 ]
 
 export const PRODUCT_SELECT_OPTIONS = [
-    {value: 'to-draft', label: 'Move to Drafts'},
-    {value: 'to-trash', label: 'Move to Trash'},
-    {value: 'delete', label: 'Delete Permanently'}
+  {
+    value: "to-draft",
+    label: "Move to Drafts",
+    bodyUpdate: { isDraft: true, isPublished: false, isDelete: false },
+  },
+  {
+    value: "to-published",
+    label: "Move to Published",
+    bodyUpdate: { isDraft: false, isPublished: true, isDelete: false },
+  },
+  {
+    value: "to-trash",
+    label: "Move to Trash",
+    bodyUpdate: { isDraft: true, isPublished: false, isDelete: true },
+  },
+    // {value: 'delete', label: 'Delete Permanently'}
 ]
 
 export const PROMOTIONAL_OPTIONS = [

@@ -1,182 +1,284 @@
 // components
-import FilterItem from '@ui/FilterItem';
-import Select from '@ui/Select';
-import StyledTable from './styles';
-import Empty from '@components/Empty';
-import Pagination from '@ui/Pagination';
-import ProductManagementCollapseItem from '@components/ProductManagementCollapseItem';
+import FilterItem from "@ui/FilterItem";
+import Select from "@ui/Select";
+import StyledTable from "./styles";
+import Empty from "@components/Empty";
+import Pagination from "@ui/Pagination";
+import ProductManagementCollapseItem from "@components/ProductManagementCollapseItem";
 
 // hooks
-import {useState, useEffect} from 'react';
-import usePagination from '@hooks/usePagination';
-import {useWindowSize} from 'react-use';
+import { useState, useEffect } from "react";
+import usePagination from "@hooks/usePagination";
+import { useWindowSize } from "react-use";
 
 // constants
 import {
-    PRODUCT_MANAGEMENT_OPTIONS,
-    PRODUCT_CATEGORIES_REAL,
-    STOCK_STATUS_OPTIONS,
-    PRODUCT_TYPE_OPTIONS,
-    PRODUCT_SELLER_OPTIONS,
-    PRODUCT_ADDITIONAL_OPTIONS,
-    PRODUCT_SELECT_OPTIONS
-} from '@constants/options';
-import {PRODUCTS_MANAGEMENT_COLUMN_DEFS} from '@constants/columnDefs';
-import { PAGE_SIZE } from '@utils/constants';
+  PRODUCT_MANAGEMENT_OPTIONS,
+  PRODUCT_CATEGORIES_REAL,
+  STOCK_STATUS_OPTIONS,
+  PRODUCT_TYPE_OPTIONS,
+  PRODUCT_SELLER_OPTIONS,
+  PRODUCT_ADDITIONAL_OPTIONS,
+  PRODUCT_SELECT_OPTIONS,
+} from "@constants/options";
+import { PRODUCTS_MANAGEMENT_COLUMN_DEFS } from "@constants/columnDefs";
+import { PAGE_SIZE } from "@utils/constants";
+import { useUpdateStatusProductsByShopMutation } from "@store/components/products/productsApi";
+import Loader from "@components/Loader";
+import { openToast } from "@store/components/customDialog/toastSlice";
+import { useDispatch } from "react-redux";
 
 // data placeholder
 
-const ProductManagementTable = ({products=[] , options , status, cb_setParamsPage, cb_setParamsStatus}) => {
-    const {width} = useWindowSize();
-    const defaultFilters = {
-        stockStatus: null,
-        productCategory: null,
-        productSeller: null,
-        productType: null,
-        additionalOptions: null
+const ProductManagementTable = ({
+  products = [],
+  options,
+  status,
+  userInfo,
+  cb_setParamsPage,
+  cb_setParamsStatus,
+  cb_onGetProductsByShop,
+}) => {
+  const dispatch = useDispatch();
+
+  const { width } = useWindowSize();
+  const defaultFilters = {
+    stockStatus: null,
+    productCategory: null,
+    productSeller: null,
+    productType: null,
+    additionalOptions: null,
+  };
+
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [category, setCategory] = useState("all");
+  const [filters, setFilters] = useState(defaultFilters);
+  const [selectedAction, setSelectedAction] = useState(null);
+  const [activeCollapse, setActiveCollapse] = useState("");
+
+  const getQty = (category) => {
+    const categories = {
+      all: options?.countAll ?? products.length,
+      trash: status?.isDelete ?? 0,
+      publish: status?.isPublished ?? 0,
+      draft: status?.isDraft ?? 0,
+    };
+    return categories[category] ?? 0;
+    return products.filter((product) => product.status === category).length;
+  };
+
+  const handleFilterSelect = ({ value, label }, name) => {
+    setFilters((prevState) => ({
+      ...prevState,
+      [name]: { label, value },
+    }));
+  };
+
+  const handleApplyFilters = () => {
+    console.log(filters);
+  };
+
+  const [updateStatusProductsByShop, { isLoading, error }] =
+    useUpdateStatusProductsByShopMutation();
+
+  const onUpdateStatusProductsByShop = async (values) => {
+    const res = await updateStatusProductsByShop(values);
+    //@ts-ignore
+    const data = res?.data;
+    if (data?.metadata) {
+      cb_onGetProductsByShop();
+      dispatch(
+        openToast({
+          isOpen: Date.now(),
+          content: "Updated Success",
+          step: 1,
+        })
+      );
+    } else {
+      dispatch(
+        openToast({
+          isOpen: Date.now(),
+          content: "Update Failed",
+          step: 2,
+        })
+      );
     }
-    const [category, setCategory] = useState('all');
-    const [filters, setFilters] = useState(defaultFilters);
-    const [selectedAction, setSelectedAction] = useState(null);
-    const [activeCollapse, setActiveCollapse] = useState('');
-    const getQty = (category) => {
-        const categories = {
-            all:options?.countAll ?? products.length,
-            trash:status?.isDelete ?? 0,
-            publish:status?.isPublished ?? 0,
-            draft:status?.isDraft ?? 0
-        }
-        return categories[category] ?? 0;
-        return products.filter(product => product.status === category).length;
+  };
+
+  const handleApplyAction = () => {
+    const bodyUpdate = PRODUCT_SELECT_OPTIONS.find(
+      (ooo) => ooo.value === selectedAction.value
+    )?.bodyUpdate;
+    const data = {
+      ids: selectedRowKeys,
+      bodyUpdate,
+      product_shop: userInfo?._id,
+    };
+    onUpdateStatusProductsByShop(data);
+  };
+
+  const handleClearFilters = () => {
+    setFilters(defaultFilters);
+  };
+
+  const dataByStatus = () => {
+    if (category === "all") return products;
+    return products.filter((product) => product.status === category);
+  };
+
+  const pagination = usePagination({
+    ...options,
+    data: dataByStatus(),
+    limit: PAGE_SIZE,
+  });
+  // reset active collapse when page or window width changes
+  useEffect(() => {
+    setActiveCollapse("");
+    if (cb_setParamsPage)
+      cb_setParamsPage({
+        page: +pagination.currentPage > 0 ? +pagination.currentPage + 1 : 1,
+      });
+  }, [pagination.currentPage, width]);
+
+  const handleCollapse = (_id) => {
+    if (activeCollapse === _id) {
+      setActiveCollapse("");
+    } else {
+      setActiveCollapse(_id);
     }
+  };
 
-    const handleFilterSelect = ({value, label}, name) => {
-        setFilters(prevState => ({
-            ...prevState,
-            [name]: {label, value}
-        }));
-    }
+  const onSelectChange = (newSelectedRowKeys) => {
+    // console.log('selectedRowKeys changed: ', newSelectedRowKeys);
+    setSelectedRowKeys(newSelectedRowKeys);
+  };
 
-    const handleApplyFilters = () => {}
+  const disabled = selectedRowKeys.length === 0 || !selectedAction;
 
-    const handleClearFilters = () => {
-        setFilters(defaultFilters);
-    }
-
-    const dataByStatus = () => {
-        if (category === 'all') return products;
-        return products.filter(product => product.status === category);
-    }
-
-    const pagination = usePagination({...options, data : dataByStatus(), limit : PAGE_SIZE});
-    // reset active collapse when page or window width changes
-    useEffect(() => {
-        setActiveCollapse('');
-        if(cb_setParamsPage) cb_setParamsPage({page: +pagination.currentPage > 0 ? +pagination.currentPage + 1 : 1 })
-    }, [pagination.currentPage, width]);
-
-    const handleCollapse = (product_sku) => {
-        if (activeCollapse === product_sku) {
-            setActiveCollapse('');
-        } else {
-            setActiveCollapse(product_sku);
-        }
-    }
-
-    return (
-        <div className="flex flex-col flex-1">
-            <div className="flex flex-wrap gap-2 mb-4">
-                <span className="text-header">Products:</span>
-                <div>
-                    {
-                        PRODUCT_MANAGEMENT_OPTIONS.map((option, index) => (
-                            <FilterItem key={`filter-${index}`}
-                                        text={option.label}
-                                        qty={getQty(option.value)}
-                                        value={option.value}
-                                        active={category}
-                                        onClick={()=>{
-                                            if(cb_setParamsStatus) cb_setParamsStatus(option.value)
-                                            setCategory(option.value)
-                                            pagination.setCurrentPage(0);
-                                        }}/>
-                        ))
-                    }
-                </div>
-            </div>
-            <div className="grid grid-cols-1 gap-3 md:grid-cols-3 md:gap-x-6 xl:grid-cols-6">
-                <Select options={STOCK_STATUS_OPTIONS}
-                        value={filters.stockStatus}
-                        placeholder="Stock Status"
-                        onChange={e => handleFilterSelect(e, 'stockStatus')}/>
-                <Select options={PRODUCT_CATEGORIES_REAL}
-                        value={filters.productCategory}
-                        placeholder="Product Category"
-                        onChange={e => handleFilterSelect(e, 'productCategory')}/>
-                <Select options={PRODUCT_SELLER_OPTIONS}
-                        value={filters.productSeller}
-                        placeholder="Product Seller"
-                        onChange={e => handleFilterSelect(e, 'productSeller')}/>
-                <Select options={PRODUCT_TYPE_OPTIONS}
-                        value={filters.productType}
-                        placeholder="Product Type"
-                        onChange={e => handleFilterSelect(e, 'productType')}/>
-                <Select options={PRODUCT_ADDITIONAL_OPTIONS}
-                        value={filters.additionalOptions}
-                        placeholder="Additional Options"
-                        onChange={e => handleFilterSelect(e, 'additionalOptions')}/>
-                <div className="grid grid-cols-2 gap-3">
-                    <button className="btn btn--secondary !gap-[5px]" onClick={handleApplyFilters}>
-                        Apply <i className="icon-chevron-right-regular text-sm"/>
-                    </button>
-                    <button className="btn btn--outline blue !h-[44px]" onClick={handleClearFilters}>
-                        Clear
-                    </button>
-                </div>
-            </div>
-            <div
-                className="flex flex-col-reverse gap-4 mt-4 mb-5 md:flex-row md:justify-between md:items-end md:mt-5 md:mb-6">
-                <p>
-                    View products: {pagination.showingOf()}
-                </p>
-                <div className="md:min-w-[280px]">
-                    <Select options={PRODUCT_SELECT_OPTIONS}
-                            value={selectedAction}
-                            placeholder="Select Action"
-                            onChange={e => setSelectedAction(e)}/>
-                </div>
-            </div>
-            <div className="flex flex-1 flex-col gap-[22px]">
-                {
-                    width >= 768 ?
-                        <StyledTable columns={PRODUCTS_MANAGEMENT_COLUMN_DEFS}
-                                     dataSource={pagination.currentItems()}
-                                     rowKey={record => record.product_sku}
-                                     locale={{
-                                         emptyText: <Empty text="No products found"/>
-                                     }}
-                                     rowSelection={{
-                                         type: 'checkbox',
-                                     }}
-                                     pagination={false}/>
-                        :
-                        <div className="flex flex-col gap-5">
-                            {
-                                pagination.currentItems().map((product, index) => (
-                                    <ProductManagementCollapseItem key={`product-${index}`}
-                                                                   product={product}
-                                                                   handleCollapse={handleCollapse}
-                                                                   activeCollapse={activeCollapse}/>
-                                ))
-                            }
-                        </div>
-                }
-                {
-                    pagination.maxPage > 1 && <Pagination pagination={pagination}/>
-                }
-            </div>
+  return (
+    <div className="flex flex-col flex-1">
+      <div className="flex flex-wrap gap-2 mb-4">
+        <span className="text-header">Products:</span>
+        <div>
+          {PRODUCT_MANAGEMENT_OPTIONS.map((option, index) => (
+            <FilterItem
+              key={`filter-${index}`}
+              text={option.label}
+              qty={getQty(option.value)}
+              value={option.value}
+              active={category}
+              onClick={() => {
+                if (cb_setParamsStatus) cb_setParamsStatus(option.value);
+                setCategory(option.value);
+                pagination.setCurrentPage(0);
+              }}
+            />
+          ))}
         </div>
-    )
-}
+      </div>
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-3 md:gap-x-6 xl:grid-cols-6">
+        <Select
+          options={STOCK_STATUS_OPTIONS}
+          value={filters.stockStatus}
+          placeholder="Stock Status"
+          onChange={(e) => handleFilterSelect(e, "stockStatus")}
+        />
+        <Select
+          options={PRODUCT_CATEGORIES_REAL}
+          value={filters.productCategory}
+          placeholder="Product Category"
+          onChange={(e) => handleFilterSelect(e, "productCategory")}
+        />
+        <Select
+          options={PRODUCT_SELLER_OPTIONS}
+          value={filters.productSeller}
+          placeholder="Product Seller"
+          onChange={(e) => handleFilterSelect(e, "productSeller")}
+        />
+        <Select
+          options={PRODUCT_TYPE_OPTIONS}
+          value={filters.productType}
+          placeholder="Product Type"
+          onChange={(e) => handleFilterSelect(e, "productType")}
+        />
+        <Select
+          options={PRODUCT_ADDITIONAL_OPTIONS}
+          value={filters.additionalOptions}
+          placeholder="Additional Options"
+          onChange={(e) => handleFilterSelect(e, "additionalOptions")}
+        />
+        <div className="grid grid-cols-2 gap-3">
+          <button
+            className="btn btn--secondary !gap-[5px]"
+            onClick={handleApplyFilters}
+          >
+            Apply <i className="icon-chevron-right-regular text-sm" />
+          </button>
+          <button
+            className="btn btn--outline blue !h-[44px]"
+            onClick={handleClearFilters}
+          >
+            Clear
+          </button>
+        </div>
+      </div>
+      <div className="flex flex-col-reverse gap-4 mt-4 mb-5 md:flex-row md:justify-between md:items-end md:mt-5 md:mb-6">
+        <p>View products: {pagination.showingOf()}</p>
+        <div>
+          <div className="grid grid-cols-2 gap-3">
+            <button
+              disabled={disabled}
+              className="btn btn--outline red !gap-[5px]"
+              onClick={handleApplyAction}
+            >
+              {isLoading ? <Loader radius={30} /> : "Apply Action"}
+              <i className="icon-chevron-right-regular text-sm" />
+            </button>
+            <div className="md:min-w-[280px]">
+              <Select
+                options={PRODUCT_SELECT_OPTIONS}
+                value={selectedAction}
+                placeholder="Select Action"
+                onChange={(e) => {
+                  setSelectedAction(e);
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-1 flex-col gap-[22px]">
+        {width >= 768 ? (
+          <StyledTable
+            columns={PRODUCTS_MANAGEMENT_COLUMN_DEFS}
+            dataSource={pagination.currentItems()}
+            rowKey={(record) => record._id}
+            locale={{
+              emptyText: <Empty text="No products found" />,
+            }}
+            rowSelection={{
+              type: "checkbox",
+              selectedRowKeys,
+              onChange: onSelectChange,
+            }}
+            pagination={false}
+          />
+        ) : (
+          <div className="flex flex-col gap-5">
+            {pagination.currentItems().map((product, index) => (
+              <ProductManagementCollapseItem
+                key={`product-${index}`}
+                product={product}
+                handleCollapse={handleCollapse}
+                activeCollapse={activeCollapse}
+              />
+            ))}
+          </div>
+        )}
+        {pagination.maxPage > 1 && <Pagination pagination={pagination} />}
+      </div>
+    </div>
+  );
+};
 
-export default ProductManagementTable
+export default ProductManagementTable;

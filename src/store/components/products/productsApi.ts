@@ -158,6 +158,13 @@ export const productsApi = createApi({
         body: data,
       }),
     }),
+    updateStatusProductsByShop: builder.mutation({
+      query: (data) => ({
+        url: `/products/update-status-products-by-shop`,
+        method: "PUT",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -179,4 +186,5 @@ export const {
   useUpdateReviewMutation,
   useGetPublishedProductsQuery,
   useGetProductsByShopMutation,
+  useUpdateStatusProductsByShopMutation,
 } = productsApi;

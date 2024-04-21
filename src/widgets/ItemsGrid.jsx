@@ -27,7 +27,7 @@ const ItemsGrid = ({products}) => {
 
   const productsByCategory = products.filter(product => product.product_type === category.value);
   const sortedProducts = sortProducts(productsByCategory, sort.value)
-  const pagination = usePagination(sortedProducts, 12);
+  const pagination = usePagination({data : sortedProducts, itemsPerPage : 12});
   useEffect(() => {
     pagination.goToPage(0);
     // eslint-disable-next-line react-hooks/exhaustive-deps

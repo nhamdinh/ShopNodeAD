@@ -31,7 +31,7 @@ const LatestAcceptedReviews = () => {
         return 0;
     });
 
-    const pagination = usePagination(sortedData, 4);
+    const pagination = usePagination({data : sortedData, itemsPerPage : 4});
 
     return (
         <Spring className="flex flex-1 flex-col gap-[26px]">

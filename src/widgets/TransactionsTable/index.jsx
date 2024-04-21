@@ -38,7 +38,7 @@ const TransactionsTable = () => {
         }
     });
 
-    const pagination = usePagination(sortedData, 6);
+    const pagination = usePagination({data : sortedData, itemsPerPage : 12});
 
     // go to first page when period or sort changes and reset active collapse
     useEffect(() => {

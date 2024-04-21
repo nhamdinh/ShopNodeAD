@@ -62,7 +62,7 @@ const ProductManagementTable = ({products=[]}) => {
         return products.filter(product => product.status === category);
     }
 
-    const pagination = usePagination(dataByStatus(), 8);
+    const pagination = usePagination({data : dataByStatus(), itemsPerPage : 8});
 
     // reset active collapse when page or window width changes
     useEffect(() => {

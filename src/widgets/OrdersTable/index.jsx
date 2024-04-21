@@ -37,7 +37,7 @@ const OrdersTable = ({category, sort}) => {
         }
     }
 
-    const pagination = usePagination({data : sortedData(), itemsPerPage : 5});
+    const pagination = usePagination({data : sortedData(), limit : 5});
 
     // go to first page when period or sort changes and reset active collapse
     useEffect(() => {

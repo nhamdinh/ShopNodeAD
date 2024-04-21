@@ -21,7 +21,7 @@ const SellerProfilesList = () => {
     const [sort, setSort] = useState(SELLER_SORT_OPTIONS[0]);
     const data = sellers.slice(0, 12);
     const sortedData = sortSellers(data, sort.value);
-    const pagination = usePagination({data : sortedData, itemsPerPage : 4});
+    const pagination = usePagination({data : sortedData, limit : 4});
 
     // go to first page when sort changes
     useEffect(() => {

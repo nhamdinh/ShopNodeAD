@@ -25,7 +25,7 @@ import {PRODUCTS_MANAGEMENT_COLUMN_DEFS} from '@constants/columnDefs';
 
 // data placeholder
 
-const ProductManagementTable = ({products=[]}) => {
+const ProductManagementTable = ({products=[] , options}) => {
     const {width} = useWindowSize();
     const defaultFilters = {
         stockStatus: null,
@@ -62,7 +62,7 @@ const ProductManagementTable = ({products=[]}) => {
         return products.filter(product => product.status === category);
     }
 
-    const pagination = usePagination({data : dataByStatus(), itemsPerPage : 8});
+    const pagination = usePagination({...options, data : dataByStatus(), limit : 8 , });
 
     // reset active collapse when page or window width changes
     useEffect(() => {

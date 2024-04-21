@@ -18,6 +18,7 @@ const csvData = [
 const ProductsManagement = () => {
     const userInfo = useSelector(getUserInfo);
     const [products, setProducts] = useState([]);
+    const [options, setOptions] = useState({});
 
     const {
         data: dataProducts,
@@ -28,6 +29,7 @@ const ProductsManagement = () => {
       } = useGetProductsByShopQuery(
         {
           product_shop: userInfo?._id,
+          limit:10
         },
         {
           refetchOnMountOrArgChange: true,
@@ -37,7 +39,11 @@ const ProductsManagement = () => {
 
       useEffect(() => {
         if (isSuccess) {
+          const {totalCount,totalPages,limit} = dataProducts?.metadata
           const _products = dataProducts?.metadata?.products;
+          const _options = {totalCount,totalPages,limit};
+
+          setOptions(_options)
           setProducts(_products.map(ppp=>{
                 const status = ppp.isDelete ? "trash": ppp.isPublished?"publish":"draft"
             return {...ppp,status}
@@ -63,7 +69,7 @@ const ProductsManagement = () => {
                 </div>
                 <Search wrapperClass="lg:w-[326px]" placeholder="Search Product"/>
             </div>
-            <ProductManagementTable products={products}/>
+            <ProductManagementTable products={products} options={options}/>
         </>
     )
 }

@@ -29,7 +29,7 @@ const AppsGrid = () => {
             .filter(app => category === 'all' ? true : app.categories.includes(category))
     }
 
-    const pagination = usePagination({data : filteredData(), itemsPerPage : 12});
+    const pagination = usePagination({data : filteredData(), limit : 12});
     const data = pagination.currentItems();
 
     useEffect(() => {

@@ -28,7 +28,7 @@ const SellersProfileTable = () => {
     const [sort, setSort] = useState(SELLER_SORT_OPTIONS[0]);
     const perPage = width < 1280 ? 6 : 3;
 
-    const pagination = usePagination({data : sellers.slice(0, 12), itemsPerPage : perPage});
+    const pagination = usePagination({data : sellers.slice(0, 12), limit : perPage});
 
     const sortedData = sortSellers(pagination.currentItems(), sort.value);
 

@@ -1,12 +1,15 @@
 import {useState, useEffect} from 'react';
 
-const usePagination = ({data, itemsPerPage = 10}) => {
+const usePagination = ({data, limit = 10, totalPages, totalCount}) => {
     const [currentPage, setCurrentPage] = useState(0);
-    const maxPage = Math.ceil(data.length / itemsPerPage);
+    const totalCountData = totalCount ?? data.length;
+    const maxPage = totalPages ?? Math.ceil(data.length / limit);
+    console.log(maxPage)
+    console.log(limit)
 
     const currentItems = () => {
-        const begin = (currentPage) * itemsPerPage;
-        const end = begin + itemsPerPage;
+        const begin = (currentPage) * limit;
+        const end = begin + limit;
         return data.slice(begin, end);
     };
 
@@ -33,11 +36,11 @@ const usePagination = ({data, itemsPerPage = 10}) => {
     }
 
     const showingOf = () => {
-        const begin = (currentPage) * itemsPerPage;
-        const end = data.length > itemsPerPage ? begin + itemsPerPage : data.length;
-        return data.length > 0 ?
+        const begin = (currentPage) * limit;
+        const end = totalCountData > limit ? begin + limit : totalCountData;
+        return totalCountData > 0 ?
             <>
-                <span className="font-semibold">{end}</span>/{data.length}
+                <span className="font-semibold">{end}</span>/{totalCountData}
             </>
             : '';
     }

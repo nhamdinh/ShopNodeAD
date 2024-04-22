@@ -99,7 +99,7 @@ const ProductManagementTable = ({
     //@ts-ignore
     const data = res?.data;
     if (data?.metadata) {
-      cb_onGetProductsByShop();
+      if(cb_onGetProductsByShop) cb_onGetProductsByShop();
       setSelectedRowKeys([]);
       dispatch(
         openToast({

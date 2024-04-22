@@ -62,7 +62,7 @@ const ProductsGrid = () => {
         cb_refetch={onGetProductsByShop}
         title="Products Grid"
       />
-      <ItemsGrid products={products} />
+      <ItemsGrid products={products} cb_refetch={onGetProductsByShop} />
     </>
   );
 };

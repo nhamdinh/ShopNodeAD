@@ -17,7 +17,7 @@ import { sortProducts } from "@utils/helpers";
 // data placeholder
 // import products from "@db/products";
 
-const ItemsGrid = ({products}) => {
+const ItemsGrid = ({products, cb_refetch}) => {
   const options = PRODUCT_CATEGORIES_REAL.filter((option) => option.value !== "all");
   const [category, setCategory] = useState(options[0]);
   const [sort, setSort] = useState(PRODUCT_SORT_OPTIONS[0]);
@@ -65,6 +65,9 @@ const ItemsGrid = ({products}) => {
             key={`${product._id}-${sort.value}-${category.value}`}
             product={product}
             index={index}
+            cb_onGetProductsByShop={()=>{
+              if(cb_refetch) cb_refetch()
+            }}
           />
         ))}
       </div>

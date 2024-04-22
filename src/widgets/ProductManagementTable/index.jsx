@@ -8,7 +8,7 @@ import ProductManagementCollapseItem from "@components/ProductManagementCollapse
 
 // hooks
 import { useState, useEffect } from "react";
-import usePagination from "@hooks/usePagination";
+import usePaginationApi from "@hooks/usePaginationApi";
 import { useWindowSize } from "react-use";
 
 // constants
@@ -140,7 +140,7 @@ const ProductManagementTable = ({
     return products.filter((product) => product.status === category);
   };
 
-  const pagination = usePagination({
+  const pagination = usePaginationApi({
     ...options,
     data: dataByStatus(),
     limit: PAGE_SIZE,

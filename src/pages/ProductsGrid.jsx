@@ -1,49 +1,70 @@
 // components
-import PageHeader from '@layout/PageHeader';
-import ItemsGrid from '@widgets/ItemsGrid';
+import PageHeader from "@layout/PageHeader";
+import ItemsGrid from "@widgets/ItemsGrid";
 
 // hooks
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
-import { getUserInfo } from '@store/selector/RootSelector';
-import { useGetPublishedProductsQuery } from '@store/components/products/productsApi';
+import { getUserInfo } from "@store/selector/RootSelector";
+import { useGetProductsByShopMutation } from "@store/components/products/productsApi";
+import { PAGE_SIZE_999 } from "@utils/constants";
+
 const ProductsGrid = () => {
-    const userInfo = useSelector(getUserInfo);
-    const [products, setProducts] = useState([]);
+  const userInfo = useSelector(getUserInfo);
+  const [products, setProducts] = useState([]);
 
-    const {
-        data: dataProducts,
-        error,
-        isSuccess,
-        isFetching ,
-        refetch
-      } = useGetPublishedProductsQuery(
-        {
-          product_shop: userInfo?._id,
-        },
-        {
-          refetchOnMountOrArgChange: true,
-          skip: false,
-        }
+  const [params, setParams] = useState({
+    product_shop: userInfo?._id,
+    limit: PAGE_SIZE_999,
+    page: 1,
+  });
+
+  useEffect(() => {
+    setParams({
+      product_shop: userInfo?._id,
+      limit: PAGE_SIZE_999,
+      page: 1,
+      isDelete: false
+    });
+  }, [userInfo]);
+
+  const [getProductsByShop, { isLoading, error }] =
+    useGetProductsByShopMutation();
+
+  const onGetProductsByShop = async () => {
+    const res = await getProductsByShop(params);
+    //@ts-ignore
+    const data = res?.data;
+    if (data) {
+      const _products = data?.metadata?.products;
+      setProducts(
+        _products.map((ppp) => {
+          const status = ppp.isDelete
+            ? "trash"
+            : ppp.isPublished
+            ? "publish"
+            : "draft";
+          return { ...ppp, status };
+        })
       );
+    }
+  };
 
-      useEffect(() => {
-        if (isSuccess) {
-          const _products = dataProducts?.metadata?.products;
-          setProducts(_products)
-        }
-      }, [dataProducts]);
-      // console.log(JSON.stringify(dataFetched[0]))
-      // console.log(JSON.stringify(products[0]))
-      // console.log(dataFetched)
+  useEffect(() => {
+    if (params.product_shop) onGetProductsByShop(params);
+  }, [params]);
+  console.log(products)
+  return (
+    <>
+      <PageHeader
+        isFetching={isLoading}
+        cb_refetch={onGetProductsByShop}
+        title="Products Grid"
+      />
+      <ItemsGrid products={products} />
+    </>
+  );
+};
 
-    return (
-        <>
-            <PageHeader isFetching={isFetching} cb_refetch={refetch} title="Products Grid" />
-            <ItemsGrid products={products} />
-        </>
-    )
-}
-
-export default ProductsGrid
+export default ProductsGrid;

@@ -18,6 +18,7 @@ const csvData = [
 
 const ProductsManagement = () => {
   const userInfo = useSelector(getUserInfo);
+  const [searchInput, setSearchInput] = useState("");
   const [products, setProducts] = useState([]);
   const [options, setOptions] = useState({});
   const [status, setStatus] = useState({});
@@ -97,12 +98,27 @@ const ProductsManagement = () => {
             Export CSV <i className="icon-file-export-solid" />
           </CSVLink>
         </div>
-        <Search wrapperClass="lg:w-[326px]" placeholder="Search Product" />
+        <Search
+          query={searchInput}
+          setQuery={setSearchInput}
+          cb_setParamsSearch={() => {
+            setParams((prevState) => ({
+              ...prevState,
+              page: 1,
+              keyword: searchInput,
+            }));
+          }}
+          wrapperClass="lg:w-[326px]"
+          placeholder="Search Product"
+        />
       </div>
       <ProductManagementTable
         cb_onGetProductsByShop={onGetProductsByShop}
         cb_setParamsPage={(ob) => {
-          setParams({ ...params, ...ob });
+          setParams((prevState) => ({
+            ...prevState,
+            ...ob,
+          }));
         }}
         cb_setParamsStatus={(val) => {
           const categories = {
@@ -117,6 +133,13 @@ const ProductsManagement = () => {
             page: 1,
             ...categories[val],
           });
+        }}
+        cb_setParamsFilter={(val) => {
+          setParams((prevState) => ({
+            ...prevState,
+            page: 1,
+            ...val,
+          }));
         }}
         products={products}
         options={options}

@@ -9,6 +9,7 @@ import { setUserInfo } from "@store/components/auth/authSlice";
 import { userLogout } from "@store/components/auth/authSlice";
 import { useGetPublishedProductsQuery } from "@store/components/products/productsApi";
 import { setStoProducts } from "@store/components/products/productsSlice";
+import { useGetProductsByShopMutation } from "@store/components/products/productsApi";
 
 const Copyright = () => {
   const dispatch = useDispatch();
@@ -27,22 +28,35 @@ const Copyright = () => {
     }
   );
 
-  const { data: dataProducts, isSuccess } = useGetPublishedProductsQuery(
-    {
-      product_shop: user?._id,
-    },
-    {
-      refetchOnMountOrArgChange: true,
-      skip: false,
-    }
-  );
+  const [params, setParams] = useState({
+    product_shop: user?._id,
+    limit: 999,
+    page: 1,
+  });
 
-  useEffect(() => {
-    if (isSuccess) {
-      const _products = dataProducts?.metadata?.products;
+  const [getProductsByShop, { isLoading }] = useGetProductsByShopMutation();
+
+  const onGetProductsByShop = async () => {
+    const res = await getProductsByShop(params);
+    //@ts-ignore
+    const data = res?.data;
+    if (data) {
+      const _products = data?.metadata?.products;
       dispatch(setStoProducts(_products));
     }
-  }, [dataProducts]);
+  };
+
+  useEffect(() => {
+    if (params.product_shop) onGetProductsByShop(params);
+  }, [params]);
+
+  useEffect(() => {
+    setParams({
+      product_shop: user?._id,
+      limit: 999,
+      page: 1,
+    });
+  }, [user]);
 
   useEffect(() => {
     if (isSuccessProfile) {

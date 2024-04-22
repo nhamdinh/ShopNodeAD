@@ -27,6 +27,8 @@ import { useUpdateStatusProductsByShopMutation } from "@store/components/product
 import Loader from "@components/Loader";
 import { openToast } from "@store/components/customDialog/toastSlice";
 import { useDispatch } from "react-redux";
+import { useGetBrandsQuery } from "@store/components/products/productsApi";
+import { removeNullObject } from "@utils/commonFunction";
 
 // data placeholder
 
@@ -37,6 +39,7 @@ const ProductManagementTable = ({
   userInfo,
   cb_setParamsPage,
   cb_setParamsStatus,
+  cb_setParamsFilter,
   cb_onGetProductsByShop,
 }) => {
   const dispatch = useDispatch();
@@ -44,9 +47,9 @@ const ProductManagementTable = ({
   const { width } = useWindowSize();
   const defaultFilters = {
     stockStatus: null,
-    productCategory: null,
+    product_type: null,
     productSeller: null,
-    productType: null,
+    productBrands: null,
     additionalOptions: null,
   };
 
@@ -75,7 +78,17 @@ const ProductManagementTable = ({
   };
 
   const handleApplyFilters = () => {
-    console.log(filters);
+    const filtersRemoveNull = removeNullObject(filters);
+    const final = {};
+    Object.keys(filtersRemoveNull).forEach((key) => {
+      if (key === "product_type") final[key] = filtersRemoveNull[key].value;
+    });
+    console.log(final);
+    if (cb_setParamsFilter) {
+      cb_setParamsFilter(final);
+      setSelectedRowKeys([]);
+      pagination.setCurrentPage(0);
+    }
   };
 
   const [updateStatusProductsByShop, { isLoading, error }] =
@@ -87,6 +100,7 @@ const ProductManagementTable = ({
     const data = res?.data;
     if (data?.metadata) {
       cb_onGetProductsByShop();
+      setSelectedRowKeys([]);
       dispatch(
         openToast({
           isOpen: Date.now(),
@@ -134,10 +148,12 @@ const ProductManagementTable = ({
   // reset active collapse when page or window width changes
   useEffect(() => {
     setActiveCollapse("");
-    if (cb_setParamsPage)
+    if (cb_setParamsPage) {
+      setSelectedRowKeys([]);
       cb_setParamsPage({
         page: +pagination.currentPage > 0 ? +pagination.currentPage + 1 : 1,
       });
+    }
   }, [pagination.currentPage, width]);
 
   const handleCollapse = (_id) => {
@@ -152,6 +168,36 @@ const ProductManagementTable = ({
     // console.log('selectedRowKeys changed: ', newSelectedRowKeys);
     setSelectedRowKeys(newSelectedRowKeys);
   };
+
+  const [brand, setbrand] = useState("All");
+  const [brands, setbrands] = useState([]);
+  const {
+    data: dataBrands,
+    error: errBrands,
+    isSuccess: isSuccessBrands,
+    isLoading: isLoadingBrands,
+  } = useGetBrandsQuery(
+    {
+      page: 1,
+      limit: 1000,
+    },
+    {
+      refetchOnMountOrArgChange: true,
+      skip: false,
+    }
+  );
+  useEffect(() => {
+    if (isSuccessBrands) {
+      setbrands(
+        dataBrands?.brands.map((brr) => {
+          return {
+            value: brr._id,
+            label: brr.brand,
+          };
+        })
+      );
+    }
+  }, [dataBrands]);
 
   const disabled = selectedRowKeys.length === 0 || !selectedAction;
 
@@ -168,7 +214,11 @@ const ProductManagementTable = ({
               value={option.value}
               active={category}
               onClick={() => {
-                if (cb_setParamsStatus) cb_setParamsStatus(option.value);
+                if (cb_setParamsStatus) {
+                  setSelectedRowKeys([]);
+                  cb_setParamsStatus(option.value);
+                }
+
                 setCategory(option.value);
                 pagination.setCurrentPage(0);
               }}
@@ -184,10 +234,12 @@ const ProductManagementTable = ({
           onChange={(e) => handleFilterSelect(e, "stockStatus")}
         />
         <Select
-          options={PRODUCT_CATEGORIES_REAL}
-          value={filters.productCategory}
+          options={PRODUCT_CATEGORIES_REAL.filter(
+            (ooo) => ooo.value !== PRODUCT_CATEGORIES_REAL[0]?.value
+          )}
+          value={filters.product_type}
           placeholder="Product Category"
-          onChange={(e) => handleFilterSelect(e, "productCategory")}
+          onChange={(e) => handleFilterSelect(e, "product_type")}
         />
         <Select
           options={PRODUCT_SELLER_OPTIONS}
@@ -196,10 +248,10 @@ const ProductManagementTable = ({
           onChange={(e) => handleFilterSelect(e, "productSeller")}
         />
         <Select
-          options={PRODUCT_TYPE_OPTIONS}
-          value={filters.productType}
-          placeholder="Product Type"
-          onChange={(e) => handleFilterSelect(e, "productType")}
+          options={brands}
+          value={filters.productBrands}
+          placeholder="Product Brands"
+          onChange={(e) => handleFilterSelect(e, "productBrands")}
         />
         <Select
           options={PRODUCT_ADDITIONAL_OPTIONS}

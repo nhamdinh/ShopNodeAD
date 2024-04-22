@@ -2,7 +2,7 @@
 import DocumentTitle from '@components/DocumentTitle';
 
 // hooks
-import {useState, useEffect} from 'react';
+import {useState, useEffect, memo} from 'react';
 import {useWindowSize} from 'react-use';
 
 // utils
@@ -47,4 +47,4 @@ PageHeader.propTypes = {
     title: PropTypes.string.isRequired
 }
 
-export default PageHeader
+export default memo(PageHeader)

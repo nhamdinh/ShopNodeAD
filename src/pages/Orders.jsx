@@ -1,5 +1,6 @@
 // components
-import { uid } from 'uid';
+import { uid } from "uid";
+import dayjs from "dayjs";
 
 import PageHeader from "@layout/PageHeader";
 import CalendarSelector from "@components/CalendarSelector";
@@ -68,7 +69,7 @@ const Orders = () => {
         if (isPaid === true) return "completed";
         return "completed";
       };
-      const _ordersProduct = checkedProducts.map((pro,index) => {
+      const _ordersProduct = checkedProducts.map((pro, index) => {
         const orderFound = orders.find((order) => order._id === pro.order_id);
         const { isPaid, isDelivered, isCanceled, isRefunded } = orderFound;
         return {
@@ -104,6 +105,18 @@ const Orders = () => {
           <CalendarSelector
             wrapperClass="lg:max-w-[275px] lg:col-span-2 xl:col-span-4"
             id="ordersPeriodSelector"
+            cb_setRangeDate={(val) => {
+              const createdAt = {
+                gte: dayjs(val[0]).format(),
+                lt: dayjs(val[1]).format(),
+              };
+              setParams({
+                shopId: userInfo?._id,
+                limit: PAGE_SIZE_999,
+                page: 1,
+                createdAt,
+              });
+            }}
           />
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-[26px] md:col-span-2">
             <Select

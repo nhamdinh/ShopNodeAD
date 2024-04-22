@@ -1,6 +1,7 @@
 import Spring from '@components/Spring';
+import { formatCustomerPhoneNumber } from '@utils/commonFunction';
 
-const UserProfileInfo = () => {
+const UserProfileInfo = ({userInfo}) => {
     return (
         <Spring className="card flex items-center">
             <div className="flex flex-col gap-5">
@@ -8,7 +9,7 @@ const UserProfileInfo = () => {
                     <span className="icon-wrapper mt-1">
                         <i className="icon icon-envelope-solid"/>
                     </span>
-                    maria@email.com
+                    {userInfo?.email}
                 </div>
                 <div className="flex items-start gap-4">
                     <span className="icon-wrapper mt-1.5">
@@ -22,13 +23,13 @@ const UserProfileInfo = () => {
                     <span className="icon-wrapper mt-1">
                         <i className="icon icon-mobile-solid"/>
                     </span>
-                    +1 123-123-123
+                    {formatCustomerPhoneNumber(userInfo?.phone)}
                 </div>
                 <div className="flex items-center gap-4">
                     <span className="icon-wrapper mt-1">
                         <i className="icon icon-whatsapp"/>
                     </span>
-                    +1 123-123-123
+                    {formatCustomerPhoneNumber(userInfo?.phone)}
                 </div>
                 <button className="flex items-center gap-4 w-fit">
                         <span className="icon-wrapper mt-1">

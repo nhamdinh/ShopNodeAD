@@ -1,4 +1,5 @@
 // components
+import "./styles.scss"
 import Search from '@ui/Search';
 import Headroom from 'react-headroom';
 import CustomTooltip from '@ui/CustomTooltip';
@@ -15,6 +16,8 @@ import {useNavigate} from 'react-router-dom';
 
 // constants
 import {LOCALES} from '@constants/options';
+import { useSelector } from 'react-redux';
+import { getUserInfo } from '@store/selector/RootSelector';
 
 const LocaleMenu = ({active, setActive}) => {
     return (
@@ -37,6 +40,7 @@ const LocaleMenu = ({active, setActive}) => {
 }
 
 const AppBar = () => {
+    const userInfo = useSelector(getUserInfo);
     const navigate = useNavigate();
     const [searchModalOpen, setSearchModalOpen] = useState(false);
     const [notificationsPanelOpen, setNotificationsPanelOpen] = useState(false);
@@ -119,7 +123,8 @@ const AppBar = () => {
                                     justify-center relative xl:w-11 xl:h-11 xl:text-lg"
                                     onClick={() => navigate('/general-settings')}
                                     aria-label="Account menu">
-                                <i className="icon-user-solid"/>
+                                {/* <i className="icon-user-solid"/> */}
+                                <img className='avatar__icon' src={userInfo?.avatar} alt="avatar__icon" />
                             </button>
                             <span className="badge-online"/>
                         </div>

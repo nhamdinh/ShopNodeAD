@@ -17,6 +17,8 @@ export const PAGE_SIZE_12 = 12;
 export const PAGE_SIZE_1 = 1;
 export const PAGE_SIZE_999 = 999;
 export const SAFE_STOCK = 300;
+export const PATH_IMG_AVATAR = "avatar";
+
 export const REGEX_CURRENCY = /(\d)(?=(\d{3})+(?!\d))/g;
 export const DATE_FORMAT = "YYYY-MM-DD";
 export const RE_ONLY_NUMBER = /^-?\d*(\.\d+)?$/;

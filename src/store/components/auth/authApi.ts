@@ -79,6 +79,14 @@ export const authApi = createApi({
         params: data,
       }),
     }),
+    changePassword: builder.mutation({
+      query: (data) => ({
+        url: `/users/change-password`,
+        method: "PUT",
+        body: data,
+      }),
+    }),
+
   }),
 });
 
@@ -87,6 +95,7 @@ export const {
   useLoginMutation,
   useRegisterMutation,
   useUpdateProfileMutation,
+  useChangePasswordMutation,
   useClearCountChatMutation,
   useGetAllMemberQuery,
   useGetStoryQuery,

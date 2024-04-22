@@ -3,7 +3,6 @@ import Spring from '@components/Spring';
 import {NavLink} from 'react-router-dom';
 import {PatternFormat} from 'react-number-format';
 import PasswordInput from '@components/PasswordInput';
-import {toast} from 'react-toastify';
 import Select from '@ui/Select';
 
 // hooks
@@ -15,16 +14,24 @@ import {useState} from 'react';
 import classNames from 'classnames';
 import countryList from 'react-select-country-list';
 import {City} from 'country-state-city';
+import { formatCustomerPhoneNumber } from '@utils/commonFunction';
+import { useChangePasswordMutation ,useUpdateProfileMutation } from '@store/components/auth/authApi';
+import { openToast } from '@store/components/customDialog/toastSlice';
+import { useDispatch } from 'react-redux';
+import Loader from '@components/Loader';
+import { RE_ONLY_NUMBER } from '@utils/constants';
 
-const UserProfileDetails = () => {
+const UserProfileDetails = ({userInfo, avatar}) => {
+    const dispatch = useDispatch();
+
     const {theme, toggleTheme} = useTheme();
-    const {register, setValue, handleSubmit, formState: {errors}, control} = useForm({
+    const {register, watch, setValue, handleSubmit, formState: {errors}, control} = useForm({
         defaultValues: {
-            firstName: 'Maria',
-            lastName: 'Smith',
-            email: 'maria@email.com',
-            phone: '',
-            password: 'password',
+            name: userInfo?.name,
+            passwordOld: '',
+            email: userInfo?.email,
+            phone: (userInfo?.phone),
+            password: '',
             country: null,
             city: null,
             state: '',
@@ -60,8 +67,85 @@ const UserProfileDetails = () => {
     // do something with the data
     const onSubmit = data => {
         console.log(data);
-        toast.success('Profile updated successfully');
+
+        const { name, phone } =data
+        onUpdateProfile({ name, phone, avatar }) 
+    
+    
+    
     }
+
+    const [updateProfile, { isLoading :isLoading1, error:error1 }] = useUpdateProfileMutation();
+    const [changePassword, { isLoading, error }] = useChangePasswordMutation();
+
+    const onUpdateProfile = async (values) => {
+        await updateProfile(values).then((res) =>{
+          const data = res?.data
+  
+        if (data) {
+          dispatch(
+            openToast({
+              isOpen: Date.now(),
+              content: "Updated Profile Success",
+              step: 1,
+            })
+          );
+        } else {
+          dispatch(
+            openToast({
+              isOpen: Date.now(),
+              content: "Update Profile Failed",
+              step: 2,
+            })
+          );
+        }
+  
+  
+  
+        }).catch((err) => {
+  console.log(err)      });
+    
+      //   //@ts-ignore
+      //   const data = res?.data;
+  
+  
+      };
+
+
+
+    const onChangePassword = async (values) => {
+      await changePassword(values).then((res) =>{
+        const data = res?.data
+
+      if (data) {
+        dispatch(
+          openToast({
+            isOpen: Date.now(),
+            content: "Updated Password Success",
+            step: 1,
+          })
+        );
+      } else {
+        dispatch(
+          openToast({
+            isOpen: Date.now(),
+            content: "Update Password Failed",
+            step: 2,
+          })
+        );
+      }
+
+
+
+      }).catch((err) => {
+console.log(err)      });
+  
+    //   //@ts-ignore
+    //   const data = res?.data;
+
+
+    };
+    
 
     return (
         <Spring className="card flex flex-col gap-[30px] md:gap-12 md:row-start-2 md:col-span-2 md:!pb-[50px]
@@ -72,35 +156,38 @@ const UserProfileDetails = () => {
                     <div className="grid gap-4 md:grid-cols-2 md:gap-5">
                         <div className="grid gap-4">
                             <div className="field-wrapper">
-                                <label className="field-label" htmlFor="firstName">First Name</label>
-                                <input className={classNames('field-input', {'field-input--error': errors.firstName})}
+                                <label className="field-label" htmlFor="name">User Name</label>
+                                <input className={classNames('field-input', {'field-input--error': errors.name})}
                                        type="text"
-                                       id="firstName"
+                                       id="name"
                                        placeholder="First Name"
-                                       defaultValue="Maria"
-                                       {...register('firstName', {required: true})}/>
+                                       defaultValue={userInfo?.name}
+                                       {...register('name', {required: true})}/>
                             </div>
-                            <div className="field-wrapper">
-                                <label className="field-label" htmlFor="lastName">Last Name</label>
-                                <input className={classNames('field-input', {'field-input--error': errors.lastName})}
-                                       type="text"
-                                       id="lastName"
-                                       placeholder="Last Name"
-                                       defaultValue="Smith"
-                                       {...register('lastName', {required: true})}/>
-                            </div>
+
                             <div className="field-wrapper">
                                 <label className="field-label" htmlFor="email">Email</label>
                                 <input className={classNames('field-input', {'field-input--error': errors.email})}
                                        type="text"
                                        id="email"
                                        placeholder="Email"
-                                       defaultValue="maria@email.com"
-                                       {...register('email', {required: true, pattern: /^\S+@\S+$/i})}/>
+                                       readOnly={true}
+                                       disabled={true}
+                                       defaultValue={userInfo?.email}
+                                       {...register('email', {required: false, pattern: /^\S+@\S+$/i})}/>
                             </div>
                             <div className="field-wrapper">
                                 <label className="field-label" htmlFor="phone">Phone Number</label>
-                                <Controller
+
+                                <input className={classNames('field-input', {'field-input--error': errors.phone})}
+                                       type="text"
+                                       id="phone"
+                                       maxLength={10}
+                                       placeholder="(123) 456-7890"
+                                       defaultValue={userInfo?.phone}
+                                       {...register('phone', {required: true, pattern: RE_ONLY_NUMBER})}/>
+                               
+{/*                                 <Controller
                                     name="phone"
                                     control={control}
                                     render={({field}) => (
@@ -111,9 +198,18 @@ const UserProfileDetails = () => {
                                             className={classNames('field-input', {'field-input--error': errors.phone})}
                                             getInputRef={field.ref}/>
                                     )}
-                                />
+                                /> */}
                             </div>
-                            <Controller name="password"
+                            <div className="field-wrapper">
+                                <label className="field-label" htmlFor="passwordOld">Old Password </label>
+                                <input className={classNames('field-input', {'field-input--error': errors.passwordOld})}
+                                       type="text"
+                                       id="passwordOld"
+                                       placeholder="Old Password "
+                                       defaultValue=""
+                                       {...register('passwordOld', {required: false})}/>
+                            </div> 
+                          <Controller name="password"
                                         control={control}
                                         rules={{required: true}}
                                         render={({field: {onChange, value, ref}}) => (
@@ -122,7 +218,11 @@ const UserProfileDetails = () => {
                                                            value={value}
                                                            isInvalid={errors.password}
                                                            onChange={onChange}/>
-                                        )}/>
+                                        )}/> 
+
+
+                                        
+
                         </div>
                         <div className="grid gap-4">
                             <div className="field-wrapper">
@@ -197,11 +297,18 @@ const UserProfileDetails = () => {
                         </div>
                     </div>
                     <div className="mt-2.5">
-                        <button className="text-btn" type="button">
+                        <button onClick={(e)=>{
+                            e.preventDefault();
+                            e.stopPropagation();
+                            const passwordOld = watch('passwordOld')
+                            const password = watch('password')
+                            onChangePassword({password,passwordOld})
+
+                        }} className="text-btn" type="button">
                             Change password
                         </button>
                         <button className="btn btn--primary w-full mt-5 md:w-fit md:px-[70px]" type="submit">
-                            Update information
+                        {isLoading1 &&    <Loader radius={30} /> } Update information
                         </button>
                     </div>
                 </form>

@@ -116,7 +116,7 @@ export const productsApi = createApi({
     }),
     uploadImg: builder.mutation({
       query: (data) => ({
-        url: `/upload?folder=${data?.folder}`,
+        url: `/uploads/file?folder=${data?.folder}`,
         method: "POST",
         body: data?.formData,
       }),

@@ -14,6 +14,7 @@ export const FOLDER_PRODUCS_STORAGE = "products";
 export const PAGE_SIZE = 6;
 export const PAGE_SIZE_10 = 10;
 export const PAGE_SIZE_12 = 12;
+export const PAGE_SIZE_1 = 1;
 export const PAGE_SIZE_999 = 999;
 export const SAFE_STOCK = 300;
 export const REGEX_CURRENCY = /(\d)(?=(\d{3})+(?!\d))/g;

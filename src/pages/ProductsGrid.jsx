@@ -54,7 +54,6 @@ const ProductsGrid = () => {
   useEffect(() => {
     if (params.product_shop) onGetProductsByShop(params);
   }, [params]);
-  console.log(products)
   return (
     <>
       <PageHeader

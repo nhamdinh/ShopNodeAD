@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { NAME_STORAGE } from "@utils/constants";
+import { NAME_STORAGE, PAGE_SIZE_999 } from "@utils/constants";
 import { setUserInfo } from "@store/components/auth/authSlice";
 import { userLogout } from "@store/components/auth/authSlice";
 import { useGetPublishedProductsQuery } from "@store/components/products/productsApi";
@@ -30,7 +30,7 @@ const Copyright = () => {
 
   const [params, setParams] = useState({
     product_shop: user?._id,
-    limit: 999,
+    limit: PAGE_SIZE_999,
     page: 1,
   });
 
@@ -53,7 +53,7 @@ const Copyright = () => {
   useEffect(() => {
     setParams({
       product_shop: user?._id,
-      limit: 999,
+      limit: PAGE_SIZE_999,
       page: 1,
     });
   }, [user]);

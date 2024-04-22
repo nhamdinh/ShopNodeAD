@@ -8,7 +8,9 @@ const CalendarSelector = ({wrapperClass, label = 'Sales period', id}) => {
     return (
         <div className={`${wrapperClass || ''} flex flex-col gap-2.5 w-full`}>
             <label className="h5 w-fit" htmlFor={id}>{label}:</label>
-            <RangeDatePicker id={id}/>
+            <RangeDatePicker onChange={(val)=>{
+                console.log(val)
+            }} id={id}/>
         </div>
     )
 }

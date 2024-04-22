@@ -14,19 +14,19 @@ import {getStatusColor} from '@utils/helpers';
 const OrderCollapseItem = ({order, activeCollapse, handleCollapse}) => {
     const isExtraSmall = useWindowSize().width < 375;
 
-    const status = order.payment.amount === order.payment.received ?
+    const status = order.payment.totalAmountPay === order.payment.received ?
         'Fully paid'
         :
-        (order.payment.amount > order.payment.received && order.payment.received !== 0) ? 'Partially paid' : 'Unpaid';
+        (order.payment.totalAmountPay > order.payment.received && order.payment.received !== 0) ? 'Partially paid' : 'Unpaid';
 
     return (
         <div className="card">
             <div className="flex items-center justify-between">
-                <span className="subheading-2">#{order.orderNumber}</span>
+                <span className="subheading-2">#{order._id}</span>
                 <div className="flex items-center gap-4">
-                    <button className={`collapse-btn ${activeCollapse === order.sku ? 'active' : ''}`}
+                    <button className={`collapse-btn ${activeCollapse === order.SKU ? 'active' : ''}`}
                             aria-label="Toggle view"
-                            onClick={() => handleCollapse(order.sku)}>
+                            onClick={() => handleCollapse(order.SKU)}>
                         <i className="icon icon-caret-down-solid"/>
                     </button>
                     <NavLink to="/product-editor" aria-label="Edit">
@@ -35,7 +35,7 @@ const OrderCollapseItem = ({order, activeCollapse, handleCollapse}) => {
                     <SubmenuTrigger/>
                 </div>
             </div>
-            <Collapse in={activeCollapse === order.sku}>
+            <Collapse in={activeCollapse === order.SKU}>
                 <table className="basic-table">
                     <tbody>
                     <tr>
@@ -59,11 +59,11 @@ const OrderCollapseItem = ({order, activeCollapse, handleCollapse}) => {
                     </tr>
                     <tr>
                         <td>SKU</td>
-                        <td>{order.sku}</td>
+                        <td>{order.SKU}</td>
                     </tr>
                     <tr>
                         <td>Category</td>
-                        <td className="capitalize">{order.category}</td>
+                        <td className="capitalize">{order.product_type}</td>
                     </tr>
                     <tr>
                         <td>Payment</td>
@@ -71,7 +71,7 @@ const OrderCollapseItem = ({order, activeCollapse, handleCollapse}) => {
                             <div className="flex flex-col">
                                 <span className="font-heading font-bold text-header">
                                     {status !== 'Fully paid' && `$${order.payment.received} / from `}
-                                    ${order.payment.amount}
+                                    ${order.payment.totalAmountPay}
                                 </span>
                                 <span>{status}</span>
                             </div>
@@ -99,10 +99,10 @@ const OrderCollapseItem = ({order, activeCollapse, handleCollapse}) => {
                         <td>
                             {
                                 isExtraSmall ?
-                                    order.rating
+                                    order.product_ratings
                                     :
                                     <div className="flex justify-center">
-                                        <RatingStars rating={order.rating}/>
+                                        <RatingStars rating={order.product_ratings}/>
                                     </div>
                             }
                         </td>

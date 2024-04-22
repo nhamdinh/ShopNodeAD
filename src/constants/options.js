@@ -11,10 +11,15 @@ import bitpay from '@assets/payment/bitpay.svg';
 
 export const PRODUCT_CATEGORIES = [
     {value: 'all', label: 'All Products'},
-    {value: 'electronics', label: 'Electronics', icon: 'icon-laptop-mobile-solid', color: 'accent'},
-    {value: 'food', label: 'Groceries', icon: 'icon-burger-soda-solid', color: 'header'},
-    {value: 'fashion', label: 'Fashion', icon: 'icon-shirt-solid', color: 'red'},
-    {value: 'services', label: 'Services', icon: 'icon-user-gear-solid', color: 'yellow'},
+    // {value: 'electronics', label: 'Electronics', icon: 'icon-laptop-mobile-solid', color: 'accent'},
+    // {value: 'food', label: 'Groceries', icon: 'icon-burger-soda-solid', color: 'header'},
+    // {value: 'fashion', label: 'Fashion', icon: 'icon-shirt-solid', color: 'red'},
+    // {value: 'services', label: 'Services', icon: 'icon-user-gear-solid', color: 'yellow'},
+    
+    {value: 'household', label: 'Household', icon: 'icon-burger-soda-solid', color: 'header'},
+    {value: 'electronic', label: 'Electronics', icon: 'icon-laptop-mobile-solid', color: 'accent'},
+    {value: 'clothing', label: 'Clothing', icon: 'icon-shirt-solid', color: 'red'},
+    {value: 'furniture', label: 'Furniture', icon: 'icon-user-gear-solid', color: 'yellow'},
 ]
 
 export const PRODUCT_CATEGORIES_REAL = [

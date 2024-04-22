@@ -54,6 +54,8 @@
     "vite": "^4.4.3",
     "vite-plugin-babel-macros": "^1.0.6",
     "vite-plugin-svgr": "^3.2.0",
+    "uid": "^2.0.2",
+
     "@ant-design/icons": "^5.0.1",
     "@emotion/react": "^11.9.3",
     "@reduxjs/toolkit": "^1.8.2",

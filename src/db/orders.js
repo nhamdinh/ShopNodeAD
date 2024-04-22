@@ -9,15 +9,15 @@ import img8 from '@assets/products/fashion/9.webp';
 import img9 from '@assets/products/services/3.webp';
 import img10 from '@assets/products/electronics/11.webp';
 
-const orders = [
+const orders_product = [
     {
-        orderNumber: 123456,
-        sku: '123456FR',
+        _id: 123456,
+        SKU: '123456FR',
         status: 'completed',
-        rating: 3.5,
-        category: 'electronics',
+        product_ratings: 3.5,
+        product_type: 'electronics',
         payment: {
-            amount: 600,
+            totalAmountPay: 600,
             received: 600,
         },
         product: {
@@ -29,13 +29,13 @@ const orders = [
         }
     },
     {
-        orderNumber: 154844,
-        sku: '598741FR',
+        _id: 154844,
+        SKU: '598741FR',
         status: 'confirmed',
-        rating: 4.5,
-        category: 'fashion',
+        product_ratings: 4.5,
+        product_type: 'fashion',
         payment: {
-            amount: 4000,
+            totalAmountPay: 4000,
             received: 180,
         },
         product: {
@@ -46,13 +46,13 @@ const orders = [
         }
     },
     {
-        orderNumber: 202587,
-        sku: '485912TY',
+        _id: 202587,
+        SKU: '485912TY',
         status: 'cancelled',
-        rating: 4.5,
-        category: 'electronics',
+        product_ratings: 4.5,
+        product_type: 'electronics',
         payment: {
-            amount: 200,
+            totalAmountPay: 200,
             received: 0,
         },
         product: {
@@ -64,13 +64,13 @@ const orders = [
         }
     },
     {
-        orderNumber: 300411,
-        sku: '365487RT',
+        _id: 300411,
+        SKU: '365487RT',
         status: 'confirmed',
-        rating: 4.5,
-        category: 'services',
+        product_ratings: 4.5,
+        product_type: 'services',
         payment: {
-            amount: 9.99,
+            totalAmountPay: 9.99,
             received: 9.99,
         },
         product: {
@@ -81,13 +81,13 @@ const orders = [
         }
     },
     {
-        orderNumber: 785241,
-        sku: '002315ES',
+        _id: 785241,
+        SKU: '002315ES',
         status: 'confirmed',
-        rating: 4.5,
-        category: 'fashion',
+        product_ratings: 4.5,
+        product_type: 'fashion',
         payment: {
-            amount: 40,
+            totalAmountPay: 40,
             received: 40,
         },
         product: {
@@ -99,13 +99,13 @@ const orders = [
         }
     },
     {
-        orderNumber: 458745,
-        sku: '541125FR',
+        _id: 458745,
+        SKU: '541125FR',
         status: 'completed',
-        rating: 0,
-        category: 'food',
+        product_ratings: 0,
+        product_type: 'food',
         payment: {
-            amount: 129.54,
+            totalAmountPay: 129.54,
             received: 129.54,
         },
         product: {
@@ -116,13 +116,13 @@ const orders = [
         }
     },
     {
-        orderNumber: 105488,
-        sku: '252596FR',
+        _id: 105488,
+        SKU: '252596FR',
         status: 'confirmed',
-        rating: 5,
-        category: 'food',
+        product_ratings: 5,
+        product_type: 'food',
         payment: {
-            amount: 78.99,
+            totalAmountPay: 78.99,
             received: 52.18,
         },
         product: {
@@ -134,13 +134,13 @@ const orders = [
         }
     },
     {
-        orderNumber: 900541,
-        sku: '002315BN',
+        _id: 900541,
+        SKU: '002315BN',
         status: 'cancelled',
-        rating: 0,
-        category: 'fashion',
+        product_ratings: 0,
+        product_type: 'fashion',
         payment: {
-            amount: 118.99,
+            totalAmountPay: 118.99,
             received: 0,
         },
         product: {
@@ -152,13 +152,13 @@ const orders = [
         }
     },
     {
-        orderNumber: 121844,
-        sku: '814315LP',
+        _id: 121844,
+        SKU: '814315LP',
         status: 'refunded',
-        rating: 0,
-        category: 'services',
+        product_ratings: 0,
+        product_type: 'services',
         payment: {
-            amount: 9.99,
+            totalAmountPay: 9.99,
             received: 0,
         },
         product: {
@@ -169,13 +169,13 @@ const orders = [
         }
     },
     {
-        orderNumber: 240412,
-        sku: '361087RT',
+        _id: 240412,
+        SKU: '361087RT',
         status: 'completed',
-        rating: 4.5,
-        category: 'electronics',
+        product_ratings: 4.5,
+        product_type: 'electronics',
         payment: {
-            amount: 200,
+            totalAmountPay: 200,
             received: 200,
         },
         product: {
@@ -188,4 +188,4 @@ const orders = [
     }
 ]
 
-export default orders
+export default orders_product

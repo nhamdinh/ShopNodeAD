@@ -14,13 +14,13 @@ import {useWindowSize} from 'react-use';
 import {ORDERS_COLUMN_DEFS} from '@constants/columnDefs';
 
 // data placeholder
-import orders from '@db/orders';
+// import orders_product from '@db/orders';
 
-const OrdersTable = ({category, sort}) => {
+const OrdersTable = ({category, sort, ordersProduct}) => {
     const {width} = useWindowSize();
     const [activeCollapse, setActiveCollapse] = useState('');
 
-    const filteredData = category.value === 'all' ? orders : orders.filter(order => order.category === category.value);
+    const filteredData = category.value === 'all' ? ordersProduct : ordersProduct.filter(order => order.product_type === category.value);
     const sortedData = () => {
         switch (sort.value) {
             default:
@@ -31,9 +31,9 @@ const OrdersTable = ({category, sort}) => {
             case 'z-a':
                 return filteredData.sort((a, b) => b.product.product_name.localeCompare(a.product.product_name));
             case 'rating-high-to-low':
-                return filteredData.sort((a, b) => b.rating - a.rating);
+                return filteredData.sort((a, b) => b.product_ratings - a.product_ratings);
             case 'rating-low-to-high':
-                return filteredData.sort((a, b) => a.rating - b.rating);
+                return filteredData.sort((a, b) => a.product_ratings - b.product_ratings);
         }
     }
 
@@ -51,11 +51,11 @@ const OrdersTable = ({category, sort}) => {
         setActiveCollapse('');
     }, [pagination.currentPage, width]);
 
-    const handleCollapse = (sku) => {
-        if (activeCollapse === sku) {
+    const handleCollapse = (SKU) => {
+        if (activeCollapse === SKU) {
             setActiveCollapse('');
         } else {
-            setActiveCollapse(sku);
+            setActiveCollapse(SKU);
         }
     }
 
@@ -69,13 +69,13 @@ const OrdersTable = ({category, sort}) => {
                                  locale={{
                                      emptyText: <Empty text="No orders found"/>
                                  }}
-                                 rowKey={record => record.orderNumber}
+                                 rowKey={record => record.SKU}
                     />
                     :
                     <div className="flex flex-1 flex-col gap-5 mb-[26px]">
                         {
                             pagination.currentItems().map(order => (
-                                <OrderCollapseItem key={order.sku}
+                                <OrderCollapseItem key={order.SKU}
                                                    order={order}
                                                    activeCollapse={activeCollapse}
                                                    handleCollapse={handleCollapse}

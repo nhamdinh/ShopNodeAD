@@ -14,9 +14,9 @@ import { SAFE_STOCK } from '@utils/constants';
 export const ORDERS_COLUMN_DEFS = [
     {
         title: '# order',
-        dataIndex: 'orderNumber',
+        dataIndex: '_id',
         width: '100px',
-        render: text => <span className="subheading-2">#{text}</span>
+        render: text => <div className="subheading-2 w80px line__clamp__2">#{text}</div>
     },
     {
         title: 'Product',
@@ -28,7 +28,7 @@ export const ORDERS_COLUMN_DEFS = [
                     <img src={product?.product_thumb_small ?? product?.product_thumb} alt={product.product_name}/>
                 </div>
                 <div className="flex-col hidden 2xl:flex">
-                    <h5 className="text-sm max-w-[195px] mb-1.5">{product.product_name}</h5>
+                    <h5 className="text-sm max-w-[195px] mb-1.5 line__clamp__2">{product.product_name}</h5>
                     <div className="flex flex-col gap-1 text-sm">
                         <p>Regular price: ${product.product_price}</p>
                         {product.product_original_price && <p>Sale price: ${product.product_original_price}</p>}
@@ -39,11 +39,13 @@ export const ORDERS_COLUMN_DEFS = [
     },
     {
         title: 'SKU',
-        dataIndex: 'sku',
+        dataIndex: 'product_id',
+        render: text => <div className="w80px line__clamp__2">{text}</div>
+
     },
     {
         title: 'Category',
-        dataIndex: 'category',
+        dataIndex: 'product_type',
         render: category =>
             <div className="flex items-center gap-4">
                 <div className={`badge-icon badge-icon--sm bg-${getCategory(category).color}`}>
@@ -57,16 +59,16 @@ export const ORDERS_COLUMN_DEFS = [
         title: 'Payment',
         dataIndex: 'payment',
         render: payment => {
-            const status = payment.amount === payment.received ?
+            const status = payment.totalAmountPay === payment.received ?
                 'Fully paid'
                 :
-                (payment.amount > payment.received && payment.received !== 0) ? 'Partially paid' : 'Unpaid';
+                (payment.totalAmountPay > payment.received && payment.received !== 0) ? 'Partially paid' : 'Unpaid';
 
             return (
                 <div className="flex flex-col">
                     <span className="font-heading font-bold text-header">
                         {status !== 'Fully paid' && `$${payment.received} / from `}
-                        ${payment.amount}
+                        ${payment.totalAmountPay}
                     </span>
                     <span>{status}</span>
                 </div>
@@ -84,7 +86,7 @@ export const ORDERS_COLUMN_DEFS = [
     },
     {
         title: 'Rate',
-        dataIndex: 'rating',
+        dataIndex: 'product_ratings',
         render: rating => <RatingStars rating={rating}/>,
         responsive: ['xl'],
     },

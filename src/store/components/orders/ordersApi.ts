@@ -88,6 +88,13 @@ export const ordersApi = createApi({
         params: data,
       }),
     }),
+    getOrdersByShop: builder.mutation({
+      query: (data) => ({
+        url: `/orders/all-by-shop`,
+        method: "PUT",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -101,4 +108,5 @@ export const {
   usePayOrderMutation,
   useDeliveredOrderMutation,
   useGetOrderAdQuery,
+  useGetOrdersByShopMutation,
 } = ordersApi;

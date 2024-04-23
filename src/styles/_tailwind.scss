@@ -114,3 +114,47 @@
 .ed1c24 {
   color: #ed1c24 !important;
 }
+
+.color__1890ff {
+  color: #1890ff !important;
+}
+
+.shadow__orangered{
+  font-weight: 600;
+  -webkit-text-shadow: 0 0 10px orangered, 0 0 20px orangered,
+    0 0 40px orangered, 0 0 80px orangered, 0 0 120px orangered;
+  text-shadow: 0 0 10px orangered, 0 0 20px orangered, 0 0 40px orangered,
+    0 0 80px orangered, 0 0 120px orangered;
+}
+.Chat {
+  color: black;
+  border: 1px #ed1c24 solid;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  .co__chat {
+    color: #ed1c24;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .ani {
+    animation: reng 1.2s ease-in-out infinite;
+  }
+  @keyframes reng {
+    0% {
+      scale: 0.9;
+      transform: rotate(-10deg);
+    }
+    50% {
+      scale: 0.9;
+      transform: rotate(0);
+    }
+    100% {
+      scale: 1.1;
+      transform: rotate(10deg);
+    }
+  }
+}

@@ -64,7 +64,7 @@ export const APPS_OPTIONS = [
     {value: 'all', label: 'All'},
     {value: 'development', label: 'Developer Tools'},
     {value: 'marketplace', label: 'Marketplace'},
-    {value: 'finances', label: 'Financial Accounting'}
+    {value: 'finances', label: 'User Clients'}
 ]
 
 export const PRODUCT_MANAGEMENT_OPTIONS = [

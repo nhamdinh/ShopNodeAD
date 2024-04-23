@@ -15,8 +15,8 @@ const UserProfileInfo = ({userInfo}) => {
                     <span className="icon-wrapper mt-1.5">
                         <i className="icon icon-location-dot-solid"/>
                     </span>
-                    <span className="max-w-[156px]">
-                        312 3rd St, Albany, New York 12206, USA
+                    <span className="max-w-[156px] ed1c24 shadow__orangered capitalize">
+                    {userInfo?.productShopName}
                     </span>
                 </div>
                 <div className="flex items-center gap-4">

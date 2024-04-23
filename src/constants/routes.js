@@ -40,7 +40,10 @@ const ROUTES = [
     {
         name: 'Customers',
         icon: 'chart-user-regular',
-        path: '/customers'
+        links: [
+            {name: 'Chat With Clients', path: '/connected-apps'},
+            {name: 'Customers', path: '/customers'},
+        ]
     },
     {
         name: 'Transactions',
@@ -53,7 +56,7 @@ const ROUTES = [
         icon: 'layer-group-regular',
         links: [
             {name: 'Login', path: '/login'},
-            {name: 'Page 404', path: '/404'},
+            // {name: 'Page 404', path: '/404'},
         ]
     },
     {

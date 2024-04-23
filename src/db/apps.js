@@ -13,143 +13,163 @@ import img12 from '@assets/apps/12.webp';
 
 const apps = [
     {
-        id: 'app-1',
+        _id: 'app-1',
         name: 'Tracking App',
-        description: 'Real-time order tracking and a list of bestselling products from the shops',
-        img: img1,
+        email: 'Real-time order tracking and a list of bestselling products from the shops',
+        avatar: img1,
+        phone: 298088,
         categories: ['marketplace']
     },
     {
-        id: 'app-2',
+        _id: 'app-2',
         name: 'Data Shop Foundation',
-        description: 'Run Data PPC campaigns and adjust budgets, without leaving  dashboard',
-        img: img2,
+        email: 'Run Data PPC campaigns and adjust budgets, without leaving  dashboard',
+        avatar: img2,
+        phone: 798374,
         categories: ['marketplace', 'finances']
     },
     {
-        id: 'app-3',
+        _id: 'app-3',
         name: 'Optimized scheduling',
-        description: 'Real-time order tracking and a list of bestselling products from the shops',
-        img: img3,
+        email: 'Real-time order tracking and a list of bestselling products from the shops',
+        avatar: img3,
+        phone: 809340,
         categories: ['marketplace', 'finances']
     },
     {
-        id: 'app-4',
+        _id: 'app-4',
         name: 'Target\'s robust App',
-        description: 'Target Wallet that allows users can save their payment information',
-        img: img4,
+        email: 'Target Wallet that allows users can save their payment information',
+        avatar: img4,
+        phone: 463330,
         categories: ['marketplace', 'finances', 'development']
     },
     {
-        id: 'app-5',
+        _id: 'app-5',
         name: 'Inventory administration',
-        description: 'Release calendar that neatly organizes all the different drops for new shop products',
-        img: img5,
+        email: 'Release calendar that neatly organizes all the different drops for new shop products',
+        avatar: img5,
+        phone: 938728,
         categories: ['marketplace', 'finances', 'development']
     },
     {
-        id: 'app-6',
+        _id: 'app-6',
         name: 'Employee management',
-        description: 'Manager of a brick-and-mortar store to use on a daily basis security transactions',
-        img: img6,
+        email: 'Manager of a brick-and-mortar store to use on a daily basis security transactions',
+        avatar: img6,
+        phone: 349106,
         categories: ['marketplace', 'development']
     },
     {
-        id: 'app-7',
+        _id: 'app-7',
         name: 'Shop Email Service',
-        description: 'Real-time order tracking and a list of bestselling products from the shops',
-        img: img7,
+        email: 'Real-time order tracking and a list of bestselling products from the shops',
+        avatar: img7,
+        phone: 174907,
         categories: ['development']
     },
     {
-        id: 'app-8',
+        _id: 'app-8',
         name: 'Offer online customer service',
-        description: 'Automate your daily business operations and decreases the effort required',
-        img: img8,
+        email: 'Automate your daily business operations and decreases the effort required',
+        avatar: img8,
+        phone: 186825,
         categories: ['marketplace', 'finances', 'development']
     },
     {
-        id: 'app-9',
+        _id: 'app-9',
         name: 'Digital advertising',
-        description: 'Referral advertising',
-        img: img9,
+        email: 'Referral advertising',
+        avatar: img9,
+        phone: 499855,
         categories: ['marketplace', 'development']
     },
     {
-        id: 'app-10',
+        _id: 'app-10',
         name: 'Crypto Wallet',
-        description: 'Cryptocurrency transaction operations',
-        img: img10,
+        email: 'Cryptocurrency transaction operations',
+        avatar: img10,
+        phone: 852055,
         categories: ['finances']
     },
     {
-        id: 'app-11',
+        _id: 'app-11',
         name: 'Tracking',
-        description: 'Real-time order tracking and a list of bestselling products from the shops',
-        img: img11,
+        email: 'Real-time order tracking and a list of bestselling products from the shops',
+        avatar: img11,
+        phone: 509468,
         categories: ['marketplace', 'finances']
     },
     {
-        id: 'app-12',
+        _id: 'app-12',
         name: 'Target\'s robust App',
-        description: 'Target Wallet that allows users can save their payment information',
-        img: img12,
+        email: 'Target Wallet that allows users can save their payment information',
+        avatar: img12,
+        phone: 767312,
         categories: ['marketplace', 'finances', 'development']
     },
     {
-        id: 'app-13',
+        _id: 'app-13',
         name: 'Inventory administration',
-        description: 'Release calendar that neatly organizes all the drops for new shop products',
-        img: img5,
+        email: 'Release calendar that neatly organizes all the drops for new shop products',
+        avatar: img5,
+        phone: 642647,
         categories: ['finances', 'development']
     },
     {
-        id: 'app-14',
+        _id: 'app-14',
         name: 'Employee management',
-        description: 'Manager of a brick-and-mortar store to use on a daily basis security transactions',
-        img: img8,
+        email: 'Manager of a brick-and-mortar store to use on a daily basis security transactions',
+        avatar: img8,
+        phone: 666469,
         categories: ['marketplace', 'development']
     },
     {
-        id: 'app-15',
+        _id: 'app-15',
         name: 'Shop Email Service',
-        description: 'Real-time order tracking and a list of bestselling products from the shops',
-        img: img7,
+        email: 'Real-time order tracking and a list of bestselling products from the shops',
+        avatar: img7,
+        phone: 431376,
         categories: ['development']
     },
     {
-        id: 'app-16',
+        _id: 'app-16',
         name: 'Online customer service',
-        description: 'Automate your daily business operations and decreases the effort required',
-        img: img2,
+        email: 'Automate your daily business operations and decreases the effort required',
+        avatar: img2,
+        phone: 660084,
         categories: ['marketplace']
     },
     {
-        id: 'app-17',
+        _id: 'app-17',
         name: 'Digital advertising Pro Plus',
-        description: 'Referral advertising for your business',
-        img: img9,
+        email: 'Referral advertising for your business',
+        avatar: img9,
+        phone: 999268,
         categories: ['marketplace', 'development']
     },
     {
-        id: 'app-18',
+        _id: 'app-18',
         name: 'E-commerce Crypto Wallet',
-        description: 'Cryptocurrency transaction operations',
-        img: img10,
+        email: 'Cryptocurrency transaction operations',
+        avatar: img10,
+        phone: 199124,
         categories: ['finances']
     },
     {
-        id: 'app-19',
+        _id: 'app-19',
         name: 'Content management',
-        description: 'Real-time order tracking and a list of bestselling products from the shops',
-        img: img11,
+        email: 'Real-time order tracking and a list of bestselling products from the shops',
+        avatar: img11,
+        phone: 493405,
         categories: ['marketplace']
     },
     {
-        id: 'app-20',
+        _id: 'app-20',
         name: 'Target\'s robust App',
-        description: 'Target Wallet that allows users can save their payment information',
-        img: img12,
+        email: 'Target Wallet that allows users can save their payment information',
+        avatar: img12,
+        phone: 881627,
         categories: ['marketplace', 'finances', 'development']
     }
 ]

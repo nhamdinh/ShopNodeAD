@@ -18,6 +18,7 @@ import {useNavigate} from 'react-router-dom';
 import {LOCALES} from '@constants/options';
 import { useSelector } from 'react-redux';
 import { getUserInfo } from '@store/selector/RootSelector';
+import avatar_user from "@assets/user.png";
 
 const LocaleMenu = ({active, setActive}) => {
     return (
@@ -124,7 +125,7 @@ const AppBar = () => {
                                     onClick={() => navigate('/general-settings')}
                                     aria-label="Account menu">
                                 {/* <i className="icon-user-solid"/> */}
-                                <img className='avatar__icon' src={userInfo?.avatar} alt="avatar__icon" />
+                                <img className='avatar__icon' src={userInfo?.avatar ?? avatar_user} alt="avatar__icon" />
                             </button>
                             <span className="badge-online"/>
                         </div>

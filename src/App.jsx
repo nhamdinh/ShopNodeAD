@@ -18,7 +18,7 @@ import {ThemeProvider} from 'styled-components';
 
 // hooks
 import {useTheme} from '@contexts/themeContext';
-import {useEffect, useRef} from 'react';
+import { useEffect, useRef, useState } from "react";
 import {useWindowSize} from 'react-use';
 
 // components
@@ -31,6 +31,12 @@ import Copyright from '@components/Copyright';
 import AppBar from '@layout/AppBar';
 import { REACT_ENV,API_LINK,SOCKET_HOST } from '@utils/constants';
 import Toast from '@components/LoadingError/Toast';
+
+import socketIOClient from "socket.io-client";
+import { useSelector } from 'react-redux';
+import { getUserInfo } from '@store/selector/RootSelector';
+import { openToast } from '@store/components/customDialog/toastSlice';
+import { useDispatch } from 'react-redux';
 
 // pages
 const Login  = lazy(() => import('@pages/Login'));
@@ -58,6 +64,7 @@ const App = () => {
     // console.log(REACT_ENV)
     // console.log(API_LINK)
     // console.log(SOCKET_HOST)
+    const dispatch = useDispatch();
 
     const {width} = useWindowSize();
     const appRef = useRef(null);
@@ -72,6 +79,37 @@ const App = () => {
     useEffect(() => {
         appRef.current && appRef.current.scrollTo(0, 0);
     }, []);
+
+
+    const userInfo = useSelector(getUserInfo);
+
+    const socketRef = useRef();
+    useEffect(() => {
+      //@ts-ignore
+      socketRef.current = socketIOClient.connect(SOCKET_HOST);
+  
+      socketRef.current.on("serverSetSocketId", (socketId) => {
+        //   setIdSocketId(socketId);
+      });
+  
+      socketRef.current.on("serverSendData", (data) => {
+        // console.log("serverSendData ::: ", data);
+        if (data?.to === userInfo?.email) {
+        //   refetchAllMember();
+          dispatch(
+            openToast({
+              isOpen: Date.now(),
+              content: data?.sendFrom + " send a message",
+              step: 1,
+            })
+          );
+        }
+      });
+      return () => {
+        socketRef.current.disconnect();
+      };
+    }, [userInfo]);
+
 
     return (
         <SidebarProvider>

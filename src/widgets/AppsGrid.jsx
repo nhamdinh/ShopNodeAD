@@ -15,16 +15,24 @@ import {APPS_OPTIONS} from '@constants/options';
 // data placeholder
 import apps from '@db/apps';
 
-const AppsGrid = () => {
+const AppsGrid = ({userInfo}) => {
+    const {user_clients = [] , _id} = userInfo
+    const userClient = user_clients.filter(user => user._id !== _id ).map(user=> {
+        return { ...user , categories:["finances"]} 
+    })
     const [query, setQuery] = useState('');
-    const [category, setCategory] = useState('all');
+    const [category, setCategory] = useState('finances');
 
     const getQty = (category) => {
         if (category === 'all') return apps.length;
+        if(category === "finances") return userClient.filter(app => app.categories.includes(category)).length;
         return apps.filter(app => app.categories.includes(category)).length;
     }
 
     const filteredData = () => {
+        if(category === "finances")
+            return userClient.filter(app => app.name.toLowerCase().includes(query.toLowerCase()))
+            .filter(app => category === 'all' ? true : app.categories.includes(category))
         return apps.filter(app => app.name.toLowerCase().includes(query.toLowerCase()))
             .filter(app => category === 'all' ? true : app.categories.includes(category))
     }
@@ -45,7 +53,7 @@ const AppsGrid = () => {
                         Add New Application <i className="icon-circle-plus-regular"/>
                     </button>
                     <Search wrapperClass="w-full md:w-[326px]"
-                            placeholder="Search Application"
+                            placeholder="Search"
                             query={query}
                             setQuery={setQuery}/>
                 </div>
@@ -73,7 +81,9 @@ const AppsGrid = () => {
                             {
                                 data.map((app, index) => (
                                     <AppCard key={`item-${index}-${category}-page-${pagination.currentPage}`}
-                                             index={index} app={app}/>
+                                             index={index} app={app}
+                                             category={category}
+                                             />
                                 ))
                             }
                         </div>

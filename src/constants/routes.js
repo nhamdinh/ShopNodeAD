@@ -18,7 +18,7 @@ const ROUTES = [
             {name: 'Top Products', path: '/top-products'},
             {name: 'Products Grid', path: '/products-grid'},
             {name: 'Products Management', path: '/products-management'},
-            {name: 'Product Editor', path: '/product-editor'},
+            // {name: 'Product Editor', path: '/product-editor'},
             // {name: 'Banners', path: '/banners'},
         ]
     },

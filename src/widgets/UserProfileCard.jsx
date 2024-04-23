@@ -41,7 +41,7 @@ const UserProfileCard = ({ userInfo, cb_setImage }) => {
   const uploadImage = async (options) => {
     const { onSuccess, onError, file, onProgress } = options;
 
-    let sizeImg = file ? Number(file?.size) : sizeMax + 1;
+    const sizeImg = file ? Number(file?.size) : sizeMax + 1;
     if (sizeImg <= sizeMax) {
       let formData = new FormData();
       const fileName = Date.now() + file.name;

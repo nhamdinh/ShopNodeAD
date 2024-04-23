@@ -17,12 +17,12 @@ const Logo = ({imgClass, textClass}) => {
     return (
         <NavLink className="logo" to="/">
             <span className={`logo_img relative ${imgClass || ''}`}>
-                <img src={light} alt="ShopPoint" />
+                <img src={light} alt="ShopNode" />
                 <img className={`absolute top-0 left-0 ${theme === 'light' ? 'hidden' : ''}`}
                      src={dark}
-                     alt="ShopPoint" />
+                     alt="ShopNode" />
             </span>
-            <h4 className={`logo_text ${textClass || ''}`}>ShopPoint</h4>
+            <h4 className={`logo_text ${textClass || ''}`}>ShopNode</h4>
         </NavLink>
     )
 }

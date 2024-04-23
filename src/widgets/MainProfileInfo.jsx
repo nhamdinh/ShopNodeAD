@@ -24,14 +24,14 @@ const MainProfileInfo = () => {
                  justify-center gap-6 shrink-0 md:w-[190px]">
                 <img className="h-20 w-auto ml-2.5"
                      src={theme === 'light' ? light : dark}
-                     alt="ShopPoint" />
+                     alt="ShopNode" />
                 <span className="font-heading font-bold text-xl leading-[1.1] text-header">
-                    ShopPoint
+                    ShopNode
                 </span>
             </div>
             <div className="flex flex-1 flex-col gap-8">
                 <div className="flex flex-col gap-2">
-                    <h3>ShopPoint - Retail</h3>
+                    <h3>ShopNode - Retail</h3>
                     <p>Aliquam erat volutpat. Duis molestie ultrices tempus. Mauris sem orci, euismod sit amet.</p>
                 </div>
                 <div className="flex flex-col gap-6">

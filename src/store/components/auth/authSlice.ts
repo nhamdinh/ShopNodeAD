@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { ACCESSTOKEN_STORAGE, LANG_STORAGE, NAME_STORAGE } from "@utils/constants";
 
 interface IfAuth {
   userInfo: any;
@@ -16,9 +17,13 @@ const authSlice = createSlice({
   reducers: {
     userLogout: (state: IfAuth, action: PayloadAction) => {
       state.accessToken = "";
+      state.userInfo = {};
+      localStorage.removeItem(NAME_STORAGE);
+      localStorage.removeItem(ACCESSTOKEN_STORAGE);
+      localStorage.removeItem(LANG_STORAGE);
       window.location.href = "/login";
+      // localStorage.clear();
 
-      localStorage.clear();
     },
     setUserInfo: (state: IfAuth, action: PayloadAction) => {
       state.userInfo = action.payload;

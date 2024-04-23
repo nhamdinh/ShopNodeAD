@@ -70,8 +70,8 @@ const Copyright = () => {
   useEffect(() => {
     //@ts-ignore
     if (error?.status === 401) {
-      //   dispatch(userLogout());
-      //   navigate("/");
+        dispatch(userLogout());
+        navigate("/");
     }
   }, [error]);
   return (

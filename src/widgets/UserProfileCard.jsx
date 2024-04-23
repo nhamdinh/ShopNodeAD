@@ -10,11 +10,17 @@ import { PATH_IMG_AVATAR } from "@utils/constants";
 import { useUploadImgMutation } from "@store/components/products/productsApi";
 import { Upload } from "antd";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { userLogout } from "@store/components/auth/authSlice";
 
 const SIZE = 5;
 const sizeMax = SIZE * 1000 * 1000;
 
 const UserProfileCard = ({ userInfo, cb_setImage }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [fileList, setFileList] = useState([]);
   const [avatar, setImage] = useState("");
   const onChange = ({ fileList: newFileList }) => {
@@ -83,6 +89,13 @@ const UserProfileCard = ({ userInfo, cb_setImage }) => {
     if (cb_setImage) cb_setImage(avatar);
   }, [avatar]);
 
+  const logoutHandler = async () => {
+    // await logout({});
+    // setdataFetched({});
+    dispatch(userLogout());
+    navigate("/");
+  };
+
   return (
     <Spring
       className="card flex flex-col items-center justify-center"
@@ -128,7 +141,10 @@ const UserProfileCard = ({ userInfo, cb_setImage }) => {
       <p className="subheading-2 mt-6 mb-[18px]">
         last visit {dayjs().format("DD/MM/YYYY")}
       </p>
-      <button className="btn btn--secondary w-full md:max-w-[280px]">
+      <button
+        onClick={logoutHandler}
+        className="btn btn--secondary w-full md:max-w-[280px]"
+      >
         Log Out
       </button>
     </Spring>

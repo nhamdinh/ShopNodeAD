@@ -20,7 +20,7 @@ const PasswordInput = ({innerRef, id, label = 'Password', isInvalid, ...props}) 
     return (
         <div className="field-wrapper">
             <label className="field-label" htmlFor={id}>
-                {label}
+                {label} [123456]
             </label>
             <div className="relative">
                 <input className={classNames('field-input !pr-10', {'field-input--error': isInvalid})}

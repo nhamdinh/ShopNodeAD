@@ -35,7 +35,7 @@ const SellerProfile = () => {
             <PageHeader title="Seller Profile Details"/>
             <div className="flex flex-col gap-4 mb-5 md:mb-[26px] md:gap-5 lg:flex-row lg:justify-between">
                 <CalendarSelector wrapperClass="md:max-w-[275px]" id="sellerPeriodSelector"/>
-                <PopularTags/>
+                {/* <PopularTags/> */}
             </div>
             <div className="widgets-grid grid-cols-1 md:grid-cols-3 2xl:grid-cols-6">
                 <SellerProfilePreview/>

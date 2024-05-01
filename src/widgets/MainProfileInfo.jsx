@@ -32,12 +32,14 @@ const MainProfileInfo = () => {
             <div className="flex flex-1 flex-col gap-8">
                 <div className="flex flex-col gap-2">
                     <h3>ShopNode - Retail</h3>
-                    <p>Aliquam erat volutpat. Duis molestie ultrices tempus. Mauris sem orci, euismod sit amet.</p>
+                    <p>ShopNode is the ultimate e-commerce solution built with React. Try it today!</p>
                 </div>
                 <div className="flex flex-col gap-6">
                     <div className="flex items-center gap-4">
-                        <h5>Average Rate 2023</h5>
-                        <InfoBtn onClick={handleClick}/>
+                        <h5>Average Rate 2024</h5>
+                        <InfoBtn 
+                        // onClick={handleClick}
+                        />
                     </div>
                     <div className="flex-1 grid grid-cols-1 gap-6 md:grid-cols-2 lg:flex justify-between xl:max-w-[670px]">
                         <div className="flex gap-5">

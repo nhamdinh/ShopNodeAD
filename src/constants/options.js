@@ -1,5 +1,6 @@
 import eng from '@assets/flags/eng.webp';
 import de from '@assets/flags/de.webp';
+import vi from '@assets/flags/vi.png';
 import dk from '@assets/flags/dk.webp';
 import ua from '@assets/flags/ua.webp';
 import mc from '@assets/payment/mc.svg';
@@ -55,9 +56,9 @@ export const REVIEW_SORT_OPTIONS = [
 
 export const LOCALES = [
     {value: 'en-EN', label: 'English (EN)', icon: eng},
-    {value: 'de-DE', label: 'Deutsch (DE)', icon: de},
-    {value: 'dk-DK', label: 'Dansk (DK)', icon: dk},
-    {value: 'ua-UA', label: 'Українська (UA)', icon: ua}
+    {value: 'vi-VI', label: 'Vietnamese (VI)', icon: vi},
+    // {value: 'dk-DK', label: 'Dansk (DK)', icon: dk},
+    // {value: 'ua-UA', label: 'Українська (UA)', icon: ua}
 ]
 
 export const APPS_OPTIONS = [

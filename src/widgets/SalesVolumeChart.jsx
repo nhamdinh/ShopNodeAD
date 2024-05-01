@@ -17,6 +17,7 @@ const data = [
 ];
 
 const CustomTooltip = ({active, payload}) => {
+    console.log(payload)
     if (active) {
         return (
             <div className="chart-tooltip py-4 px-5">

@@ -22,7 +22,9 @@ const TotalReport = () => {
             <div>
                 <div className="flex items-center justify-between">
                     <h4>Total Report</h4>
-                    <InfoBtn onClick={handleClick}/>
+                    <InfoBtn 
+                    // onClick={handleClick}
+                    />
                 </div>
                 <p className="mt-1.5 mb-4 text-sm md:text-base">
                     All Periods per 01/01/2022 - 08/28/2023
@@ -35,9 +37,12 @@ const TotalReport = () => {
                     ))
                 }
             </div>
-            <NavLink className="btn btn--primary" to="/revenue-by-period">
+            {/* <NavLink className="btn btn--primary" to="/revenue-by-period">
                 More Details
-            </NavLink>
+            </NavLink> */}
+            <div className="btn btn--primary" >
+                More Details
+            </div>
             <Submenu anchorEl={anchorEl} open={open} onClose={handleClose}>
                 <div className="flex flex-col items-start gap-5 p-5">
                     <button className="menu-btn subheading-2">

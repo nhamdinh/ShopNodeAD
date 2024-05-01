@@ -21,7 +21,7 @@ const RevenueByPeriod = () => {
             <div>
                 <div className="flex flex-col gap-4 mb-5 md:mb-[26px] md:gap-5 lg:flex-row lg:justify-between">
                     <CalendarSelector wrapperClass="md:max-w-[275px]" id="revenue"/>
-                    <PopularTags/>
+                    {/* <PopularTags/> */}
                 </div>
                 <div className="widgets-grid grid-cols-1 md:grid-cols-2
                      2xl:grid-cols-[minmax(0,_584px)_minmax(0,_462px)_minmax(0,_1fr)]">

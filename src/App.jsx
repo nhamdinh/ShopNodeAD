@@ -129,13 +129,13 @@ const App = () => {
                                     <Route path="/login" element={<Login/>}/>
                                     <Route path="/" element={<SalesAnalytics/>}/>
                                     <Route path="sellers-list" element={<SellersList/>}/>
-                                    <Route path="sellers-table" element={<SellersTable/>}/>
-                                    <Route path="sellers-grid" element={<SellersGrid/>}/>
-                                    <Route path="products-management" element={<ProductsManagement/>}/>
-                                    <Route path="seller-profile" element={<SellerProfile/>}/>
-                                    <Route path="revenue-by-period" element={<RevenueByPeriod/>}/>
+                                    {/* <Route path="sellers-table" element={<SellersTable/>}/> */}
+                                    {/* <Route path="sellers-grid" element={<SellersGrid/>}/> */}
+                                    {/* <Route path="seller-profile" element={<SellerProfile/>}/> */}
+                                    {/* <Route path="revenue-by-period" element={<RevenueByPeriod/>}/> */}
                                     <Route path="top-products" element={<TopProducts/>}/>
                                     <Route path="products-grid" element={<ProductsGrid/>}/>
+                                    <Route path="products-management" element={<ProductsManagement/>}/>
                                     {/* <Route path="product-editor" element={<ProductEditor/>}/> */}
                                     {/* <Route path="banners" element={<Banners/>}/> */}
                                     <Route path="orders" element={<Orders/>}/>

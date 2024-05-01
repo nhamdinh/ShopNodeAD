@@ -8,7 +8,7 @@ const LabeledProgressBar = ({label, value, displayValue, color, withBar = true, 
     return (
         <div className={`flex flex-col gap-[5px] ${wrapperClass || ''}`}>
             <div className="flex items-center justify-between">
-                <span className="h6 !text-sm !text-body-text">{label}</span>
+                <span className="h6 !text-sm !text-body-text capitalize">{label}</span>
                 <span className="text-header h6 !text-sm">{displayValue}</span>
             </div>
             {withBar && <ProgressBar value={value} color={color} />}

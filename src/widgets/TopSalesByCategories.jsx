@@ -4,7 +4,7 @@ import LabeledProgressBar from "@components/LabeledProgressBar";
 
 // utils
 import { getPercentage, numFormatter } from "@utils/helpers";
-import { PRODUCT_CATEGORIES_REAL } from "@constants/options";
+// import { PRODUCT_CATEGORIES_REAL } from "@constants/options";
 
 //   const data = [
 //     { label: "Electronics", totalValue: 7541, color: "accent" },
@@ -13,13 +13,14 @@ import { PRODUCT_CATEGORIES_REAL } from "@constants/options";
 //     { label: "Services", totalValue: 6548, color: "yellow" },
 //   ];
 
-const TopSalesByCategories = ({ dataProducts = [] }) => {
-  const options = PRODUCT_CATEGORIES_REAL.filter(
-    (option) => option.value !== "all"
-  );
-  const data = options.map((ooo) => {
+const TopSalesByCategories = ({ dataProducts = [], categories = [] }) => {
+  // console.log(dataProducts)
+  // const options = PRODUCT_CATEGORIES_REAL.filter(
+  //   (option) => option.value !== "all"
+  // );
+  const data = categories.map((ooo) => {
     const totalValue = dataProducts.reduce((acc, ddd) => {
-      if (ddd?.product_type === ooo.value) {
+      if (ddd?.product_categories.includes(ooo.value)) {
         acc = acc + +ddd.product_price * +ddd.product_sold;
       }
       return acc;

@@ -30,7 +30,7 @@ export const productsApi = createApi({
     "GetBrands",
     "GetReviews",
     "getReviewsByShop_tag",
-    "tag_getPublishedProducts"
+    "tag_getPublishedProducts",
   ],
   endpoints: (builder) => ({
     getProducts: builder.query({
@@ -165,6 +165,13 @@ export const productsApi = createApi({
         body: data,
       }),
     }),
+    getCodes: builder.query({
+      query: (data) => ({
+        url: `/codes/all`,
+        method: "GET",
+        params: data,
+      }),
+    }),
   }),
 });
 
@@ -187,4 +194,5 @@ export const {
   useGetPublishedProductsQuery,
   useGetProductsByShopMutation,
   useUpdateStatusProductsByShopMutation,
+  useGetCodesQuery,
 } = productsApi;

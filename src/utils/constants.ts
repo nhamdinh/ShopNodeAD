@@ -18,6 +18,7 @@ export const PAGE_SIZE_1 = 1;
 export const PAGE_SIZE_999 = 999;
 export const SAFE_STOCK = 300;
 export const PATH_IMG_AVATAR = "avatar";
+export const PRODUCT_CATEGORY = 'PRODUCT_MODEL';
 
 export const REGEX_CURRENCY = /(\d)(?=(\d{3})+(?!\d))/g;
 export const DATE_FORMAT = "YYYY-MM-DD";

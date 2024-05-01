@@ -27,11 +27,11 @@ const ROUTES = [
         icon: 'cart-shopping-regular',
         path: '/orders'
     },
-    {
-        name: 'Statistics',
-        icon: 'chart-simple-regular',
-        path: '/statistics'
-    },
+    // {
+    //     name: 'Statistics',
+    //     icon: 'chart-simple-regular',
+    //     path: '/statistics'
+    // },
     {
         name: 'Reviews',
         icon: 'star-half-stroke-solid',
@@ -42,15 +42,15 @@ const ROUTES = [
         icon: 'chart-user-regular',
         links: [
             {name: 'Chat With Clients', path: '/connected-apps'},
-            {name: 'Customers', path: '/customers'},
+            // {name: 'Customers', path: '/customers'},
         ]
     },
-    {
-        name: 'Transactions',
-        icon: 'money-check-dollar-pen-regular',
-        path: '/transactions',
-        qty: 279
-    },
+    // {
+    //     name: 'Transactions',
+    //     icon: 'money-check-dollar-pen-regular',
+    //     path: '/transactions',
+    //     qty: 279
+    // },
     {
         name: 'Pages',
         icon: 'layer-group-regular',
@@ -64,7 +64,7 @@ const ROUTES = [
         icon: 'gear-regular',
         links: [
             {name: 'General Settings', path: '/general-settings'},
-            {name: 'Connected Apps', path: '/connected-apps'}
+            // {name: 'Connected Apps', path: '/connected-apps'}
         ]
     }
 ]

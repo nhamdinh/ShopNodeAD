@@ -11,16 +11,21 @@ import {useEffect, useState} from 'react';
 import {useWindowSize} from 'react-use';
 
 // constants
-import {ORDERS_COLUMN_DEFS} from '@constants/columnDefs';
-
+// import {ORDERS_COLUMN_DEFS} from '@constants/columnDefs';
+import RatingStars from '@ui/RatingStars';
+import SubmenuTrigger from '@ui/SubmenuTrigger';
+import {NavLink} from 'react-router-dom';
+import { getStatusColor } from '@utils/helpers';
+import { formatMoney } from '@utils/commonFunction';
 // data placeholder
 // import orders_product from '@db/orders';
 
-const OrdersTable = ({category, sort, ordersProduct}) => {
+const OrdersTable = ({category, sort, ordersProduct, categories}) => {
+
     const {width} = useWindowSize();
     const [activeCollapse, setActiveCollapse] = useState('');
 
-    const filteredData = category.value === 'all' ? ordersProduct : ordersProduct.filter(order => order.product_type === category.value);
+    const filteredData = category.value === 'all' ? ordersProduct : ordersProduct.filter(order => order.product_categories.includes(category.value));
     const sortedData = () => {
         switch (sort.value) {
             default:
@@ -58,6 +63,110 @@ const OrdersTable = ({category, sort, ordersProduct}) => {
             setActiveCollapse(SKU);
         }
     }
+
+     const getCategory = value => {
+        return categories.find(category => category.value === value);
+    }
+
+
+     const ORDERS_COLUMN_DEFS = [
+        {
+            title: '# order',
+            dataIndex: '_id',
+            width: '100px',
+            render: text => <div className="subheading-2 w80px line__clamp__2">#{text}</div>
+        },
+        {
+            title: 'Product',
+            dataIndex: 'product',
+            className: 'product-cell',
+            render: product =>
+                <div className="flex gap-6">
+                    <div className="img-wrapper w-[70px] h-[64px] flex items-center justify-center shrink-0">
+                        <img src={product?.product_thumb_small ?? product?.product_thumb} alt={product.product_name}/>
+                    </div>
+                    <div className="flex-col hidden 2xl:flex">
+                        <h5 className="text-sm max-w-[195px] mb-1.5 line__clamp__2">{product.product_name}</h5>
+                        <div className="flex flex-col gap-1 text-sm">
+                            <p>Regular price: ${product.product_price}</p>
+                            {product.product_original_price && <p>Sale price: ${product.product_original_price}</p>}
+                        </div>
+                    </div>
+                </div>,
+            responsive: ['lg'],
+        },
+        {
+            title: 'SKU',
+            dataIndex: 'product_id',
+            render: text => <div className="w80px line__clamp__2">{text}</div>
+    
+        },
+        {
+            title: 'Category',
+            dataIndex: 'product_categories',
+            render: product_categories =>
+                <div className="flex items-center gap-4 direction__column">
+                    {product_categories.map((category)=>(
+                            <div className='flex items-center gap-4 '>
+                        <div className={`badge-icon badge-icon--sm bg-${getCategory(category)?.color}`}>
+                            <i className={`${getCategory(category)?.icon} text-base`}/>
+                        </div>
+                        <span className="label-text capitalize">{getCategory(category)?.label}</span> 
+                        </div>
+                        ))}
+                </div>,
+            responsive: ['lg'],
+        },
+        {
+            title: 'Payment',
+            dataIndex: 'payment',
+            render: payment => {
+                const status = payment.totalAmountPay === payment.received ?
+                    'Fully paid'
+                    :
+                    (payment.totalAmountPay > payment.received && payment.received !== 0) ? 'Partially paid' : 'Unpaid';
+    
+                return (
+                    <div className="flex flex-col">
+                        <span className="font-heading font-bold text-header">
+                            {status !== 'Fully paid' && `$${payment.received} / from `}
+                            ${formatMoney(payment.totalAmountPay)}
+                        </span>
+                        <span>{status}</span>
+                    </div>
+                )
+            }
+        },
+        {
+            title: 'Order Status',
+            dataIndex: 'status',
+            render: status =>
+                <span className="badge-status badge-status--lg"
+                      style={{backgroundColor: `var(--${getStatusColor(status)})`}}>
+                    {status}
+                </span>
+        },
+        {
+            title: 'Rate',
+            dataIndex: 'product_ratings',
+            render: rating => <RatingStars rating={rating}/>,
+            responsive: ['xl'],
+        },
+        {
+            title: 'Actions',
+            dataIndex: 'actions',
+            width: '70px',
+            render: () =>
+                <div className="flex items-center justify-end gap-11">
+                    <NavLink to="/product-editor" aria-label="Edit">
+                        <i className="icon icon-pen-to-square-regular text-lg leading-none"/>
+                    </NavLink>
+                    <SubmenuTrigger/>
+                </div>
+        }
+    ];
+
+
 
     return (
         <Spring className="flex flex-col flex-1 w-full">

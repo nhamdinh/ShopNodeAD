@@ -15,20 +15,23 @@ import { useState, useEffect } from "react";
 // constants
 import { PRODUCT_CATEGORIES, ORDER_SORT_OPTIONS } from "@constants/options";
 import { useSelector } from "react-redux";
-import { getUserInfo } from "@store/selector/RootSelector";
+import { getUserInfo, getCategories } from "@store/selector/RootSelector";
 import { useGetOrdersByShopMutation } from "@store/components/orders/ordersApi";
 import { PAGE_SIZE_1, PAGE_SIZE_999 } from "@utils/constants";
 
 const Orders = () => {
-  const [category, setCategory] = useState(PRODUCT_CATEGORIES[0]);
-  const [sort, setSort] = useState(ORDER_SORT_OPTIONS[0]);
+  const categories = useSelector(getCategories);
+  const __categories = [{ value: "all", label: "All Products" }, ...categories];
 
+  const [category, setCategory] = useState(__categories[0]);
+  const [sort, setSort] = useState(ORDER_SORT_OPTIONS[0]);
   const userInfo = useSelector(getUserInfo);
 
   const [Paid, setPaid] = useState(0);
   const [Delivered, setDelivered] = useState(0);
   const [Canceled, setCanceled] = useState(0);
   const [Refunded, setRefunded] = useState(0);
+  const [NotPaid, setNotPaid] = useState(0);
 
   const [ordersProduct, setOrdersProduct] = useState([]);
   const [params, setParams] = useState({
@@ -52,13 +55,14 @@ const Orders = () => {
     //@ts-ignore
     const data = res?.data;
     if (data) {
-      const { isPaid, isDelivered, isCanceled, isRefunded, orders } =
+      const { isPaid, isDelivered, isCanceled, isRefunded, isNotPaid, orders } =
         data?.metadata;
 
       setPaid(isPaid);
       setDelivered(isDelivered);
       setCanceled(isCanceled);
       setRefunded(isRefunded);
+      setNotPaid(isNotPaid);
 
       const checkedProducts = orders.flatMap((order) => order.itemProducts);
 
@@ -77,6 +81,7 @@ const Orders = () => {
           product_id: pro._id,
           product_ratings: pro.product_ratings,
           product_type: pro.product_type,
+          product_categories: pro.product_categories,
           payment: {
             totalAmountPay: orderFound.totalAmountPay,
             received: orderFound.isPaid ? orderFound.totalAmountPay : 0,
@@ -96,7 +101,11 @@ const Orders = () => {
 
   return (
     <>
-      <PageHeader title="Orders" />
+      <PageHeader
+        title="Orders"
+        isFetching={isLoading}
+        cb_refetch={onGetOrdersByShop}
+      />
       <div className="flex flex-col flex-1 gap-5 md:gap-[26px]">
         <div
           className="w-full grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-[26px] lg:grid-cols-4 lg:items-end
@@ -121,7 +130,7 @@ const Orders = () => {
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-[26px] md:col-span-2">
             <Select
               value={category}
-              options={PRODUCT_CATEGORIES}
+              options={__categories}
               onChange={setCategory}
               placeholder="Product category"
             />
@@ -139,6 +148,12 @@ const Orders = () => {
           </div>
           <div className="widgets-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:col-span-4">
             <OrdersInfobox
+              title="Not Paid"
+              count={NotPaid * PAGE_SIZE_1}
+              color="red"
+              icon={<i className="icon-ban-solid" />}
+            />
+            <OrdersInfobox
               title="Paid"
               count={Paid * PAGE_SIZE_1}
               icon={<i className="icon-check-to-slot-solid" />}
@@ -148,12 +163,6 @@ const Orders = () => {
               count={Delivered * PAGE_SIZE_1}
               color="green"
               icon={<i className="icon-list-check-solid" />}
-            />
-            <OrdersInfobox
-              title="Canceled"
-              count={Canceled * PAGE_SIZE_1}
-              color="red"
-              icon={<i className="icon-ban-solid" />}
             />
             <OrdersInfobox
               title="Refunded"
@@ -167,6 +176,7 @@ const Orders = () => {
           ordersProduct={ordersProduct}
           category={category}
           sort={sort}
+          categories={categories}
         />
       </div>
     </>

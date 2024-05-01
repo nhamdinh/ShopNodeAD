@@ -93,7 +93,7 @@ const AppBar = () => {
                                 <img src={activeLocale.icon} alt={activeLocale.label}/>
                             </button>
                         </CustomTooltip>
-                        <div className="relative h-fit mt-1.5 xl:self-end xl:mt-0 xl:mr-1.5">
+                        {/* <div className="relative h-fit mt-1.5 xl:self-end xl:mt-0 xl:mr-1.5">
                             <button className="text-lg leading-none text-gray dark:text-gray-red xl:text-[20px]"
                                     onClick={() => setNotificationsPanelOpen(true)}
                                     aria-label="Notifications">
@@ -118,7 +118,7 @@ const AppBar = () => {
                                       2
                                   </span>
                             </span>
-                        </div>
+                        </div> */}
                         <div className="relative">
                             <button className="h-8 w-8 rounded-full bg-accent text-widget text-sm flex items-center
                                     justify-center relative xl:w-11 xl:h-11 xl:text-lg"
@@ -141,12 +141,12 @@ const AppBar = () => {
                     </div>
                 </ModalBase>
             } */}
-            <NotificationsPanel open={notificationsPanelOpen}
+            {/* <NotificationsPanel open={notificationsPanelOpen}
                                 onOpen={() => setNotificationsPanelOpen(true)}
                                 onClose={() => setNotificationsPanelOpen(false)}/>
             <MessagesPanel open={messagesPanelOpen}
                            onOpen={() => setMessagesPanelOpen(true)}
-                           onClose={() => setMessagesPanelOpen(false)}/>
+                           onClose={() => setMessagesPanelOpen(false)}/> */}
         </>
     )
 }

@@ -139,10 +139,10 @@ const App = () => {
                                     {/* <Route path="product-editor" element={<ProductEditor/>}/> */}
                                     {/* <Route path="banners" element={<Banners/>}/> */}
                                     <Route path="orders" element={<Orders/>}/>
-                                    <Route path="statistics" element={<Statistics/>}/>
+                                    {/* <Route path="statistics" element={<Statistics/>}/> */}
                                     <Route path="reviews" element={<Reviews/>}/>
-                                    <Route path="customers" element={<Customers/>}/>
-                                    <Route path="transactions" element={<Transactions/>}/>
+                                    {/* <Route path="customers" element={<Customers/>}/> */}
+                                    {/* <Route path="transactions" element={<Transactions/>}/> */}
                                     <Route path="general-settings" element={<GeneralSettings/>}/>
                                     <Route path="connected-apps" element={<ConnectedApps/>}/>
                                     <Route path="*" element={<Navigate to="/404"/>}/>

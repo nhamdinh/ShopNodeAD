@@ -37,12 +37,16 @@ const NormalizedSelect = styled(Select)`
     }
 
     &__single-value {
+      text-transform: capitalize;
+
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
     }
 
     &__menu {
+      text-transform: capitalize;
+
       min-width: max-content;
       width: 100%;
       border-radius: 6px;
@@ -115,11 +119,15 @@ const BasicSelect = styled(NormalizedSelect)`
     }
 
     &__single-value {
+      text-transform: capitalize;
+
       color: var(--text);
       line-height: 1;
     }
 
     &__menu {
+      text-transform: capitalize;
+
       box-shadow: var(--widget-shadow);
       background: var(--widget);
       width: 100%;
@@ -129,7 +137,6 @@ const BasicSelect = styled(NormalizedSelect)`
   &.is-invalid {
     .select__control {
       border-color: var(--red);
-      text-transform: capitalize
     }
   }
 `;
@@ -156,6 +163,8 @@ const MinimalSelect = styled(NormalizedSelect)`
 
     &__single-value {
       margin: 0;
+      text-transform: capitalize;
+
       color: var(--header);
     }
 

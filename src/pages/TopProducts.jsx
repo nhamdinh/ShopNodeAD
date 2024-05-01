@@ -1,52 +1,12 @@
 // components
 import PageHeader from "@layout/PageHeader";
 import TopSalesByCategories from "@widgets/TopSalesByCategories";
-import TopRetail from "@widgets/TopRetail";
 import TopProductsList from "@widgets/TopProductsList";
 import { useSelector } from "react-redux";
-import { getDataProducts } from "@store/selector/RootSelector";
-import { useGetCodesQuery } from "@store/components/products/productsApi";
-import { PRODUCT_CATEGORY } from "@utils/constants";
-import { useEffect, useState } from "react";
-import { PRODUCT_CATEGORIES_REAL } from "@constants/options";
+import { getDataProducts, getCategories } from "@store/selector/RootSelector";
 const TopProducts = () => {
   const dataProducts = useSelector(getDataProducts);
-  const [categories, setCategories] = useState([]);
-
-  const {
-    data: dataFetch,
-    error,
-    isSuccess,
-    isLoading,
-  } = useGetCodesQuery(
-    {
-      mainCode_type: PRODUCT_CATEGORY,
-    },
-    {
-      refetchOnMountOrArgChange: true,
-      skip: false,
-    }
-  );
-  useEffect(() => {
-    if (isSuccess) {
-      const options = PRODUCT_CATEGORIES_REAL.filter(
-        (option) => option.value !== "all"
-      );
-      const lll = options.length ?? 1;
-
-      const { mainCodes = [] } = dataFetch?.metadata;
-      const __mainCodes = mainCodes.map((mm, index) => {
-        const inx = index % lll;
-        return {
-          value: mm?._id,
-          label: mm?.mainCode_value,
-          icon: options[inx]?.icon,
-          color: options[inx]?.color,
-        };
-      });
-      setCategories(__mainCodes);
-    }
-  }, [dataFetch]);
+  const categories = useSelector(getCategories);
 
   return (
     <>

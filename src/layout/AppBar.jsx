@@ -69,10 +69,10 @@ const AppBar = () => {
                             <i className="icon-bars-solid"/>
                         </button>
                     }
-                    {
+                    {/* {
                         width >= 768 &&
                         <Search wrapperClass="flex-1 max-w-[1054px] ml-5 mr-auto 4xl:ml-0"/>
-                    }
+                    } */}
                     <div className="flex items-center gap-5 md:ml-5 xl:gap-[26px]">
                         {
                             width < 768 &&
@@ -132,7 +132,7 @@ const AppBar = () => {
                     </div>
                 </div>
             </Headroom>
-            {
+            {/* {
                 width < 768 &&
                 <ModalBase open={searchModalOpen} onClose={() => setSearchModalOpen(false)}>
                     <div className="card max-w-[360px] w-full">
@@ -140,7 +140,7 @@ const AppBar = () => {
                         <Search placeholder="What are you looking for?"/>
                     </div>
                 </ModalBase>
-            }
+            } */}
             <NotificationsPanel open={notificationsPanelOpen}
                                 onOpen={() => setNotificationsPanelOpen(true)}
                                 onClose={() => setNotificationsPanelOpen(false)}/>

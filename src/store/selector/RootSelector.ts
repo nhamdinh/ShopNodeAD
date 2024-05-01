@@ -1,6 +1,7 @@
 export const getUserInfo = (state: any) => state.auth.userInfo;
 export const getChatNotices = (state: any) => state.productsReducer.userChatNotices;
 export const getDataProducts = (state: any) => state.productsReducer.dataProducts;
+export const getCategories = (state: any) => state.productsReducer.categories;
 
 export const getArrBuy = (state: any) => state.thudungGiosReducer.arrBuy;
 export const getArrSell = (state: any) => state.thudungGiosReducer.arrSell;

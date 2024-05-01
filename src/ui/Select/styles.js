@@ -129,6 +129,7 @@ const BasicSelect = styled(NormalizedSelect)`
   &.is-invalid {
     .select__control {
       border-color: var(--red);
+      text-transform: capitalize
     }
   }
 `;

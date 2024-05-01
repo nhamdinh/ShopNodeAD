@@ -6,11 +6,12 @@ import ItemsGrid from "@widgets/ItemsGrid";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
-import { getUserInfo } from "@store/selector/RootSelector";
+import { getUserInfo, getCategories } from "@store/selector/RootSelector";
 import { useGetProductsByShopMutation } from "@store/components/products/productsApi";
 import { PAGE_SIZE_999 } from "@utils/constants";
 
 const ProductsGrid = () => {
+  const categories = useSelector(getCategories);
   const userInfo = useSelector(getUserInfo);
   const [products, setProducts] = useState([]);
 
@@ -25,7 +26,7 @@ const ProductsGrid = () => {
       product_shop: userInfo?._id,
       limit: PAGE_SIZE_999,
       page: 1,
-      isDelete: false
+      isDelete: false,
     });
   }, [userInfo]);
 
@@ -61,7 +62,7 @@ const ProductsGrid = () => {
         cb_refetch={onGetProductsByShop}
         title="Products Grid"
       />
-      <ItemsGrid products={products} cb_refetch={onGetProductsByShop} />
+      <ItemsGrid categories={categories} products={products} cb_refetch={onGetProductsByShop} />
     </>
   );
 };

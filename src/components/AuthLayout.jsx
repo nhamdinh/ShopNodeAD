@@ -165,7 +165,7 @@ const AuthLayout = () => {
               {isLoading && <Loading />}
             </div>
           </form>
-          <div>
+{/*           <div>
             <div className="relative">
               <span className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-[1px] bg-border" />
               <span className="flex items-center justify-center relative z-10 w-11 h-[23px] m-auto bg-widget">
@@ -196,7 +196,7 @@ const AuthLayout = () => {
               <p>Don’t have an account?</p>
               <button className="text-btn">Sign Up</button>
             </div>
-          </div>
+          </div> */}
         </Spring>
       </div>
     </div>

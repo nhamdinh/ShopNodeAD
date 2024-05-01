@@ -61,9 +61,9 @@ export const LOCALES = [
 ]
 
 export const APPS_OPTIONS = [
-    {value: 'all', label: 'All'},
-    {value: 'development', label: 'Developer Tools'},
-    {value: 'marketplace', label: 'Marketplace'},
+    // {value: 'all', label: 'All'},
+    // {value: 'development', label: 'Developer Tools'},
+    // {value: 'marketplace', label: 'Marketplace'},
     {value: 'finances', label: 'User Clients'}
 ]
 

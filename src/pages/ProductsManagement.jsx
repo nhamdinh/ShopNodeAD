@@ -22,7 +22,6 @@ const ProductsManagement = () => {
   const [products, setProducts] = useState([]);
   const [options, setOptions] = useState({});
   const [status, setStatus] = useState({});
-
   const [params, setParams] = useState({
     product_shop: userInfo?._id,
     limit: PAGE_SIZE,
@@ -121,7 +120,7 @@ const ProductsManagement = () => {
           }));
         }}
         cb_setParamsStatus={(val) => {
-          const categories = {
+          const statusFilter = {
             all: {},
             trash: { isDelete: true },
             publish: { isDelete: false, isPublished: true },
@@ -131,7 +130,7 @@ const ProductsManagement = () => {
             product_shop: userInfo?._id,
             limit: PAGE_SIZE,
             page: 1,
-            ...categories[val],
+            ...statusFilter[val],
           });
         }}
         cb_setParamsFilter={(val) => {

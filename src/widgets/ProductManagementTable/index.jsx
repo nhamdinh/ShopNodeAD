@@ -29,6 +29,8 @@ import { openToast } from "@store/components/customDialog/toastSlice";
 import { useDispatch } from "react-redux";
 import { useGetBrandsQuery } from "@store/components/products/productsApi";
 import { removeNullObject } from "@utils/commonFunction";
+import { useSelector } from "react-redux";
+import { getCategories } from "@store/selector/RootSelector";
 
 // data placeholder
 
@@ -43,31 +45,33 @@ const ProductManagementTable = ({
   cb_onGetProductsByShop,
 }) => {
   const dispatch = useDispatch();
-
   const { width } = useWindowSize();
+  const categories = useSelector(getCategories);
+
+
   const defaultFilters = {
     stockStatus: null,
-    product_type: null,
+    product_categories: null,
     productSeller: null,
-    productBrands: null,
+    brand: null,
     additionalOptions: null,
   };
 
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  const [category, setCategory] = useState("all");
+  const [categoryStatus, setCategoryStatus] = useState("all");
   const [filters, setFilters] = useState(defaultFilters);
   const [selectedAction, setSelectedAction] = useState(null);
   const [activeCollapse, setActiveCollapse] = useState("");
 
-  const getQty = (category) => {
-    const categories = {
+  const getQty = (val) => {
+    const statusFilter = {
       all: options?.countAll ?? products.length,
       trash: status?.isDelete ?? 0,
       publish: status?.isPublished ?? 0,
       draft: status?.isDraft ?? 0,
     };
-    return categories[category] ?? 0;
-    return products.filter((product) => product.status === category).length;
+    return statusFilter[val] ?? 0;
+    return products.filter((product) => product.status === val).length;
   };
 
   const handleFilterSelect = ({ value, label }, name) => {
@@ -79,9 +83,11 @@ const ProductManagementTable = ({
 
   const handleApplyFilters = () => {
     const filtersRemoveNull = removeNullObject(filters);
+    // console.log(filtersRemoveNull)
     const final = {};
     Object.keys(filtersRemoveNull).forEach((key) => {
-      if (key === "product_type") final[key] = filtersRemoveNull[key].value;
+      if (key === "product_categories") final[key] = filtersRemoveNull[key].value;
+      if (key === "brand") final[key] = filtersRemoveNull[key].value;
     });
     console.log(final);
     if (cb_setParamsFilter) {
@@ -136,8 +142,8 @@ const ProductManagementTable = ({
   };
 
   const dataByStatus = () => {
-    if (category === "all") return products;
-    return products.filter((product) => product.status === category);
+    if (categoryStatus === "all") return products;
+    return products.filter((product) => product.status === categoryStatus);
   };
 
   const pagination = usePaginationApi({
@@ -212,14 +218,15 @@ const ProductManagementTable = ({
               text={option.label}
               qty={getQty(option.value)}
               value={option.value}
-              active={category}
+              active={categoryStatus}
               onClick={() => {
+                console.log(option.value)
                 if (cb_setParamsStatus) {
                   setSelectedRowKeys([]);
                   cb_setParamsStatus(option.value);
                 }
 
-                setCategory(option.value);
+                setCategoryStatus(option.value);
                 pagination.setCurrentPage(0);
               }}
             />
@@ -234,12 +241,13 @@ const ProductManagementTable = ({
           onChange={(e) => handleFilterSelect(e, "stockStatus")}
         />
         <Select
-          options={PRODUCT_CATEGORIES_REAL.filter(
-            (ooo) => ooo.value !== PRODUCT_CATEGORIES_REAL[0]?.value
-          )}
-          value={filters.product_type}
+          // options={PRODUCT_CATEGORIES_REAL.filter(
+          //   (ooo) => ooo.value !== PRODUCT_CATEGORIES_REAL[0]?.value
+          // )}
+          options={categories}
+          value={filters.product_categories}
           placeholder="Product Category"
-          onChange={(e) => handleFilterSelect(e, "product_type")}
+          onChange={(e) => handleFilterSelect(e, "product_categories")}
         />
         <Select
           options={PRODUCT_SELLER_OPTIONS}
@@ -249,9 +257,9 @@ const ProductManagementTable = ({
         />
         <Select
           options={brands}
-          value={filters.productBrands}
+          value={filters.brand}
           placeholder="Product Brands"
-          onChange={(e) => handleFilterSelect(e, "productBrands")}
+          onChange={(e) => handleFilterSelect(e, "brand")}
         />
         <Select
           options={PRODUCT_ADDITIONAL_OPTIONS}

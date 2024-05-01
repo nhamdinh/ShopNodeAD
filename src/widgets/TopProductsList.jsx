@@ -17,7 +17,7 @@ const TopSalesByCategories = ({
   dataProducts = [],
   categories = [],
 }) => {
-  const category_id = categories.find((ccc) => ccc.label === category)?.value;
+  const category_id = categories.find((ccc) => ccc?.label === category)?.value;
   const categoryProducts = sortProducts(
     dataProducts.filter((product) =>
       product?.product_categories.includes(category_id)

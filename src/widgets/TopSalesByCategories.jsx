@@ -20,8 +20,8 @@ const TopSalesByCategories = ({ dataProducts = [], categories = [] }) => {
   // );
   const data = categories.map((ooo) => {
     const totalValue = dataProducts.reduce((acc, ddd) => {
-      if (ddd?.product_categories.includes(ooo.value)) {
-        acc = acc + +ddd.product_price * +ddd.product_sold;
+      if (ddd?.product_categories.includes(ooo?.value)) {
+        acc = acc + +ddd?.product_price * +ddd?.product_sold;
       }
       return acc;
     }, 0);

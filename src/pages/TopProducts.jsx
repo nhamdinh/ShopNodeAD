@@ -38,10 +38,10 @@ const TopProducts = () => {
       const __mainCodes = mainCodes.map((mm, index) => {
         const inx = index % lll;
         return {
-          value: mm._id,
-          label: mm.mainCode_value,
-          icon: options[inx].icon,
-          color: options[inx].color,
+          value: mm?._id,
+          label: mm?.mainCode_value,
+          icon: options[inx]?.icon,
+          color: options[inx]?.color,
         };
       });
       setCategories(__mainCodes);

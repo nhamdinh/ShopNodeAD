@@ -48,10 +48,22 @@ export const SELLER_SORT_OPTIONS = [
 ]
 
 export const REVIEW_SORT_OPTIONS = [
-    {value: 'recent', label: 'Recent'},
-    {value: 'oldest', label: 'Oldest'},
-    {value: 'rating-high-to-low', label: 'Highest Rating'},
-    {value: 'rating-low-to-high', label: 'Lowest Rating'},
+    {value: 'recent', label: 'Recent',
+    orderByKey: "_id",
+    orderByValue: -1,
+    },
+    {value: 'oldest', label: 'Oldest',
+    orderByKey: "_id",
+    orderByValue: 1,
+    },
+    {value: 'rating-high-to-low', label: 'Highest Rating',
+    orderByKey: "rating",
+    orderByValue: -1,
+    },
+    {value: 'rating-low-to-high', label: 'Lowest Rating',
+    orderByKey: "rating",
+    orderByValue: 1,
+    },
 ]
 
 export const LOCALES = [

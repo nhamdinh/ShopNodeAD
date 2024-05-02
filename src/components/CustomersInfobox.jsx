@@ -16,7 +16,7 @@ const CustomersInfobox = ({iconClass = 'users-solid', color = 'accent', label = 
             </div>
             <h6>
                 {label}
-                <span className="xl:hidden 4xl:inline"> Customers</span>
+                <span className="xl:hidden 4xl:inline"> Reviews</span>
             </h6>
         </Spring>
     )

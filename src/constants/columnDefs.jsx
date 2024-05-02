@@ -203,7 +203,7 @@ export const PRODUCTS_MANAGEMENT_COLUMN_DEFS = [
         dataIndex: 'product_name',
         render: text => <span className="inline-block h6 !text-sm max-w-[155px] h40px line__clamp__2">{text}</span>
     },
-    {title: 'SKU', dataIndex: 'product_sku'},
+    {title: 'SKU', dataIndex: '_id'},
     {
         title: 'Stock',
         dataIndex: 'product_quantity',

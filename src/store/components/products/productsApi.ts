@@ -139,7 +139,7 @@ export const productsApi = createApi({
       query: (data) => ({
         url: `/reviews/get-by-shop`,
         method: "GET",
-        // params: data,
+        params: data,
       }),
       providesTags: ["getReviewsByShop_tag"],
     }),

@@ -89,7 +89,6 @@ const ProductManagementTable = ({
       if (key === "product_categories") final[key] = filtersRemoveNull[key].value;
       if (key === "brand") final[key] = filtersRemoveNull[key].value;
     });
-    console.log(final);
     if (cb_setParamsFilter) {
       cb_setParamsFilter(final);
       setSelectedRowKeys([]);
@@ -154,13 +153,16 @@ const ProductManagementTable = ({
   // reset active collapse when page or window width changes
   useEffect(() => {
     setActiveCollapse("");
+  }, [width]);
+
+  useEffect(() => {
     if (cb_setParamsPage) {
       setSelectedRowKeys([]);
       cb_setParamsPage({
         page: +pagination.currentPage > 0 ? +pagination.currentPage + 1 : 1,
       });
     }
-  }, [pagination.currentPage, width]);
+  }, [pagination.currentPage]);
 
   const handleCollapse = (_id) => {
     if (activeCollapse === _id) {

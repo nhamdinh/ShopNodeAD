@@ -11,83 +11,83 @@ import img8 from '@assets/reviews/8.webp';
 const reviews = [
     {
         id: 'review-1',
-        firstName: 'J.',
+        name: 'J.',
         lastName: 'Davidson',
         email: 'jdavidson@domain.com',
-        img: img1,
+        avatar: img1,
         rating: 4,
-        timestamp: faker.date.recent(),
-        text: faker.lorem.paragraph()
+        createdAt: faker.date.recent(),
+        comment: faker.lorem.paragraph()
     },
     {
         id: 'review-2',
-        firstName: 'Mark',
+        name: 'Mark',
         lastName: 'Vallance',
         email: 'mark@domain.com',
-        img: img2,
+        avatar: img2,
         rating: 2,
-        timestamp: faker.date.recent(),
-        text: faker.lorem.sentence()
+        createdAt: faker.date.recent(),
+        comment: faker.lorem.sentence()
     },
     {
         id: 'review-3',
-        firstName: 'Sam',
+        name: 'Sam',
         lastName: 'Lincoln',
         email: 'sam@domain.com',
-        img: img3,
+        avatar: img3,
         rating: 5,
-        timestamp: faker.date.recent(),
-        text: faker.lorem.paragraph()
+        createdAt: faker.date.recent(),
+        comment: faker.lorem.paragraph()
     },
     {
         id: 'review-4',
-        firstName: 'Helen',
+        name: 'Helen',
         lastName: 'Rogers',
         email: 'helen@domain.com',
-        img: img4,
+        avatar: img4,
         rating: 3.5,
-        timestamp: faker.date.recent(),
-        text: faker.lorem.paragraph()
+        createdAt: faker.date.recent(),
+        comment: faker.lorem.paragraph()
     },
     {
         id: 'review-5',
-        firstName: 'Rita',
+        name: 'Rita',
         lastName: 'Amber',
         email: 'rita@domain.com',
-        img: img5,
+        avatar: img5,
         rating: 4.5,
-        timestamp: faker.date.recent(),
-        text: faker.lorem.sentence()
+        createdAt: faker.date.recent(),
+        comment: faker.lorem.sentence()
     },
     {
         id: 'review-6',
-        firstName: 'Lisa',
+        name: 'Lisa',
         lastName: 'Newman',
         email: 'newman@domain.com',
-        img: img6,
+        avatar: img6,
         rating: 5,
-        timestamp: faker.date.recent(),
-        text: faker.lorem.paragraph()
+        createdAt: faker.date.recent(),
+        comment: faker.lorem.paragraph()
     },
     {
         id: 'review-7',
-        firstName: 'Eva',
+        name: 'Eva',
         lastName: 'Peters',
         email: 'peters@domain.com',
-        img: img7,
+        avatar: img7,
         rating: 3,
-        timestamp: faker.date.recent(),
-        text: faker.lorem.sentence()
+        createdAt: faker.date.recent(),
+        comment: faker.lorem.sentence()
     },
     {
         id: 'review-8',
-        firstName: 'Grace',
+        name: 'Grace',
         lastName: 'Mitchell',
         email: 'mitchell@domain.com',
-        img: img8,
+        avatar: img8,
         rating: 1,
-        timestamp: faker.date.recent(),
-        text: faker.lorem.paragraph()
+        createdAt: faker.date.recent(),
+        comment: faker.lorem.paragraph()
     }
 ]
 

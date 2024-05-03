@@ -26,7 +26,7 @@ const Reviews = () => {
     orderByKey: "_id",
     shopId: userInfo?._id,
   });
-  const { data, error, isSuccess, isLoading } = useGetReviewsByShopQuery(
+  const { data, error, isSuccess, isFetching ,refetch} = useGetReviewsByShopQuery(
     params,
     {
       refetchOnMountOrArgChange: true,
@@ -84,7 +84,10 @@ const Reviews = () => {
 
   return (
     <>
-        <PageHeader title={t("Reviews")}/>
+        <PageHeader
+        isFetching={isFetching}
+        cb_refetch={refetch}
+        title={t("Reviews")}/>
         <div className="flex flex-col flex-1 gap-5 md:gap-[26px]">
             <div className="grid grid-cols-1 gap-y-5 md:gap-y-[26px] xl:grid-cols-6 xl:gap-x-[26px]">
                 <div className="widgets-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:col-span-4">

@@ -4,13 +4,16 @@ import TopSalesByCategories from "@widgets/TopSalesByCategories";
 import TopProductsList from "@widgets/TopProductsList";
 import { useSelector } from "react-redux";
 import { getDataProducts, getCategories } from "@store/selector/RootSelector";
+import { useTranslation } from "react-i18next";
 const TopProducts = () => {
+  const { t } = useTranslation();
+
   const dataProducts = useSelector(getDataProducts);
   const categories = useSelector(getCategories);
 
   return (
     <>
-      <PageHeader title="Top Products" />
+      <PageHeader title={t("Top Products")}/>
       <div className="widgets-grid grid-cols-1 lg:!gap-10 xl:mb-[50px]">
         <div
           className="widgets-grid grid-cols-1 xl:grid-cols-[minmax(0,330px)_minmax(0,1fr)]

@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { getUserInfo } from "@store/selector/RootSelector";
 import { useGetProductsByShopMutation } from "@store/components/products/productsApi";
 import { PAGE_SIZE } from "@utils/constants";
+import { useTranslation } from "react-i18next";
 
 const csvData = [
   ["firstname", "lastname", "email"],
@@ -17,6 +18,8 @@ const csvData = [
 ];
 
 const ProductsManagement = () => {
+  const { t } = useTranslation();
+
   const userInfo = useSelector(getUserInfo);
   const [searchInput, setSearchInput] = useState("");
   const [products, setProducts] = useState([]);
@@ -86,7 +89,7 @@ const ProductsManagement = () => {
       <PageHeader
         isFetching={isLoading}
         cb_refetch={onGetProductsByShop}
-        title="Products Management"
+        title={t("Products Management")}
       />
       <div className="flex flex-col-reverse gap-4 mb-5 md:flex-col lg:flex-row lg:justify-between">
         <div className="flex flex-col gap-4 md:flex-row md:gap-[14px]">

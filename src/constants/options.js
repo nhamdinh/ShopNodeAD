@@ -67,8 +67,8 @@ export const REVIEW_SORT_OPTIONS = [
 ]
 
 export const LOCALES = [
-    {value: 'en-EN', label: 'English (EN)', icon: eng},
-    {value: 'vi-VI', label: 'Vietnamese (VI)', icon: vi},
+    {value: 'en', label: 'English (EN)', icon: eng},
+    {value: 'vi', label: 'Vietnamese (VI)', icon: vi},
     // {value: 'dk-DK', label: 'Dansk (DK)', icon: dk},
     // {value: 'ua-UA', label: 'Українська (UA)', icon: ua}
 ]

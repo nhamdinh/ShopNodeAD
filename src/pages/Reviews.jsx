@@ -9,8 +9,11 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { getUserInfo } from "@store/selector/RootSelector";
 import { PAGE_SIZE } from "@utils/constants";
+import { useTranslation } from "react-i18next";
 
 const Reviews = () => {
+  const { t } = useTranslation();
+
   const userInfo = useSelector(getUserInfo);
   const [options, setOptions] = useState({});
   const [reviews, setReviews] = useState([]);
@@ -81,7 +84,7 @@ const Reviews = () => {
 
   return (
     <>
-        <PageHeader title="Reviews"/>
+        <PageHeader title={t("Reviews")}/>
         <div className="flex flex-col flex-1 gap-5 md:gap-[26px]">
             <div className="grid grid-cols-1 gap-y-5 md:gap-y-[26px] xl:grid-cols-6 xl:gap-x-[26px]">
                 <div className="widgets-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:col-span-4">

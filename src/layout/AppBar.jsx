@@ -19,19 +19,24 @@ import {LOCALES} from '@constants/options';
 import { useSelector } from 'react-redux';
 import { getUserInfo } from '@store/selector/RootSelector';
 import avatar_user from "@assets/user.png";
+import i18n1 from "@locales/config";
+import { useTranslation } from "react-i18next";
+import { LANG_STORAGE } from "@utils/constants";
 
 const LocaleMenu = ({active, setActive}) => {
     return (
         <div className="flex flex-col gap-4 p-4">
             {
                 LOCALES.map(locale => (
-                    <button key={locale.value}
+                    <button key={locale?.value}
                             className="group flex items-center gap-2.5 w-fit"
-                            onClick={() => setActive(locale.value)}>
-                        <img className="rounded-full w-5" src={locale.icon} alt={locale.label}/>
+                            onClick={() => {
+                                setActive(locale?.value)
+                            }}>
+                        <img className="rounded-full w-5" src={locale?.icon} alt={locale?.label}/>
                         <span
-                            className={`text-sm font-medium transition group-hover:text-accent ${active === locale.value ? 'text-accent' : 'text-header'}`}>
-                            {locale.label}
+                            className={`text-sm font-medium transition group-hover:text-accent ${active === locale?.value ? 'text-accent' : 'text-header'}`}>
+                            {locale?.label}
                         </span>
                     </button>
                 ))
@@ -41,22 +46,33 @@ const LocaleMenu = ({active, setActive}) => {
 }
 
 const AppBar = () => {
+    const { t, i18n } = useTranslation();
     const userInfo = useSelector(getUserInfo);
     const navigate = useNavigate();
+
     const [searchModalOpen, setSearchModalOpen] = useState(false);
     const [notificationsPanelOpen, setNotificationsPanelOpen] = useState(false);
     const [messagesPanelOpen, setMessagesPanelOpen] = useState(false);
-    const [locale, setLocale] = useState('en-EN');
+    const [locale, setLocale] = useState('en');
     const {width} = useWindowSize();
     const {theme, toggleTheme} = useTheme();
     const {setOpen} = useSidebar();
-
-    const activeLocale = LOCALES.find(l => l.value === locale);
+    const activeLocale = LOCALES.find(ll => ll.value === locale);
 
     useEffect(() => {
         setSearchModalOpen(false);
     }, [width]);
 
+    useEffect(() => {
+        const lang = localStorage.getItem(LANG_STORAGE);
+        if (lang) {
+          i18n.changeLanguage(lang);
+          setLocale(lang);
+        } else {
+          i18n.changeLanguage("en");
+          setLocale("en");
+        }
+      }, []);
     return (
         <>
             <Headroom style={{zIndex: 999}}>
@@ -87,12 +103,27 @@ const AppBar = () => {
                                 onClick={toggleTheme}>
                             <i className={`icon-${theme === 'light' ? 'sun-bright' : 'moon'}-regular`}/>
                         </button>
-                        <CustomTooltip title={<LocaleMenu active={locale} setActive={setLocale}/>}>
+                        <button className="w-6 h-6 rounded-full overflow-hidden xl:w-8 xl:h-8"
+                                    aria-label="Change language"
+                                    onClick={()=>{
+                                        if (i18n1?.language === "vi") {
+                                            i18n.changeLanguage("en");
+                                            setLocale("en")
+                                            localStorage.setItem(LANG_STORAGE, "en");
+                                          } else {
+                                            i18n.changeLanguage("vi");
+                                            setLocale("vi")
+                                            localStorage.setItem(LANG_STORAGE, "vi");
+                                          }
+                                    }}>
+                                <img src={activeLocale?.icon} alt={activeLocale?.label}/>
+                            </button>
+                        {/* <CustomTooltip title={<LocaleMenu active={locale} setActive={setLocale}/>}>
                             <button className="w-6 h-6 rounded-full overflow-hidden xl:w-8 xl:h-8"
                                     aria-label="Change language">
-                                <img src={activeLocale.icon} alt={activeLocale.label}/>
+                                <img src={activeLocale?.icon} alt={activeLocale?.label}/>
                             </button>
-                        </CustomTooltip>
+                        </CustomTooltip> */}
                         {/* <div className="relative h-fit mt-1.5 xl:self-end xl:mt-0 xl:mr-1.5">
                             <button className="text-lg leading-none text-gray dark:text-gray-red xl:text-[20px]"
                                     onClick={() => setNotificationsPanelOpen(true)}

@@ -57,6 +57,7 @@ export default defineConfig({
             '@contexts': '/src/contexts',
             '@constants': '/src/constants',
             '@store': '/src/store',
+            '@locales': '/src/locales',
         }
     },
     define: {

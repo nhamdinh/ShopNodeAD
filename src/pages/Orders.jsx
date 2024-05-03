@@ -18,8 +18,10 @@ import { useSelector } from "react-redux";
 import { getUserInfo, getCategories } from "@store/selector/RootSelector";
 import { useGetOrdersByShopMutation } from "@store/components/orders/ordersApi";
 import { PAGE_SIZE_1, PAGE_SIZE_999 } from "@utils/constants";
+import { useTranslation } from "react-i18next";
 
 const Orders = () => {
+  const { t } = useTranslation();
   const categories = useSelector(getCategories);
   const __categories = [{ value: "all", label: "All Products" }, ...categories];
 
@@ -101,9 +103,8 @@ const Orders = () => {
 
   return (
     <>
-      <PageHeader
-        title="Orders"
-        isFetching={isLoading}
+      <PageHeader title={t("Orders")}
+            isFetching={isLoading}
         cb_refetch={onGetOrdersByShop}
       />
       <div className="flex flex-col flex-1 gap-5 md:gap-[26px]">

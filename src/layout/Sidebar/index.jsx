@@ -14,8 +14,11 @@ import {useWindowSize} from 'react-use';
 
 // constants
 import ROUTES from '@constants/routes';
+import { useTranslation } from 'react-i18next';
 
 const Sidebar = () => {
+    const { t } = useTranslation();
+
     const {width} = useWindowSize();
     const {open, setOpen} = useSidebar();
     const [active, setActive] = useState('Dashboard');
@@ -55,7 +58,7 @@ const Sidebar = () => {
                                                  onClick={() => setActive(active === route.name ? '' : route.name)}>
                                                 <div className="flex items-center gap-2.5">
                                                     <i className={`icon icon-${route.icon}`}/>
-                                                    <span className="text">{route.name}</span>
+                                                    <span className="text">{t(route.name)}</span>
                                                 </div>
                                                 <button className="xl:hidden 4xl:block" aria-label="Toggle submenu">
                                                     <i className="icon icon-caret-right-solid"/>
@@ -88,7 +91,7 @@ const Sidebar = () => {
                                         <NavLink className="menu_item" to={route.path}>
                                             <div className="flex items-center gap-2.5">
                                                 <i className={`icon icon-${route.icon}`}/>
-                                                <span className="text">{route.name}</span>
+                                                <span className="text">{t(route.name)}</span>
                                             </div>
                                             {
                                                 route.qty &&

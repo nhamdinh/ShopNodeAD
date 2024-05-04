@@ -172,6 +172,21 @@ export const productsApi = createApi({
         params: data,
       }),
     }),
+    getInventoriesByShop: builder.mutation({
+      query: (data) => ({
+        url: `/inventories/get-skus-by-shop`,
+        method: "PUT",
+        body: data,
+      }),
+    }),
+
+    updateStatusSkusByShop: builder.mutation({
+      query: (data) => ({
+        url: `/inventories/update-status-skus-by-shop`,
+        method: "PUT",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -195,4 +210,6 @@ export const {
   useGetProductsByShopMutation,
   useUpdateStatusProductsByShopMutation,
   useGetCodesQuery,
+  useGetInventoriesByShopMutation,
+  useUpdateStatusSkusByShopMutation,
 } = productsApi;

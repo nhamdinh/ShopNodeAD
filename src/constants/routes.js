@@ -25,6 +25,11 @@ const ROUTES = [
         ]
     },
     {
+        name: 'Inventories',
+        icon: 'chart-simple-regular',
+        path: '/inventories-management'
+    },
+    {
         name: 'Orders',
         icon: 'cart-shopping-regular',
         path: '/orders'

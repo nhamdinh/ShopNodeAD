@@ -287,10 +287,134 @@ export const PRODUCTS_MANAGEMENT_COLUMN_DEFS = [
         dataIndex: 'actions',
         render: () =>
             <div className="flex items-center justify-end gap-11">
-                <NavLink to="/product-editor" aria-label="Edit">
+{/*                 <NavLink to="/product-editor" aria-label="Edit">
                     <i className="icon icon-pen-to-square-regular text-lg leading-none"/>
-                </NavLink>
+                </NavLink> */}
                 <SubmenuTrigger/>
             </div>
     }
+]
+
+
+export const INVENTORIES_MANAGEMENT_COLUMN_DEFS = [
+    {
+        title: <div className="flex items-center justify-center">
+            <i className="icon-image-regular text-[26px]"/>
+        </div>,
+        dataIndex: 'product_thumb_small',
+        width: 45,
+        render: (image,record) =>
+            <div className="img-wrapper w-[45px] h-[45px] flex items-center justify-center">
+                <img loading="lazy" src={image??record.product_thumb} alt="product"/>
+            </div>
+    },
+    {
+        title: 'Product name',
+        dataIndex: 'product_name',
+        render: text => <span className="inline-block h6 !text-sm max-w-[155px] h40px line__clamp__2">{text}</span>
+    },
+    {title: 'SKU', dataIndex: '_id', 
+/*             ellipsis: true,
+ */},
+    {
+        title: 'Stock',
+        dataIndex: 'sku_stock',
+        // width: 130,
+        render: (stock,record) =>
+            <div className="flex items-center gap-5">
+                {
+                    stock == null ?
+                        'On Demand'
+                        :
+                        <span>
+                        <span className={`${stock !== 0 ? 'text-green' : 'text-red'}`}>
+                            {stock !== 0 ? (stock >= SAFE_STOCK ? 'In stock ' : 'Low Inventory ') : 'Out of stock '}
+                        </span>
+                        ({stock}/{record?.product_quantity})
+                    </span>
+                }
+            </div>
+    },
+    {
+        title: 'Sold',
+        dataIndex: 'sku_sold',
+        // width: 130,
+        render: (sku_sold,record) =>
+            <div className="flex items-center gap-5">
+                <span>
+                        ({sku_sold}/{record?.product_sold})
+                    </span>
+            </div>
+    },
+    {
+        title: 'Price',
+        dataIndex: 'sku_price',
+        render: price => <span>${price ? price.toFixed(2) : '0.00'}</span>
+    },
+    // {
+    //     title: 'Category',
+    //     dataIndex: 'product_type',
+    //     render: category => <button className="text-accent capitalize">{category}</button>,
+    //     responsive: ['xxl'],
+    // },
+    // {
+    //     title: 'Type',
+    //     dataIndex: 'type',
+    //     render: type => <span className="capitalize">{type}</span>,
+    //     responsive: ['lg'],
+    // },
+    // {
+    //     title: 'Statistics',
+    //     dataIndex: 'statistics',
+    //     render: statistics => <span className="capitalize">{statistics || '-'}</span>,
+    //     responsive: ['xl'],
+    // },
+    // {
+    //     title: 'Tags',
+    //     dataIndex: 'tags',
+    //     width: 125,
+    //     render: tags => <div className="flex flex-wrap gap-x-0.5">
+    //         {
+    //             tags && tags.length ? tags.map((tag, index) =>
+    //                 <button className="tag text-accent capitalize"
+    //                         key={tag}>{tag}{index !== tags.length - 1 && ','}</button>
+    //             ) : '-'
+    //         }
+    //     </div>,
+    //     responsive: ['xl'],
+    // },
+    // {
+    //     title: 'Rate',
+    //     dataIndex: 'product_ratings',
+    //     render: rateCount =>
+    //         <div className="flex items-center gap-2">
+    //             <i className={`icon icon-star-${rateCount !== 0 ? 'solid' : 'regular'} text-lg leading-none`}/>
+    //             {rateCount !== 0 && <span className="mt-1">({rateCount})</span>}
+    //         </div>,
+    //     responsive: ['xl'],
+    // },
+    {
+        title: 'Date',
+        dataIndex: 'updatedAt',
+        align: "center",
+        render: date =>
+            <div className="flex flex-col">
+                <span>Last modified:</span>
+                <span className="font-bold text-header">
+                    {date && dayjs(date).format('DD/MM/YYYY')}
+                </span>
+            </div>,
+        responsive: ['lg'],
+    },
+    // {
+    //     title: 'Actions',
+    //     dataIndex: 'actions',
+    //     render: () =>
+    //         <div className="flex items-center justify-end gap-11">
+    //             <NavLink to="/product-editor" aria-label="Edit">
+    //                 <i className="icon icon-pen-to-square-regular text-lg leading-none"/>
+    //             </NavLink>
+    //             <SubmenuTrigger/>
+    //         </div>
+    // }
 ]

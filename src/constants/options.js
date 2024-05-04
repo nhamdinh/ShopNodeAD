@@ -87,6 +87,12 @@ export const PRODUCT_MANAGEMENT_OPTIONS = [
     {value: 'trash', label: 'Trash'}
 ]
 
+export const INVENTORY_MANAGEMENT_OPTIONS = [
+    {value: 'all', label: 'All'},
+    {value: 'publish', label: 'Published'},
+    {value: 'draft', label: 'Drafts'},
+]
+
 export const ORDER_SORT_OPTIONS = [
     {value: 'default', label: 'Default sorting'},
     {value: 'a-z', label: 'By name: A-Z'},
@@ -172,6 +178,20 @@ export const PRODUCT_SELECT_OPTIONS = [
     // {value: 'delete', label: 'Delete Permanently'}
 ]
 
+
+export const INVENTORY_SELECT_OPTIONS = [
+    {
+      value: "to-draft",
+      label: "Move to Drafts",
+      bodyUpdate: { isDraft: true, isPublished: false},
+    },
+    {
+      value: "to-published",
+      label: "Move to Published",
+      bodyUpdate: { isDraft: false, isPublished: true },
+    },
+  ]
+
 export const PROMOTIONAL_OPTIONS = [
     {value: 'category-1', label: 'Category 1'},
     {value: 'category-2', label: 'Category 2'},
@@ -185,3 +205,54 @@ export const UNITS_OPTIONS = [
     {value: 'box', label: 'Boxes'},
     {value: 'kg', label: 'Kilograms'},
 ]
+
+export const INVENTORY_SORT_OPTIONS = [
+    {
+        value: "a-z",
+        label: "Name: A-Z",
+        orderByKey: "sku_slug",
+        orderByValue: 1,
+      },
+      {
+        value: "z-a",
+        label: "Name: Z-A",
+        orderByKey: "sku_slug",
+        orderByValue: -1,
+      },
+    {
+      value: "Sold-low-to-high",
+      label: "Sold: Low -> High",
+      orderByKey: "sku_sold",
+      orderByValue: 1,
+    },
+    {
+      value: "Sold-high-to-low",
+      label: "Sold: High -> Low",
+      orderByKey: "sku_sold",
+      orderByValue: -1,
+    },
+    {
+      value: "Stock-low-to-high",
+      label: "Stock: Low -> High",
+      orderByKey: "sku_stock",
+      orderByValue: 1,
+    },
+    {
+      value: "Stock-high-to-low",
+      label: "Stock: High -> Low",
+      orderByKey: "sku_stock",
+      orderByValue: -1,
+    },
+    {
+      value: "Price-high-to-low",
+      label: "Price: High -> Low",
+      orderByKey: "sku_price",
+      orderByValue: -1,
+    },
+    {
+      value: "Price-low-to-high",
+      label: "Price: Low -> High",
+      orderByKey: "sku_price",
+      orderByValue: 1,
+    },
+  ];

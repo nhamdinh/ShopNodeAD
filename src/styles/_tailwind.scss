@@ -104,6 +104,12 @@
 .df {
   display: flex;
 }
+.content__center {
+  justify-content: center;
+}
+.items__center {
+  align-items: center;
+}
 .content__between {
   justify-content: space-between;
 }
@@ -114,19 +120,27 @@
 .ed1c24 {
   color: #ed1c24 !important;
 }
-.fw600{
+.fw600 {
   font-weight: 600;
 }
 .color__1890ff {
   color: #1890ff !important;
 }
 
-.shadow__orangered{
+.shadow__orangered {
   font-weight: 600;
-  -webkit-text-shadow: 0 0 10px orangered, 0 0 20px orangered,
-    0 0 40px orangered, 0 0 80px orangered, 0 0 120px orangered;
-  text-shadow: 0 0 10px orangered, 0 0 20px orangered, 0 0 40px orangered,
-    0 0 80px orangered, 0 0 120px orangered;
+  -webkit-text-shadow:
+    0 0 10px orangered,
+    0 0 20px orangered,
+    0 0 40px orangered,
+    0 0 80px orangered,
+    0 0 120px orangered;
+  text-shadow:
+    0 0 10px orangered,
+    0 0 20px orangered,
+    0 0 40px orangered,
+    0 0 80px orangered,
+    0 0 120px orangered;
 }
 .Chat {
   color: black;

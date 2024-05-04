@@ -8,8 +8,8 @@ import {Checkbox} from 'antd';
 import PropTypes from 'prop-types';
 import { SAFE_STOCK } from '@utils/constants';
 
-const ProductManagementCollapseItem = ({product, activeCollapse, handleCollapse}) => {
-    const stock = product?.product_quantity;
+const InventoriesManagementCollapseItem = ({product, activeCollapse, handleCollapse}) => {
+    const stock = product?.sku_stock;
     return (
         <div className="card">
             <div className="flex items-center justify-between">
@@ -46,7 +46,7 @@ const ProductManagementCollapseItem = ({product, activeCollapse, handleCollapse}
                                 <div className="img-wrapper w-[45px] h-[45px] flex items-center justify-center">
                                     <img src={product?.product_thumb_small ?? product?.product_thumb} alt="product"/>
                                 </div>
-                                <h6 className="text-sm max-w-[155px] df items__center">{product?.product_name}</h6>
+                                <h6 className="text-sm max-w-[155px] df items__center ">{product?.product_name}</h6>
                             </div>
                         </td>
                     </tr>
@@ -64,20 +64,23 @@ const ProductManagementCollapseItem = ({product, activeCollapse, handleCollapse}
                                         <span className={`${stock !== 0 ? 'text-green' : 'text-red'}`}>
                                             {stock !== 0 ? (stock >= SAFE_STOCK ? 'In stock ' : 'Low Inventory ') : 'Out of stock '}
                                         </span>
-                                        ({stock})
+                                        ({stock}/{product?.product_quantity})
                                     </span>
                             }
                         </td>
                     </tr>
                     <tr>
-                        <td colSpan={2}>Price: ${product?.product_price}</td>
+                        <td colSpan={2}>Price: ${product?.sku_price}</td>
                     </tr>
                     <tr>
-                        <td colSpan={2}>
-                            Brand:
-                            <button className="capitalize text-accent ml-1">{product?.product_brand?.brand}</button>
-                        </td>
+                        <td colSpan={2}>Sold: {product?.sku_sold}</td>
                     </tr>
+{/*                     <tr>
+                        <td colSpan={2}>
+                            Category:
+                            <button className="capitalize text-accent ml-1">{product?.product_type}</button>
+                        </td>
+                    </tr> */}
                     </tbody>
                 </table>
             </Collapse>
@@ -85,10 +88,10 @@ const ProductManagementCollapseItem = ({product, activeCollapse, handleCollapse}
     )
 }
 
-ProductManagementCollapseItem.propTypes = {
+InventoriesManagementCollapseItem.propTypes = {
     product: PropTypes.object.isRequired,
     activeCollapse: PropTypes.string.isRequired,
     handleCollapse: PropTypes.func.isRequired
 }
 
-export default ProductManagementCollapseItem
+export default InventoriesManagementCollapseItem

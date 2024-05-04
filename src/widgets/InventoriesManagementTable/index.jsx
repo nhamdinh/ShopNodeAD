@@ -4,7 +4,7 @@ import Select from "@ui/Select";
 import StyledTable from "./styles";
 import Empty from "@components/Empty";
 import Pagination from "@ui/Pagination";
-import ProductManagementCollapseItem from "@components/ProductManagementCollapseItem";
+import InventoriesManagementCollapseItem from "@components/InventoriesManagementCollapseItem";
 
 // hooks
 import { useState, useEffect } from "react";
@@ -13,28 +13,25 @@ import { useWindowSize } from "react-use";
 
 // constants
 import {
-  PRODUCT_MANAGEMENT_OPTIONS,
-  PRODUCT_CATEGORIES_REAL,
+  INVENTORY_MANAGEMENT_OPTIONS,
   STOCK_STATUS_OPTIONS,
   PRODUCT_TYPE_OPTIONS,
   PRODUCT_SELLER_OPTIONS,
   PRODUCT_ADDITIONAL_OPTIONS,
-  PRODUCT_SELECT_OPTIONS,
+  INVENTORY_SELECT_OPTIONS,
+  INVENTORY_SORT_OPTIONS,
 } from "@constants/options";
-import { PRODUCTS_MANAGEMENT_COLUMN_DEFS } from "@constants/columnDefs";
-import { PAGE_SIZE } from "@utils/constants";
-import { useUpdateStatusProductsByShopMutation } from "@store/components/products/productsApi";
+import { INVENTORIES_MANAGEMENT_COLUMN_DEFS } from "@constants/columnDefs";
+import { useUpdateStatusSkusByShopMutation } from "@store/components/products/productsApi";
 import Loader from "@components/Loader";
 import { openToast } from "@store/components/customDialog/toastSlice";
 import { useDispatch } from "react-redux";
-import { useGetBrandsQuery } from "@store/components/products/productsApi";
 import { removeNullObject } from "@utils/commonFunction";
-import { useSelector } from "react-redux";
-import { getCategories } from "@store/selector/RootSelector";
 
 // data placeholder
 
-const ProductManagementTable = ({
+const InventoriesManagementTable = ({
+  page_size = 6,
   products = [],
   options,
   status,
@@ -46,10 +43,11 @@ const ProductManagementTable = ({
 }) => {
   const dispatch = useDispatch();
   const { width } = useWindowSize();
-  const categories = useSelector(getCategories);
 
-
+  const optionsSort = INVENTORY_SORT_OPTIONS.filter((option) => option);
   const defaultFilters = {
+    sort: null,
+    productType: null,
     stockStatus: null,
     product_categories: null,
     productSeller: null,
@@ -66,7 +64,7 @@ const ProductManagementTable = ({
   const getQty = (val) => {
     const statusFilter = {
       all: options?.countAll ?? products.length,
-      trash: status?.isDelete ?? 0,
+      // trash: status?.isDelete ?? 0,
       publish: status?.isPublished ?? 0,
       draft: status?.isDraft ?? 0,
     };
@@ -82,59 +80,27 @@ const ProductManagementTable = ({
   };
 
   const handleApplyFilters = () => {
-    const filtersRemoveNull = removeNullObject({...filters});
+    const filtersRemoveNull = removeNullObject({ ...filters });
     // console.log(filtersRemoveNull)
     const final = {};
     Object.keys(filtersRemoveNull).forEach((key) => {
-      if (key === "product_categories") final[key] = filtersRemoveNull[key].value;
-      if (key === "brand") final[key] = filtersRemoveNull[key].value;
+      /*       if (key === "product_categories")
+        final[key] = filtersRemoveNull[key].value; */
+      if (key === "sort") {
+        optionsSort.map((opt) => {
+          if (opt.value === filtersRemoveNull[key].value) {
+            final.orderByKey = opt.orderByKey ?? "_id";
+            final.orderByValue = opt.orderByValue ?? -1;
+          }
+        });
+      }
     });
-    console.log(final)
+
     if (cb_setParamsFilter) {
       cb_setParamsFilter(final);
       setSelectedRowKeys([]);
       pagination.setCurrentPage(0);
     }
-  };
-
-  const [updateStatusProductsByShop, { isLoading, error }] =
-    useUpdateStatusProductsByShopMutation();
-
-  const onUpdateStatusProductsByShop = async (values) => {
-    const res = await updateStatusProductsByShop(values);
-    //@ts-ignore
-    const data = res?.data;
-    if (data?.metadata) {
-      if(cb_onGetProductsByShop) cb_onGetProductsByShop();
-      setSelectedRowKeys([]);
-      dispatch(
-        openToast({
-          isOpen: Date.now(),
-          content: "Updated Success",
-          step: 1,
-        })
-      );
-    } else {
-      dispatch(
-        openToast({
-          isOpen: Date.now(),
-          content: "Update Failed",
-          step: 2,
-        })
-      );
-    }
-  };
-
-  const handleApplyAction = () => {
-    const bodyUpdate = PRODUCT_SELECT_OPTIONS.find(
-      (ooo) => ooo.value === selectedAction.value
-    )?.bodyUpdate;
-    const data = {
-      ids: selectedRowKeys,
-      bodyUpdate,
-      product_shop: userInfo?._id,
-    };
-    onUpdateStatusProductsByShop(data);
   };
 
   const handleClearFilters = () => {
@@ -149,7 +115,7 @@ const ProductManagementTable = ({
   const pagination = usePaginationApi({
     ...options,
     data: dataByStatus(),
-    limit: PAGE_SIZE,
+    limit: page_size,
   });
   // reset active collapse when page or window width changes
   useEffect(() => {
@@ -178,44 +144,57 @@ const ProductManagementTable = ({
     setSelectedRowKeys(newSelectedRowKeys);
   };
 
-  const [brand, setbrand] = useState("All");
-  const [brands, setbrands] = useState([]);
-  const {
-    data: dataBrands,
-    error: errBrands,
-    isSuccess: isSuccessBrands,
-    isLoading: isLoadingBrands,
-  } = useGetBrandsQuery(
-    {
-      page: 1,
-      limit: 1000,
-    },
-    {
-      refetchOnMountOrArgChange: true,
-      skip: false,
-    }
-  );
-  useEffect(() => {
-    if (isSuccessBrands) {
-      setbrands(
-        dataBrands?.brands.map((brr) => {
-          return {
-            value: brr._id,
-            label: brr.brand,
-          };
-        })
-      );
-    }
-  }, [dataBrands]);
-
   const disabled = selectedRowKeys.length === 0 || !selectedAction;
+  const handleApplyAction = () => {
+    const bodyUpdate = INVENTORY_SELECT_OPTIONS.find(
+      (ooo) => ooo.value === selectedAction.value
+    )?.bodyUpdate;
+    const data = {
+      ids: selectedRowKeys,
+      bodyUpdate,
+      product_shop: userInfo?._id,
+    };
+    onUpdateStatusSkusByShop(data);
+  };
+
+  const [updateStatusSkusByShop, { isLoading, error }] =
+    useUpdateStatusSkusByShopMutation();
+
+  const onUpdateStatusSkusByShop = async (values) => {
+    await updateStatusSkusByShop(values)
+      .then((res) => {
+        const data = res?.data;
+        if (data?.metadata) {
+          if (cb_onGetProductsByShop) cb_onGetProductsByShop();
+          setSelectedRowKeys([]);
+          dispatch(
+            openToast({
+              isOpen: Date.now(),
+              content: "Updated Success",
+              step: 1,
+            })
+          );
+        } else {
+          dispatch(
+            openToast({
+              isOpen: Date.now(),
+              content: "Update Failed",
+              step: 2,
+            })
+          );
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div className="flex flex-col flex-1">
       <div className="flex flex-wrap gap-2 mb-4">
         <span className="text-header">Products:</span>
         <div>
-          {PRODUCT_MANAGEMENT_OPTIONS.map((option, index) => (
+          {INVENTORY_MANAGEMENT_OPTIONS.map((option, index) => (
             <FilterItem
               key={`filter-${index}`}
               text={option.label}
@@ -223,7 +202,6 @@ const ProductManagementTable = ({
               value={option.value}
               active={categoryStatus}
               onClick={() => {
-                console.log(option.value)
                 if (cb_setParamsStatus) {
                   setSelectedRowKeys([]);
                   cb_setParamsStatus(option.value);
@@ -238,19 +216,16 @@ const ProductManagementTable = ({
       </div>
       <div className="grid grid-cols-1 gap-3 md:grid-cols-3 md:gap-x-6 xl:grid-cols-6">
         <Select
+          options={optionsSort}
+          value={filters.sort}
+          placeholder="Sort"
+          onChange={(e) => handleFilterSelect(e, "sort")}
+        />
+        <Select
           options={STOCK_STATUS_OPTIONS}
           value={filters.stockStatus}
           placeholder="Stock Status"
           onChange={(e) => handleFilterSelect(e, "stockStatus")}
-        />
-        <Select
-          // options={PRODUCT_CATEGORIES_REAL.filter(
-          //   (ooo) => ooo.value !== PRODUCT_CATEGORIES_REAL[0]?.value
-          // )}
-          options={categories}
-          value={filters.product_categories}
-          placeholder="Product Category"
-          onChange={(e) => handleFilterSelect(e, "product_categories")}
         />
         <Select
           options={PRODUCT_SELLER_OPTIONS}
@@ -259,10 +234,10 @@ const ProductManagementTable = ({
           onChange={(e) => handleFilterSelect(e, "productSeller")}
         />
         <Select
-          options={brands}
-          value={filters.brand}
-          placeholder="Product Brands"
-          onChange={(e) => handleFilterSelect(e, "brand")}
+          options={PRODUCT_TYPE_OPTIONS}
+          value={filters.productType}
+          placeholder="Product Type"
+          onChange={(e) => handleFilterSelect(e, "productType")}
         />
         <Select
           options={PRODUCT_ADDITIONAL_OPTIONS}
@@ -299,7 +274,7 @@ const ProductManagementTable = ({
             </button>
             <div className="md:min-w-[280px]">
               <Select
-                options={PRODUCT_SELECT_OPTIONS}
+                options={INVENTORY_SELECT_OPTIONS}
                 value={selectedAction}
                 placeholder="Select Action"
                 onChange={(e) => {
@@ -313,7 +288,7 @@ const ProductManagementTable = ({
       <div className="flex flex-1 flex-col gap-[22px]">
         {width >= 768 ? (
           <StyledTable
-            columns={PRODUCTS_MANAGEMENT_COLUMN_DEFS}
+            columns={INVENTORIES_MANAGEMENT_COLUMN_DEFS}
             dataSource={pagination.currentItems()}
             rowKey={(record) => record._id}
             locale={{
@@ -329,7 +304,7 @@ const ProductManagementTable = ({
         ) : (
           <div className="flex flex-col gap-5">
             {pagination.currentItems().map((product, index) => (
-              <ProductManagementCollapseItem
+              <InventoriesManagementCollapseItem
                 key={`product-${index}`}
                 product={product}
                 handleCollapse={handleCollapse}
@@ -344,4 +319,4 @@ const ProductManagementTable = ({
   );
 };
 
-export default ProductManagementTable;
+export default InventoriesManagementTable;

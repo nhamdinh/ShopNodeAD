@@ -12,6 +12,7 @@ export const LANG_STORAGE = "langAdmin";
 export const FOLDER_CATEGORYS_STORAGE = "categorys";
 export const FOLDER_PRODUCS_STORAGE = "products";
 export const PAGE_SIZE = 6;
+export const PAGE_SIZE_8 = 8;
 export const PAGE_SIZE_10 = 10;
 export const PAGE_SIZE_12 = 12;
 export const PAGE_SIZE_1 = 1;

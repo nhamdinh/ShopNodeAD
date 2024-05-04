@@ -75,13 +75,16 @@ export const formatMoney = (text: any) => {
   }
   return text.toString().replace(REGEX_CURRENCY, "$1,");
 };
-export const findUniqueElements = (array1:any, array2:any) => {
-  const result = array1.filter((item:any) => !array2.includes(item));
+export const findUniqueElements = (array1: any, array2: any) => {
+  const result = array1.filter((item: any) => !array2.includes(item));
   return result;
 };
 
-export const calPerDiscount = (product:any) => {
-  const perDiscount = ((1 - product?.product_price/ product?.product_original_price) * 100).toFixed(0)
+export const calPerDiscount = (product: any) => {
+  const perDiscount = (
+    (1 - product?.product_price / product?.product_original_price) *
+    100
+  ).toFixed(0);
   return perDiscount;
 };
 
@@ -98,4 +101,32 @@ export const removeNullObject = (obj) => {
   }
 
   return obj;
+};
+export const updateNestedObjectParser = (obj) => {
+  const final = {};
+
+  const recurse = (obj, currentKey = "") => {
+    for (let key in obj) {
+      if (obj[key] !== null && obj[key] !== undefined) {
+        // console.log(`!Array.isArray(obj[key]) ::: ${JSON.stringify(obj[key])} ::: ${!Array.isArray(obj[key])}`);
+        if (typeof obj[key] === "object" && !Array.isArray(obj[key])) {
+          if (currentKey !== "") {
+            recurse(obj[key], `${currentKey}.${key}`);
+          } else {
+            recurse(obj[key], key);
+          }
+        } else {
+          if (currentKey !== "") {
+            final[`${currentKey}.${key}`] = obj[key];
+          } else {
+            final[key] = obj[key];
+          }
+        }
+      }
+    }
+  };
+
+  recurse(obj);
+
+  return final;
 };

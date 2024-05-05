@@ -234,12 +234,12 @@ export const PRODUCTS_MANAGEMENT_COLUMN_DEFS = [
         render: category => <button className="text-accent capitalize">{category}</button>,
         responsive: ['xxl'],
     },
-    {
-        title: 'Type',
-        dataIndex: 'type',
-        render: type => <span className="capitalize">{type}</span>,
-        responsive: ['lg'],
-    },
+    // {
+    //     title: 'Type',
+    //     dataIndex: 'type',
+    //     render: type => <span className="capitalize">{type}</span>,
+    //     responsive: ['lg'],
+    // },
     // {
     //     title: 'Statistics',
     //     dataIndex: 'statistics',

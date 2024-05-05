@@ -22,7 +22,9 @@ const SellerCollapseItem = ({seller, activeCollapse, handleCollapse}) => {
                             onClick={() => handleCollapse(seller.id)}>
                         <i className="icon icon-caret-down-solid"/>
                     </button>
-                    <NavLink to="/product-editor" aria-label="Edit">
+                    <NavLink 
+                    // to="/product-editor"
+                     aria-label="Edit">
                         <i className="icon icon-pen-to-square-regular"/>
                     </NavLink>
                     <SubmenuTrigger/>

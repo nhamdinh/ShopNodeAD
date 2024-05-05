@@ -74,7 +74,7 @@ const ProductGridItem = ({
         className={`line__clamp__2 h46px h6 !leading-[1.4] block max-w-[180px] transition hover:text-accent ${
           isSlide ? "mb-3" : ""
         }`}
-        to="/product-editor"
+        // to="/product-editor"
       >
         {product.product_name}
       </NavLink>
@@ -115,7 +115,7 @@ const ProductGridItem = ({
         <div className="grid grid-cols-2 gap-1.5 mt-4">
           <NavLink
             className="btn btn--outline blue !text-sm"
-            to="/product-editor"
+            // to="/product-editor"
           >
             <i className="icon icon-pen-solid text-xs" /> Edit
           </NavLink>

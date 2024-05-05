@@ -23,6 +23,7 @@ import { useTranslation } from "react-i18next";
 const Orders = () => {
   const { t } = useTranslation();
   const categories = useSelector(getCategories);
+
   const __categories = [{ value: "all", label: "All Products" }, ...categories];
 
   const [category, setCategory] = useState(__categories[0]);
@@ -53,48 +54,51 @@ const Orders = () => {
   const [getOrdersByShop, { isLoading, error }] = useGetOrdersByShopMutation();
 
   const onGetOrdersByShop = async () => {
-    const res = await getOrdersByShop(params);
-    //@ts-ignore
-    const data = res?.data;
-    if (data) {
-      const { isPaid, isDelivered, isCanceled, isRefunded, isNotPaid, orders } =
-        data?.metadata;
+    await getOrdersByShop(params)
+      .then((res) => {
+        const data = res?.data;
+        if (data) {
+          const { isPaid, isDelivered, isCanceled, isRefunded, isNotPaid, orders } =
+            data?.metadata;
+    
+          setPaid(isPaid);
+          setDelivered(isDelivered);
+          setCanceled(isCanceled);
+          setRefunded(isRefunded);
+          setNotPaid(isNotPaid);
+    
+          const checkedProducts = orders.flatMap((order) => order?.itemProducts);
+          const setStatus = ({ isPaid, isDelivered, isCanceled, isRefunded }) => {
+            if (isRefunded === true) return "refunded";
+            if (isCanceled === true) return "cancelled";
+            if (isDelivered === true) return "Delivered";
+            if (isPaid === false) return "not pay";
+            if (isPaid === true && isDelivered === false) return "paid";
+            return "completed";
+          };
+          const _ordersProduct = checkedProducts.map((pro, index) => {
+            const orderFound = orders.find((order) => order?._id === pro?.order_id);
+            const { isPaid, isDelivered, isCanceled, isRefunded } = orderFound;
+            return {
+              ...orderFound,
+              product_id: pro?._id,
+              product_ratings: pro?.product_ratings,
+              product_type: pro?.product_type,
+              product_categories: pro?.product_categories,
+              payment: {
+                totalAmountPay: orderFound?.totalAmountPay,
+                received: orderFound?.isPaid ? orderFound?.totalAmountPay : 0,
+              },
+              status: setStatus({ isPaid, isDelivered, isCanceled, isRefunded }),
+              SKU: uid() + index,
+              product: pro,
+            };
+          });
+          setOrdersProduct(_ordersProduct);
+        }
+      })
+      .catch((error) => console.log(error));
 
-      setPaid(isPaid);
-      setDelivered(isDelivered);
-      setCanceled(isCanceled);
-      setRefunded(isRefunded);
-      setNotPaid(isNotPaid);
-
-      const checkedProducts = orders.flatMap((order) => order.itemProducts);
-
-      const setStatus = ({ isPaid, isDelivered, isCanceled, isRefunded }) => {
-        if (isRefunded === true) return "refunded";
-        if (isCanceled === true) return "cancelled";
-        if (isDelivered === true) return "confirmed";
-        if (isPaid === true) return "completed";
-        return "completed";
-      };
-      const _ordersProduct = checkedProducts.map((pro, index) => {
-        const orderFound = orders.find((order) => order._id === pro.order_id);
-        const { isPaid, isDelivered, isCanceled, isRefunded } = orderFound;
-        return {
-          ...orderFound,
-          product_id: pro._id,
-          product_ratings: pro.product_ratings,
-          product_type: pro.product_type,
-          product_categories: pro.product_categories,
-          payment: {
-            totalAmountPay: orderFound.totalAmountPay,
-            received: orderFound.isPaid ? orderFound.totalAmountPay : 0,
-          },
-          status: setStatus({ isPaid, isDelivered, isCanceled, isRefunded }),
-          SKU: uid() + index,
-          product: pro,
-        };
-      });
-      setOrdersProduct(_ordersProduct);
-    }
   };
 
   useEffect(() => {
@@ -103,8 +107,9 @@ const Orders = () => {
 
   return (
     <>
-      <PageHeader title={t("Orders")}
-            isFetching={isLoading}
+      <PageHeader
+        title={t("Orders")}
+        isFetching={isLoading}
         cb_refetch={onGetOrdersByShop}
       />
       <div className="flex flex-col flex-1 gap-5 md:gap-[26px]">
@@ -178,6 +183,7 @@ const Orders = () => {
           category={category}
           sort={sort}
           categories={categories}
+          cb_onGetOrdersByShop={onGetOrdersByShop}
         />
       </div>
     </>

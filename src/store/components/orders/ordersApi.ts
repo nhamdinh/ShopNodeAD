@@ -77,9 +77,8 @@ export const ordersApi = createApi({
       query: (data) => ({
         url: `orders/${data.orderId}/delivered`,
         method: "PUT",
-        body: data,
+        // body: data,
       }),
-      invalidatesTags: ["getOrderDetail__TAG"],
     }),
     getOrderAd: builder.query({
       query: (data) => ({

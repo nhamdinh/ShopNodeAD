@@ -44,24 +44,24 @@ const AppCard = ({ app, index, category }) => {
             <img
               loading="lazy"
               className="h-9 w-auto "
-              src={app.avatar ?? avatar_user}
-              alt={app.name}
+              src={app?.avatar ?? avatar_user}
+              alt={app?.name}
             />
           </div>
           <h6 className="max-w-[165px] w-full leading-[1.4]" ref={titleRef}>
-            <TruncatedText text={app.name} width={titleWidth} />
+            <TruncatedText text={app?.name} width={titleWidth} />
           </h6>
         </div>
-        <Switch id={app._id} defaultChecked />
+        <Switch id={app?._id} defaultChecked />
       </div>
       <p className="text-sm flex-1 max-w-[300px]" ref={descriptionRef}>
         <a className="color__1890ff" href={`mailto:${app?.email}`}>
-          <TruncatedText text={app.email} width={descriptionWidth} />
+          <TruncatedText text={app?.email} width={descriptionWidth} />
         </a>
       </p>
       <p className="text-sm flex-1 max-w-[300px]" ref={descriptionRef}>
         <TruncatedText
-          text={formatCustomerPhoneNumber(app.phone + "")}
+          text={formatCustomerPhoneNumber(app?.phone + "")}
           width={descriptionWidth}
         />
       </p>

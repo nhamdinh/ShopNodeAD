@@ -23,7 +23,7 @@ export const authApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["getProfile__TAG", "getAllMember__TAG"],
+  tagTypes: ["getProfile__TAG", "getUserClients__TAG", "getAllMember__TAG"],
   endpoints: (builder) => ({
     login: builder.mutation({
       query: (data) => ({
@@ -70,7 +70,7 @@ export const authApi = createApi({
         method: "PUT",
         body: data,
       }),
-      invalidatesTags: ["getAllMember__TAG"],
+      invalidatesTags: ["getUserClients__TAG"],
     }),
     getStory: builder.query({
       query: (data) => ({
@@ -86,12 +86,19 @@ export const authApi = createApi({
         body: data,
       }),
     }),
-
+    getUserClients: builder.query({
+      query: (data) => ({
+        url: `/users/clients`,
+        method: "GET",
+      }),
+      providesTags: ["getUserClients__TAG"],
+    }),
   }),
 });
 
 export const {
   useGetProfileQuery,
+  useGetUserClientsQuery,
   useLoginMutation,
   useRegisterMutation,
   useUpdateProfileMutation,

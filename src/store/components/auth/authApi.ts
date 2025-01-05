@@ -11,7 +11,7 @@ export const authApi = createApi({
     prepareHeaders: (headers, { getState }) => {
       // Get token from store (userSlice)
       // @ts-ignore
-      //   const apiKey = process.env.REACT_APP_API_KEY;
+      //   const apiKey = process.env.VITE_APP_API_KEY;
       const accessToken = localStorage.getItem(ACCESSTOKEN_STORAGE);
 
       // Add token to headers

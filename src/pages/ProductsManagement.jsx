@@ -34,37 +34,70 @@ const ProductsManagement = () => {
   const [getProductsByShop, { isLoading, error }] =
     useGetProductsByShopMutation();
 
-  const onGetProductsByShop = async () => {
-    const res = await getProductsByShop(params);
+  const onGetProductsByShop = () => {
+    getProductsByShop(params)
+      .then((res) => {
+        const data = res?.data;
+        if (data) {
+          const {
+            countAll,
+            totalCount,
+            totalPages,
+            limit,
+            page,
+            isDelete,
+            isPublished,
+            isDraft,
+          } = data?.metadata;
+          const _products = data?.metadata?.products;
+          const _options = { countAll, totalCount, totalPages, limit, page };
+          const _status = { isDelete, isPublished, isDraft };
+          setStatus(_status);
+          setOptions(_options);
+          setProducts(
+            _products.map((ppp) => {
+              const status = ppp.isDelete
+                ? "trash"
+                : ppp.isPublished
+                ? "publish"
+                : "draft";
+              return { ...ppp, status };
+            })
+          );
+        }
+      })
+      .catch(function (err) {
+        console.error(err);
+      });
     //@ts-ignore
-    const data = res?.data;
-    if (data) {
-      const {
-        countAll,
-        totalCount,
-        totalPages,
-        limit,
-        page,
-        isDelete,
-        isPublished,
-        isDraft,
-      } = data?.metadata;
-      const _products = data?.metadata?.products;
-      const _options = { countAll, totalCount, totalPages, limit, page };
-      const _status = { isDelete, isPublished, isDraft };
-      setStatus(_status);
-      setOptions(_options);
-      setProducts(
-        _products.map((ppp) => {
-          const status = ppp.isDelete
-            ? "trash"
-            : ppp.isPublished
-            ? "publish"
-            : "draft";
-          return { ...ppp, status };
-        })
-      );
-    }
+    // const data = res?.data;
+    // if (data) {
+    //   const {
+    //     countAll,
+    //     totalCount,
+    //     totalPages,
+    //     limit,
+    //     page,
+    //     isDelete,
+    //     isPublished,
+    //     isDraft,
+    //   } = data?.metadata;
+    //   const _products = data?.metadata?.products;
+    //   const _options = { countAll, totalCount, totalPages, limit, page };
+    //   const _status = { isDelete, isPublished, isDraft };
+    //   setStatus(_status);
+    //   setOptions(_options);
+    //   setProducts(
+    //     _products.map((ppp) => {
+    //       const status = ppp.isDelete
+    //         ? "trash"
+    //         : ppp.isPublished
+    //         ? "publish"
+    //         : "draft";
+    //       return { ...ppp, status };
+    //     })
+    //   );
+    // }
   };
 
   useEffect(() => {
@@ -93,7 +126,7 @@ const ProductsManagement = () => {
       />
       <div className="flex flex-col-reverse gap-4 mb-5 md:flex-col lg:flex-row lg:justify-between">
         <div className="flex flex-col gap-4 md:flex-row md:gap-[14px]">
-{/*           <button className="btn btn--primary">
+          {/*           <button className="btn btn--primary">
             Add new product <i className="icon-circle-plus-regular" />
           </button> */}
           <CSVLink className="btn btn--outline blue !h-[44px]" data={csvData}>

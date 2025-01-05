@@ -1,7 +1,7 @@
 // export const API_LINK = "http://104.154.49.183:5000/api";
-export const REACT_ENV = process.env.REACT_APP_ENV;
-export const API_LINK = process.env.REACT_APP_API_URL ?? "http://ec2-18-139-1-145.ap-southeast-1.compute.amazonaws.com:5000/api";
-export const SOCKET_HOST = process.env.REACT_APP_SOCKET_HOST ?? 'http://ec2-18-139-1-145.ap-southeast-1.compute.amazonaws.com:6000';
+export const VITE_ENV = process.env.VITE_APP_ENV;
+export const API_LINK = process.env.VITE_APP_API_URL ?? "http://ec2-18-139-1-145.ap-southeast-1.compute.amazonaws.com:5000/api";
+export const SOCKET_HOST = process.env.VITE_APP_SOCKET_HOST ?? 'http://ec2-18-139-1-145.ap-southeast-1.compute.amazonaws.com:6000';
 
 // export const API_LINK = 'http://localhost:5000/api';
 // export const SOCKET_HOST = 'http://localhost:6000';
@@ -32,26 +32,26 @@ export const ToastObjects = {
   autoClose: 1000,
 };
 export const GIO: any = {
-  THUONG: 170,
-  THUONG_500G: 85,
-  VIP: 210,
-  VIP_500G: 105,
-  BAP_CUON: 270,
-  BAP_THUONG: 270,
-  BAP_VAN: 280,
+  THUONG: 200,
+  THUONG_500G: 100,
+  VIP: 250,
+  VIP_500G: 125,
+  BAP_CUON: 280,
+  BAP_THUONG: 280,
+  BAP_VAN: 300,
   GAN_NGAM: 110,
-  BAP_NGAM: 150,
+  BAP_NGAM: 140,
 };
 
 export const GIO_BUY: any = {
-  THUONG: 130,
+  THUONG: 135,
   THUONG_500G: 65,
   VIP: 180,
   VIP_500G: 90,
-  BAP_CUON: 180,
-  BAP_THUONG: 180,
-  BAP_VAN: 200,
-  GAN_NGAM: 65,
+  BAP_CUON: 190,
+  BAP_THUONG: 190,
+  BAP_VAN: 210,
+  GAN_NGAM: 70,
   BAP_NGAM: 95,
 };
 export const GIO_RENDER: any = {
@@ -62,6 +62,6 @@ export const GIO_RENDER: any = {
   BAP_CUON: "BẮP CUỘN",
   BAP_THUONG: "BẮP TO",
   BAP_VAN: "BẮP VÂN",
-  GAN_NGAM: "GÂN _NGÂM_",
-  BAP_NGAM: "BẮP _NGÂM_",
+  GAN_NGAM: "_NGÂM_ GÂN",
+  BAP_NGAM: "_NGÂM_ BẮP",
 };

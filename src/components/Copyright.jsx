@@ -44,20 +44,20 @@ const Copyright = () => {
     page: 1,
   });
 
-  const [getProductsByShop, { isLoading }] = useGetProductsByShopMutation();
+  // const [getProductsByShop, { isLoading }] = useGetProductsByShopMutation();
 
-  const onGetProductsByShop = async () => {
-    const res = await getProductsByShop(params);
-    //@ts-ignore
-    const data = res?.data;
-    if (data) {
-      const _products = data?.metadata?.products;
-      dispatch(setStoProducts(_products));
-    }
-  };
+  // const onGetProductsByShop = async () => {
+  //   const res = await getProductsByShop(params);
+  //   //@ts-ignore
+  //   const data = res?.data;
+  //   if (data) {
+  //     const _products = data?.metadata?.products;
+  //     dispatch(setStoProducts(_products));
+  //   }
+  // };
 
   useEffect(() => {
-    if (params.product_shop) onGetProductsByShop(params);
+    // if (params.product_shop) onGetProductsByShop(params);
   }, [params]);
 
   useEffect(() => {

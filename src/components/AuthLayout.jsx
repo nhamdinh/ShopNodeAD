@@ -111,15 +111,15 @@ const AuthLayout = () => {
         >
           <div className="flex flex-col gap-2.5 text-center">
             <h1>Welcome back!</h1>
-            <p className="lg:max-w-[300px] m-auto 4xl:max-w-[unset] ed1c24 fw600">
+            {/* <p className="lg:max-w-[300px] m-auto 4xl:max-w-[unset] ed1c24 fw600">
               Đăng nhập bằng USER bên dưới <br/>( ko change được password )
-            </p>
+            </p> */}
           </div>
           <form className="mt-5" onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col gap-5">
               <div className="field-wrapper">
                 <label htmlFor="email" className="field-label">
-                  E-mail [user@example.com]
+                  E-mail 
                 </label>
                 <input
                   className={classNames("field-input", {

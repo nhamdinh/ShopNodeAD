@@ -57,32 +57,32 @@ const ChatBox = ({ closeMessageBox, showMessageBox, toUser }) => {
   const socketRef = useRef();
   const messageRef = useRef(null);
 
-  useEffect(() => {
-    //@ts-ignore
-    socketRef.current = socketIOClient.connect(SOCKET_HOST);
+  // useEffect(() => {
+  //   //@ts-ignore
+  //   socketRef.current = socketIOClient.connect(SOCKET_HOST);
 
-    socketRef.current.on("serverSetSocketId", (socketId) => {
-      //   setIdSocketId(socketId);
-    });
+  //   socketRef.current.on("serverSetSocketId", (socketId) => {
+  //     //   setIdSocketId(socketId);
+  //   });
 
-    socketRef.current.on("serverSendData", (data) => {
-      // console.log("serverSendData ::: ", data);
+  //   socketRef.current.on("serverSendData", (data) => {
+  //     // console.log("serverSendData ::: ", data);
 
-      if (
-        (userInfo?.email === data.to && toUser?.email === data.sendFrom) ||
-        (userInfo?.email === data.sendFrom && toUser?.email === data.to)
-      ) {
-        setStories((oldMsgs) => [...oldMsgs, data]);
-        if (userInfo?.email !== data.sendFrom) {
-        }
-        // setShowMessageBox(true);
-        scrollToBottom();
-      }
-    });
-    return () => {
-      socketRef.current.disconnect();
-    };
-  }, []);
+  //     if (
+  //       (userInfo?.email === data.to && toUser?.email === data.sendFrom) ||
+  //       (userInfo?.email === data.sendFrom && toUser?.email === data.to)
+  //     ) {
+  //       setStories((oldMsgs) => [...oldMsgs, data]);
+  //       if (userInfo?.email !== data.sendFrom) {
+  //       }
+  //       // setShowMessageBox(true);
+  //       scrollToBottom();
+  //     }
+  //   });
+  //   return () => {
+  //     socketRef.current.disconnect();
+  //   };
+  // }, []);
 
   const sendMessage = () => {
     if (message.trim()) {

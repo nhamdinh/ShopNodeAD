@@ -2,7 +2,7 @@
   "name": "shop_point",
   "version": "1.0.0",
   "private": true,
-  "proxy": "http://localhost:5000/api",
+  "proxy": "http://3.1.81.111:5000/api",
   "author": "nham.dinh",
   "dependencies": {
     "@emotion/styled": "^11.10.5",
@@ -97,8 +97,8 @@
     "jquery": "^3.6.0"
   },
   "scripts": {
-    "dev": "set VITE_APP_ENV=developmentt&& set VITE_APP_API_URL=http://localhost:5000/api&& set VITE_APP_SOCKET_HOST=http://localhost:6000&& vite --host --port 4001",
-    "build": "vite build",
+    "dev": "set VITE_APP_ENV=developmentt&& set VITE_APP_API_URL=http://localhost:5000/api&& set VITE_APP_SOCKET_HOST=http://localhost:6000&& vite --host --port 3000",
+    "build": "set VITE_APP_ENV=prd&& set VITE_APP_API_URL=http://3.1.81.111:5000/api&& set VITE_APP_SOCKET_HOST=http://localhost:6000&& vite build",
     "serve": "vite preview"
   },
   "resolutions": {

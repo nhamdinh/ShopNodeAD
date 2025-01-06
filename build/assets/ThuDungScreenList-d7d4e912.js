@@ -1,0 +1,1 @@
+import{j as r}from"./mui-8fd662bb.js";import{I as t}from"./ImportGio-a6303dc5.js";import"./antd-d08f3b3b.js";import"./index-b16fa0e1.js";/* empty css              */import"./commonFunction-be178139.js";import"./PageHeader-f00a72fe.js";import"./DocumentTitle-15585915.js";const a=()=>r.jsx(t,{isBan:!0});export{a as default};

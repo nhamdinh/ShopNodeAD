@@ -1,0 +1,1 @@
+import{C as n}from"./index-b16fa0e1.js";const t=r=>{if(r)return`${r.slice(0,4)}-${r.slice(4,7)}-${r.slice(7)}`},c=r=>r?+r<0?(r=+r*-1,"-"+r.toString().replace(n,"$1,")):r.toString().replace(n,"$1,"):"0",f=(r,e)=>r.filter(s=>!e.includes(s));export{c as a,t as b,f};

@@ -1,0 +1,1 @@
+import{j as r}from"./mui-8fd662bb.js";import{E as t}from"./ExportGio-17969d44.js";import"./antd-d08f3b3b.js";/* empty css              */import"./moment-a9aaa855.js";import"./index-b16fa0e1.js";import"./PageHeader-f00a72fe.js";import"./DocumentTitle-15585915.js";function a(){return r.jsx(t,{isBan:!0})}export{a as default};

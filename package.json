@@ -97,7 +97,7 @@
     "jquery": "^3.6.0"
   },
   "scripts": {
-    "dev": "set VITE_APP_ENV=developmentt&& set VITE_APP_API_URL=http://localhost:5000/api&& set VITE_APP_SOCKET_HOST=http://localhost:6000&& vite --host --port 3000",
+    "dev": "set VITE_APP_ENV=developmentt&& set VITE_APP_API_URL=http://localhost:5000/api&& set VITE_APP_SOCKET_HOST=http://localhost:6000&& vite --host --port 4000",
     "build": "set VITE_APP_ENV=prd&& set VITE_APP_API_URL=http://3.1.81.111:5000/api&& set VITE_APP_SOCKET_HOST=http://localhost:6000&& vite build",
     "serve": "vite preview"
   },

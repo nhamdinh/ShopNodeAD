@@ -342,7 +342,7 @@ export default function ImportGio({ isBan }) {
               <div key={item?._id} className="mt20px">
                 <Row gutter={16} key={item?._id} className="mt20px">
                   <Col className="gutter-row" span={8}>
-                    <h5 style={style}> {index + 1 + +params.offset}. ►{dayjs(item?.createdAt).format('DD.MM.YYYY, hh:mm A')}</h5>
+                    <h5 style={style}> {index + 1 + +params.offset}. </h5>
                   </Col>
                   <Col
                     onClick={() => {
@@ -351,17 +351,17 @@ export default function ImportGio({ isBan }) {
                       );
                     }}
                     className="gutter-row cursor__pointer"
-                    span={4}
+                    span={6}
                   >
                     
-                    <div style={style}>{item?.buyName}</div>
+                    <h5 style={style}>{item?.buyName}</h5>
                   </Col>
                   <Col className="gutter-row" span={4}>
                     <h5 className="mb0px text__underline" style={style}>
                       {item?.metadata}
                     </h5>
                   </Col>
-                  <Col className="gutter-row df content__end" span={8}>
+                  <Col className="gutter-row df content__end" span={6}>
                     <button
                       type="submit"
                       onClick={() => {
@@ -381,19 +381,19 @@ export default function ImportGio({ isBan }) {
                 {item?.orderItems.map((item, ind) => {
                   return (
                     <Row key={ind} gutter={16} className="mt20px">
-                      <Col className="gutter-row" span={8}>
+                      <Col className="gutter-row items__center" span={8}>
                         <h6 style={style}>
                           {index + 1 + +params.offset}.{ind + 1}.
                           {GIO_RENDER[item.label]}
                         </h6>
                       </Col>
-                      <Col className="gutter-row" span={4}>
-                        <div style={style}><strong>{item.quantity}</strong></div>
+                      <Col className="gutter-row items__center" span={4}>
+                        <h6 style={style}><strong>{item.quantity}</strong></h6>
                       </Col>
-                      <Col className="gutter-row" span={4}>
+                      <Col className="gutter-row items__center" span={4}>
                         <div style={style}>{item.price}</div>
                       </Col>
-                      <Col className="gutter-row df content__end" span={8}>
+                      <Col className="gutter-row df content__end items__center" span={8}>
                         <div style={style}>
                           {formatMoney(+item.price * +item.quantity)}
                         </div>
@@ -402,12 +402,10 @@ export default function ImportGio({ isBan }) {
                   );
                 })}
                 <Row gutter={16} className="mt20px">
-                  <Col className="gutter-row" span={8}>
-                    <h5 style={style}></h5>
+                  <Col className="gutter-row items__center" span={12}>
+                    <h6 style={style}>►{dayjs(item?.createdAt).format('DD.MM.YYYY, hh:mm A')}</h6>
                   </Col>
-                  <Col className="gutter-row" span={4}></Col>
-                  <Col className="gutter-row" span={4}></Col>
-                  <Col className="gutter-row df content__end" span={8}>
+                  <Col className="gutter-row df content__end items__center" span={12}>
                     <h5 className="df " style={style}>
                       <div>{formatMoney(totalOrder)} -</div>
                       <div className="color__green df">
